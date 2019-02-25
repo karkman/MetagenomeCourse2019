@@ -6,7 +6,7 @@ Microbial community structure and diversity, and population structure are fundam
 **Everything is possible thanks to the support of CSC**
 
 ## [Schedule](https://github.com/karkman/MetagenomeCourse2019/blob/master/ScheduleofCourse.md)
-The course will be held at the Faculty of Agriculture and Forestry, University of Helsinki. 
+The course will be held at the Faculty of Agriculture and Forestry, University of Helsinki.
 * **Monday to Friday**: [metagenomics](https://github.com/karkman/MetagenomeCourse2019/blob/master/Metagenomics.md)
 
 ## Place
@@ -20,16 +20,16 @@ This course is targeted at PhD and MSc students who are interested in performing
 ## Learning outcomes
 Microbial genomics: QA/QC of the raw sequence data, cleaning and assembly; Gene-by-gene annotation; Genealogy reconstruction and population structure analysis; Visualization of data; GWAS and comparative analysis; Microbial metagenomics: quality control, filtering and assembly to taxonomic classification, clustering, functional assignment, analyses of microbial community composition and comparative metagenomics
 
-## Internet connection 
+## Internet connection
 Inside the class room you can find both eduroam and Univ. Helsinki HUPnet. Instructions on how to connect in HelpDesk website
 
 ## Organizers
-* Docent Jenni Hultman, University of Helsinki, Finland 
-* MSc Katariina Pärnänen, Univeristy of Helsinki, Finland
+* Docent Jenni Hultman, University of Helsinki, Finland
+* MSc Katariina Pärnänen, University of Helsinki, Finland
 * PhD Antti Karkman, University of Helsinki, Finland
 
 ## Teachers
 * Docent Jenni Hultman, University of Helsinki, Finland
-* MSc Katariina Pärnänen, Univeristy of Helsinki, Finland
+* MSc Katariina Pärnänen, University of Helsinki, Finland
 * PhD Antti Karkman, University of Helsinki, Finland
 * PhD Tom Delmont, XXX, France
