@@ -8,6 +8,9 @@ Microbial community structure and diversity, and population structure are fundam
 ## [Schedule](https://github.com/karkman/MetagenomeCourse2019/blob/master/ScheduleofCourse.md)
 The course will be held at the Faculty of Agriculture and Forestry, University of Helsinki.
 * **Monday to Friday**: [metagenomics](https://github.com/karkman/MetagenomeCourse2019/blob/master/Metagenomics.md)
+### Monday
+- [ ] Introduction
+- [ ] Setup
 
 ## Place
 * Monday, Wednesday & Friday Viikki C building, lecture room 130 (Latokartanonkaari 5)
