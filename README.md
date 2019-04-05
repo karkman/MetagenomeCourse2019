@@ -9,7 +9,7 @@ Microbial community structure and diversity, and population structure are fundam
 The course will be held at the Faculty of Agriculture and Forestry, University of Helsinki.
 * **Monday to Friday**: [metagenomics](https://github.com/karkman/MetagenomeCourse2019/blob/master/Metagenomics.md)
 ### Monday
-- [ ] Introduction
+- [x] Introduction
 - [ ]  [Setup](MetagenomeInstallations.md)
 - [ ]  [Data download and QC](MetagenomePart1.md)
 - [ ]  [Assembly](MetagenomePart1.md#assembly)
