@@ -1,4 +1,4 @@
-# From microbial genomics to metagenomics
+# Metagenomics
 
 ## General introduction
 Microbial community structure and diversity, and population structure are fundamental aspects to understand evolution, niche adaptation and demographic history of bacterial species. As NGS sequencing has become cost effective and accessible, sequencing populations of bacteria across the whole genome provides unprecedented resolution to investigate within-host evolution, transmission history, and population structure. Moreover, analysis of genetic content of microbial communities through metagenomics has become the mainstream methodology. During the one week course the students will learn and apply bioinformatic techniques to perform population genetics and study microbial communities with metagenomic approaches. The goal is to become familiar with the bioinformatic analysis tools and to be able to utilize them in own research after the course.
@@ -11,6 +11,7 @@ The course will be held at the Faculty of Agriculture and Forestry, University o
 ### Monday
 - [ ] Introduction
 - [ ] Setup
+- [ ] [Part 1](MetagenomePart1.md)
 
 ## Place
 * Monday, Wednesday & Friday Viikki C building, lecture room 130 (Latokartanonkaari 5)
@@ -36,3 +37,4 @@ Inside the class room you can find both eduroam and Univ. Helsinki HUPnet. Instr
 * MSc Katariina Pärnänen, University of Helsinki, Finland
 * PhD Antti Karkman, University of Helsinki, Finland
 * PhD Tom Delmont, XXX, France
+* Tommi Vatanen, The University of Auckland, New Zealand
