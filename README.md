@@ -11,7 +11,9 @@ The course will be held at the Faculty of Agriculture and Forestry, University o
 ### Monday
 - [ ] Introduction
 - [ ] Setup
-- [ ] [Part 1](MetagenomePart1.md)
+- [ ]  [Data download and QC](MetagenomePart1.md)
+- [ ]  [Assembly](MetagenomePart1.md#assembly)
+- [ ]  [Taxonomic annotation](MetagenomePart1.md#taxonomic-profiling-with-metaxa2)
 
 ## Place
 * Monday, Wednesday & Friday Viikki C building, lecture room 130 (Latokartanonkaari 5)
