@@ -1,4 +1,4 @@
-# Schedule of the course
+# Schedule of the course 
 ## Monday - Info 4 
 | Time | Description|
 | --- | --- |
