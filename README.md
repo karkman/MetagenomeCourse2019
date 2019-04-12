@@ -26,18 +26,18 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 ### Monday
 | Time | Description|
 | --- | --- |
-| *Morning* | [Introduction](http://link-to-presentation.com) (including general structure of the course and group work)|
-| *Morning* | [Basic usage of computing services at CSC](http://link-to-presentation) |
-| *Morning* |  [Quality control and trimminmg of data](Day1/README.md#QC-and-trimming)|
-| *Afternoon* | |
-| *Afternoon* | [Assembly](Day1/README.md#Assembly) |
+| __*Morning*__ | [Introduction](http://link-to-presentation.com) (including general structure of the course and group work)|
+| __*Morning*__ | [Basic usage of computing services at CSC](http://link-to-presentation) |
+| __*Morning*__ |  [Quality control and trimminmg of data](Day1/README.md#QC-and-trimming)|
+| __*Afternoon*__ | *open slot* |
+| __*Afternoon*__ | [Assembly](Day1/README.md#Assembly) |
 
 ### Tuesday
 | Time | Description |
 | --- | --- |
-| *Morning* | *Genomics* **Miguel Machado**: *In silico* typing using ReMatCh and Abricate |
-| *Morning* | **Working with your data** and **lunch** |
-| *Afternoon* | **Working with your data**
+| __*Morning*__ | *Genomics* **Miguel Machado**: *In silico* typing using ReMatCh and Abricate |
+| __*Morning*__ | **Working with your data** and **lunch** |
+| __*Afternoon*__ | **Working with your data**
 
 ## Wednesday
 | Time | Description |
