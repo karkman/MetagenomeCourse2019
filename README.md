@@ -16,31 +16,28 @@
 ## General introduction
 Microbial community structure and diversity, and population structure are fundamental aspects to understand evolution, niche adaptation and demographic history of bacterial species. As NGS sequencing has become cost effective and accessible, sequencing populations of bacteria across the whole genome provides unprecedented resolution to investigate within-host evolution, transmission history, and population structure. Moreover, analysis of genetic content of microbial communities through metagenomics has become the mainstream methodology. During the one week course the students will learn and apply bioinformatic techniques to perform population genetics and study microbial communities with metagenomic approaches. The goal is to become familiar with the bioinformatic analysis tools and to be able to utilize them in own research after the course.
 
-**Everything is possible thanks to the support of CSC**
+**Everything is possible thanks to the support of [CSC](www.csc.fi)**
 
 ## Schedule
-The course will be held in Viikki at the Faculty of Agriculture and Forestry, University of Helsinki.
+The course will be held in Viikki at the Faculty of Agriculture and Forestry, University of Helsinki.  
 Place: __Info Centre Korona, room Info4, 1st Floor__
 
 
 ### Monday
 | Time | Description|
 | --- | --- |
-| 09:00-09:30 | **Jenni Hultman and Mirko Rossi**: Introduction (including general structure of the course and group work)|
-| 09:30-09:45 | *Genomics* **Mirko Rossi**: Basic usage of cPouta cloud computing service at CSC |
-| 09:45-10:45 | *Genomics* **Mirko Rossi**: [Prepare the Virtual Machine](https://github.com/INNUENDOCON/MicrobialGenomeMetagenomeCourse/blob/master/MPM_starting_VM.md) |
-| 10:45-11:00 | *break* - Note: the coffee break is not included in the course |
-| 11:00-11:45 | *Genomics* **João Carriço**: Making Use of NGS Data: From Reads to Trees and Annotations |
-| 12:00-13:30 | **Working with your data** and **lunch** |
-| 13:30-17:00 | *Genomics* **Miguel Machado**: [From reads to assemblies: working with INNUca pipeline](https://github.com/INNUENDOCON/MicrobialGenomeMetagenomeCourse/blob/master/MPM_workingwithINNUCA.md) |
+| *Morning* | [Introduction](http://link-to-presentation.com) (including general structure of the course and group work)|
+| *Morning* | [Basic usage of computing service at CSC](http://link-to-presentation) |
+| *Morning* |  [Quality control and trimminmg of data](Day1/README.md#QC-and-trimming)|
+| *Afternoon* | |
+| *Afternoon* | [Assembly](Day1/README.md#Assembly) |
 
 ### Tuesday
 | Time | Description |
 | --- | --- |
-| 08:30-11:45 | *Genomics* **Miguel Machado**: *In silico* typing using ReMatCh and Abricate |
-| 12:00-13:30 | **Working with your data** and **lunch** |
-| 13:30-16:00 | *Genomics* **Mickael Silva**:  [*Whole genome and core genome MLST analysis using *chewBBACA* suite*](https://github.com/INNUENDOCON/MicrobialGenomeMetagenomeCourse/blob/master/workingwithchewBBACA.md) (see also [*chewBBACA wiki*](https://github.com/B-UMMI/chewBBACA/wiki)) |
-| 16:00-17:00 | **Working with your data**
+| *Morning* | *Genomics* **Miguel Machado**: *In silico* typing using ReMatCh and Abricate |
+| *Morning* | **Working with your data** and **lunch** |
+| *Afternoon* | **Working with your data**
 
 ## Wednesday
 | Time | Description |
