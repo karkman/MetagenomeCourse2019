@@ -24,7 +24,7 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 
 
 ### Monday
-| Time | Description                |
+| Time | Description |
 | --- | --- |
 | __*Morning*__ | [Introduction](http://link-to-presentation.com) (__Jenni__) |
 | __*Morning*__ | [Basic usage of computing services at CSC](http://link-to-presentation) (__Antti__) |

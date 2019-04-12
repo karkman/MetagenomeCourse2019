@@ -1,10 +1,9 @@
-# Day 1
 *Antti Karkman and Jenni Hultman*
 
-## Metagenome analysis of bird feces dataset
-Log into Taito, either with ssh (Mac/Linux) or PuTTy (Windows)
+# Metagenome analysis of bird feces dataset
+Log into Taito, either with ssh (Mac/Linux) or PuTTy (Windows) 
 
-__*All the scripts are to be run in BioInfo_course folder*__
+# All the scripts are to be run in BioInfo_course folder!
 
 ## Data download
 First set up the course directory, make some folders and then download the data.  
@@ -43,7 +42,7 @@ Go to the folder that contains the raw data and make a folder called e.g. `FASTQ
 Then run the QC for the raw data and combine the results to one report using `multiqc`.  
 Can be done on the interactive nodes using `sinteractive`. In that case use only 4 threads in the `fastqc` step.  
 ```
-# allocate the computing resources and log in to the computing node.
+# allocate the computing resources and log in to the computing node. 
 salloc -n 1 --cpus-per-task=6 --mem=3000 --nodes=1 -t 00:30:00 -p serial
 srun --pty $SHELL
 
@@ -51,7 +50,7 @@ srun --pty $SHELL
 module load bioconda/3
 source activate QC_env
 
-# Run fastqc
+# Run fastqc 
 fastqc ./*.fastq.gz -o FASTQC/ -t 6
 
 # Then combine the reports with multiqc
@@ -60,7 +59,7 @@ multiqc ./ --interactive
 # deactivate the virtual env
 source deactivate
 
-# log out from the computing node
+# log out from the computing node 
 exit
 
 # and free the resources after the job is done
@@ -131,7 +130,7 @@ fastqc ./*.fastq -o FASTQC/ -t 6
  multiqc ./ --interactive
 # deactivate the virtual env
 source deactivate
-# log out from the computing node
+# log out from the computing node 
 exit
 # and free the resources after the job is done
 exit
@@ -182,7 +181,7 @@ megahit -1 trimmed_data/all_R1_trimmed.fastq -2 trimmed_data/all_R2_trimmed.fast
 module purge
 module load biokit
 cd co-assembly
-metaquast.py -t $SLURM_CPUS_PER_TASK --no-plots -o assembly_QC final.contigs.fa
+metaquast.py -t $SLURM_CPUS_PER_TASK --no-plots -o assembly_QC final.contigs.fa 
 ```
 Submit the batch job as previously
 
