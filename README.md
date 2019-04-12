@@ -27,7 +27,7 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 | Time | Description|
 | --- | --- |
 | *Morning* | [Introduction](http://link-to-presentation.com) (including general structure of the course and group work)|
-| *Morning* | [Basic usage of computing service at CSC](http://link-to-presentation) |
+| *Morning* | [Basic usage of computing services at CSC](http://link-to-presentation) |
 | *Morning* |  [Quality control and trimminmg of data](Day1/README.md#QC-and-trimming)|
 | *Afternoon* | |
 | *Afternoon* | [Assembly](Day1/README.md#Assembly) |
