@@ -20,7 +20,7 @@ Microbial community structure and diversity, and population structure are fundam
 
 ## Schedule
 The course will be held in Viikki at the Faculty of Agriculture and Forestry, University of Helsinki.
-Place: Info Centre Korona, room Info4
+Place: Info Centre Korona, room Info4, 1st Floor
 
 
 ### Monday - Viikki C building, lecture room 130
@@ -72,10 +72,10 @@ Place: Info Centre Korona, room Info4
 This course is targeted at PhD and MSc students who are interested in performing bacterial population analysis using whole-genome sequencing and/or using metagenomics for investigating microbial communities.
 
 ## Learning outcomes
-Microbial genomics: QA/QC of the raw sequence data, cleaning and assembly; Gene-by-gene annotation; Genealogy reconstruction and population structure analysis; Visualization of data; GWAS and comparative analysis; Microbial metagenomics: quality control, filtering and assembly to taxonomic classification, clustering, functional assignment, analyses of microbial community composition and comparative metagenomics
+QA/QC of the raw sequence data, cleaning and assembly; Gene-by-gene annotation; Visualization of data; Taxonomic classification; Functional assignment, Analyses of microbial community composition; Comparative metagenomics; MAG (MetagenomeAssembledGenome) analysis.
 
 ## Internet connection
-Inside the class room you can find both eduroam and Univ. Helsinki HUPnet. Instructions on how to connect in HelpDesk website
+Inside the class room you can find both __eduroam__ and Univ. Helsinki __HUPnet__. Instructions on how to connect in [HelpDesk website.](https://helpdesk.it.helsinki.fi/en/instructions/logging-and-connections/networks/wireless-connections-university)
 
 ## Organizers and Teachers
 
