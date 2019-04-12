@@ -20,10 +20,10 @@ Microbial community structure and diversity, and population structure are fundam
 
 ## Schedule
 The course will be held in Viikki at the Faculty of Agriculture and Forestry, University of Helsinki.
-Place: Info Centre Korona, room Info4, 1st Floor
+Place: __Info Centre Korona, room Info4, 1st Floor__
 
 
-### Monday - Viikki C building, lecture room 130
+### Monday
 | Time | Description|
 | --- | --- |
 | 09:00-09:30 | **Jenni Hultman and Mirko Rossi**: Introduction (including general structure of the course and group work)|
@@ -34,7 +34,7 @@ Place: Info Centre Korona, room Info4, 1st Floor
 | 12:00-13:30 | **Working with your data** and **lunch** |
 | 13:30-17:00 | *Genomics* **Miguel Machado**: [From reads to assemblies: working with INNUca pipeline](https://github.com/INNUENDOCON/MicrobialGenomeMetagenomeCourse/blob/master/MPM_workingwithINNUCA.md) |
 
-### Tuesday - Biocentre 3, lecture room 1402
+### Tuesday
 | Time | Description |
 | --- | --- |
 | 08:30-11:45 | *Genomics* **Miguel Machado**: *In silico* typing using ReMatCh and Abricate |
@@ -42,7 +42,7 @@ Place: Info Centre Korona, room Info4, 1st Floor
 | 13:30-16:00 | *Genomics* **Mickael Silva**:  [*Whole genome and core genome MLST analysis using *chewBBACA* suite*](https://github.com/INNUENDOCON/MicrobialGenomeMetagenomeCourse/blob/master/workingwithchewBBACA.md) (see also [*chewBBACA wiki*](https://github.com/B-UMMI/chewBBACA/wiki)) |
 | 16:00-17:00 | **Working with your data**
 
-## Wednesday - Viikki C building, lecture room 130
+## Wednesday
 | Time | Description |
 | --- | --- |
 | 08:30-10:45 | *Genomics* **Miguel Machado & Bruno Gonçalves**: Annotation (*PROKKA*), pangenome anaylysis (*ROARY*) and GWAS (*SCOARY*)|
@@ -51,7 +51,7 @@ Place: Info Centre Korona, room Info4, 1st Floor
 | 14:30-15:30 | *Metagenomics* **Antti Karkman**: Data download, QC (*FASTQC*) and trimming (*CUTADAPT*)|
 | 15:30-17:00 | *Metagenomics* **Jenni Hultman**: Assembly (*MEGAHIT*) and installation of programs |
 
-## Thusday Lab building, lecture room 228
+## Thursday
 | Time | Description |
 | --- | --- |
 | 08:00-10:00 | *Metagenomics* **Jenni Hultman**: Assembly check and mapping with (*BOWTIE2*) |
@@ -59,7 +59,7 @@ Place: Info Centre Korona, room Info4, 1st Floor
 | 12:00-14:00 | **Working with your data** and **lunch** |
 | 14:00-17:00 | *Metagenomics* **Antti Karkman and Jenni Hultman**: Prepping files for Anvio |
 
-## Friday Viikki C building, lecture room 130
+## Friday
 | Time | Description |
 | --- | --- |
 | 09:00-10:00 | *Metagenomics* **Tom Delmont**: Introduction to Anvio **NB. Room 2012 Biocenter 2 AND coffee and pulla** |
