@@ -8,8 +8,8 @@
     - [Thursday](#Thursday)
     - [Friday](#Friday)
 3. [Target group](#target-group)
-4. [Learning outcomes](#learning-outcomes)
-5. [Internet connection](#internet-connection)
+4. [Learning outcomes](#learning-outcomes)
+5. [Internet connection](#internet-connection)
 6. [Organizers and teachers](#Organizers-and-teachers)
 
 
