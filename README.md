@@ -60,10 +60,10 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 | Time | Description |
 | --- | --- |
 | 09:00-10:00 | *Metagenomics* **Tommi Vatanen**: TBA **NB. Room 2012 Biocenter 2 AND coffee and pulla** |
-| 10:30-12:00 | *Metagenomics* **Tommi Vatanen**: Read based metagenomics with Humann2 and Metaphlan2 (*ANVIO*) |
+| 10:30-12:00 | *Metagenomics* **Tommi Vatanen**: Read based metagenomics with Humann2 and Metaphlan2 |
 | 12:00-13:00 | **Working with your data** and **lunch** |
-| 13:00-16:00 | *Metagenomics* **Katariina Pärnänen**: Crash course into statistics of metagenomic data: Multivariate and diversity analysis and generalized linear models of overdispersed count data |
-| 16:00-17:00 | *Metagenomics* **Jenni Hultman**: Wrapping up |
+| 13:00-16:00 | *Metagenomics*: Crash course into statistics of metagenomic data: Multivariate and diversity analysis and generalized linear models of overdispersed count data (__Katariina__)|
+| 16:00-17:00 | *Metagenomics* : Wrapping up (__Katariina__) |
 
 ## Target group
 This course is targeted at PhD and MSc students who are interested in performing bacterial population analysis using whole-genome sequencing and/or using metagenomics for investigating microbial communities.
