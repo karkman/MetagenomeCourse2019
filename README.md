@@ -35,16 +35,16 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 ### Tuesday
 | Time | Description |
 | --- | --- |
-| __*Morning*__ | *Genomics* **Miguel Machado**: *In silico* typing using ReMatCh and Abricate |
+| __*Morning*__ | *Open slot* |
 | __*Morning*__ | **Working with your data** and **lunch** |
 | __*Afternoon*__ | **Working with your data**
 
 ## Wednesday
 | Time | Description |
 | --- | --- |
-| 08:30-10:45 | *Genomics* **Miguel Machado & Bruno Gonçalves**: Annotation (*PROKKA*), pangenome anaylysis (*ROARY*) and GWAS (*SCOARY*)|
+| 08:30-10:45 | *Open slot*|
 | 11:00-12:30 | **Working with your data** and **lunch** |
-| 12:30-14:30 | *Genomics* **Bruno Gonçalves**: Integrating phylogenetic inference and metadata visualization for NGS data |
+| 12:30-14:30 | *Open slot* |
 | 14:30-15:30 | *Metagenomics* **Antti Karkman**: Data download, QC (*FASTQC*) and trimming (*CUTADAPT*)|
 | 15:30-17:00 | *Metagenomics* **Jenni Hultman**: Assembly (*MEGAHIT*) and installation of programs |
 
@@ -52,7 +52,7 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 | Time | Description |
 | --- | --- |
 | 08:00-10:00 | *Metagenomics* **Jenni Hultman**: Assembly check and mapping with (*BOWTIE2*) |
-| 10:00-12:00 | *Metagenomics* **Antti Karkman**: Read based analysis for 16S rRNA (*Metaxa2*) and ARG (*ResFinder*) |
+| 10:00-12:00 | *Metagenomics* **Antti Karkman**: Read based analysis for 16S rRNA (*Metaphlan2*) and ARG (*ResFinder*) |
 | 12:00-14:00 | **Working with your data** and **lunch** |
 | 14:00-17:00 | *Metagenomics* **Antti Karkman and Jenni Hultman**: Prepping files for Anvio |
 
