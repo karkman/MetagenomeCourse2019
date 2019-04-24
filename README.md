@@ -59,17 +59,17 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 ## Friday
 | Time | Description |
 | --- | --- |
-| 09:00-10:00 | *Metagenomics* **Tom Delmont**: Introduction to Anvio **NB. Room 2012 Biocenter 2 AND coffee and pulla** |
-| 10:30-12:00 | *Metagenomics* **Tom Delmont**: Metagenome visualization in Anvio (*ANVIO*) |
+| 09:00-10:00 | *Metagenomics* **Tommi Vatanen**: TBA **NB. Room 2012 Biocenter 2 AND coffee and pulla** |
+| 10:30-12:00 | *Metagenomics* **Tommi Vatanen**: Read based metagenomics with Humann2 and Metaphlan2 (*ANVIO*) |
 | 12:00-13:00 | **Working with your data** and **lunch** |
-| 13:00-16:00 | *Metagenomics* **Tom Delmont**: Construction of MAGs with Anvio |
+| 13:00-16:00 | *Metagenomics* **Katariina Pärnänen**: Crash course into statistics of metagenomic data: Multivariate and diversity analysis and generalized linear models of overdispersed count data |
 | 16:00-17:00 | *Metagenomics* **Jenni Hultman**: Wrapping up |
 
 ## Target group
 This course is targeted at PhD and MSc students who are interested in performing bacterial population analysis using whole-genome sequencing and/or using metagenomics for investigating microbial communities.
 
 ## Learning outcomes
-QA/QC of the raw sequence data, cleaning and assembly; Gene-by-gene annotation; Visualization of data; Taxonomic classification; Functional assignment, Analyses of microbial community composition; Comparative metagenomics; MAG (MetagenomeAssembledGenome) analysis.
+QA/QC of the raw sequence data, cleaning and assembly; Gene-by-gene annotation; Visualization of data; Taxonomic classification; Functional assignment, Analyses of microbial community composition; Comparative metagenomics; MAG (MetagenomeAssembledGenome) analysis; Statistical methods for metagenome data analysis.
 
 ## Internet connection
 Inside the class room you can find both __eduroam__ and Univ. Helsinki __HUPnet__. Instructions on how to connect in [HelpDesk website.](https://helpdesk.it.helsinki.fi/en/instructions/logging-and-connections/networks/wireless-connections-university)
