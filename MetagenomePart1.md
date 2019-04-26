@@ -1,17 +1,15 @@
-*Antti Karkman and Jenni Hultman*
+# Metagenome analysis of infant gut metagenomes
+Log into Taito, either with ssh (Mac/Linux) or PuTTy (Windows)
 
-# Metagenome analysis of bird feces dataset
-Log into Taito, either with ssh (Mac/Linux) or PuTTy (Windows) 
-
-# All the scripts are to be run in BioInfo_course folder!
+__All the scripts are to be run in `Metagenomics2019` folder!__
 
 ## Data download
 First set up the course directory, make some folders and then download the data.  
 Move to work directory at CSC and make a course directory there. Or a subfolder under a previous course folder.  
 ```
 cd $WRKDIR
-mkdir BioInfo_course
-cd BioInfo_course
+mkdir Metagenomics2019
+cd Metagenomics2019
 mkdir raw_data
 mkdir scripts
 mkdir trimmed_data
@@ -20,38 +18,43 @@ mkdir trimmed_data
 Download the metagenomic data (takes few minutes)  
 ```
 cd raw_data
-cp /wrk/antkark/shared/course_metagenomes.tar.gz .
+cp /wrk/antkark/shared/Metagenomics2019data.tar.gz .
 ```
 
-The md5 sum for the file is 531d74bfe7892356824b7c1ce236792e. Check that the md5 um for the file you downloaded matches by typing
+The md5 sum for the file is `XX`. Check that the md5 sum of the file you downloaded matches with this.
 
 ```
-md5sum course_metagenomes.tar.gz
+md5sum Metagenomics2019data.tar.gz
 ```
-And then unpack the tar.gz file
+And then unpack the zipped tar file with `tar`.  
+The options are: `x` = extract, `z` = unzip, `v` = verbose, `f` = file
+
 ```
-tar -xzvf course_metagenomes.tar.gz
+tar -xzvf Metagenomics2019data.tar.gz
 ```
 
-Make a file containing the sample names to be used later in bash scripts.  
- `ls *.fastq.gz |awk -F "-" '{print $2}'|uniq > ../sample_names.txt`  
+Make a file containing the sample names. This is everything before the first `-`.  
+ `ls *._R1_001.fastq |awk -F "-" '{print $2}' > ../sample_names.txt`  
 
 ## QC and trimming
 QC for the raw data (takes few min, depending on the allocation).  
 Go to the folder that contains the raw data and make a folder called e.g. `FASTQC` for the QC reports.  
 Then run the QC for the raw data and combine the results to one report using `multiqc`.  
-Can be done on the interactive nodes using `sinteractive`. In that case use only 4 threads in the `fastqc` step.  
+
+Can be done on the interactive nodes using `sinteractive`.   
+In that case do not allocate resources.  Just go to the right folder, activate `QC_env` and run `FastQC`. After it is finished you can just log out fromn the computing node. You don´t need to free any resources.
+
 ```
-# allocate the computing resources and log in to the computing node. 
-salloc -n 1 --cpus-per-task=6 --mem=3000 --nodes=1 -t 00:30:00 -p serial
+# allocate the computing resources and log in to the computing node.
+salloc -n 1 --cpus-per-task=4 --mem=3000 --nodes=1 -t 00:30:00 -p serial
 srun --pty $SHELL
 
 # activate the QC environment
 module load bioconda/3
 source activate QC_env
 
-# Run fastqc 
-fastqc ./*.fastq.gz -o FASTQC/ -t 6
+# Run fastqc
+fastqc ./*.fastq -o FASTQC/ -t 4
 
 # Then combine the reports with multiqc
 multiqc ./ --interactive
@@ -59,7 +62,7 @@ multiqc ./ --interactive
 # deactivate the virtual env
 source deactivate
 
-# log out from the computing node 
+# log out from the computing node
 exit
 
 # and free the resources after the job is done
@@ -67,7 +70,7 @@ exit
 ```
 
 Copy the resulting HTML file to your local machine with `scp` from the command line (Mac/Linux) or *WinSCP* on Windows.  
-Have a look at the QC report with your favorite browser.  
+Have a look at the QC report with your favourite browser.  
 
 After inspecting the output, it should be clear that we need to do some trimming.  
 
@@ -130,7 +133,7 @@ fastqc ./*.fastq -o FASTQC/ -t 6
  multiqc ./ --interactive
 # deactivate the virtual env
 source deactivate
-# log out from the computing node 
+# log out from the computing node
 exit
 # and free the resources after the job is done
 exit
@@ -181,7 +184,7 @@ megahit -1 trimmed_data/all_R1_trimmed.fastq -2 trimmed_data/all_R2_trimmed.fast
 module purge
 module load biokit
 cd co-assembly
-metaquast.py -t $SLURM_CPUS_PER_TASK --no-plots -o assembly_QC final.contigs.fa 
+metaquast.py -t $SLURM_CPUS_PER_TASK --no-plots -o assembly_QC final.contigs.fa
 ```
 Submit the batch job as previously
 
