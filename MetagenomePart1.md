@@ -35,7 +35,7 @@ tar -xzvf Metagenomics2019data.tar.gz
 
 Make a file containing the sample names. This is the second field separated by `_`.    
 Use only the forward reads for this.  
- `ls *.R1_001.fastq |awk -F "_" '{print $2}' > ../sample_names.txt`  
+ `ls *_R1_001.fastq |awk -F "_" '{print $2}' > ../sample_names.txt`  
 
 ## QC and trimming
 QC for the raw data (takes few min, depending on the allocation).  
@@ -74,12 +74,18 @@ Copy the resulting HTML file to your local machine with `scp` from the command l
 Have a look at the QC report with your favourite browser.  
 
 After inspecting the output, it should be clear that we need to do some trimming.  
+__What kind of trimming do you think should be done?__
 
-We'll make a bash script that runs cutadapt for each file using the `sample_names.txt` file.    
-Go to your scripts folder and make a bash script for cutadapt with any text editor. Specify the adapter sequences that you want to trim after `-a` and `-A`. What is the difference with `-a` and `-A`?
+You can check the adapter sequences from Illumina's website. (e.g. search with "*Illumina adapter sequences*").  
 
-Go to the Cutadapt [manual.](http://cutadapt.readthedocs.io) and find out what the other options are doing.
+Or go [here](https://support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/experiment-design/illumina-adapter-sequences-1000000002694-10.pdf).
 
+For trimming we'll make a bash script that runs `cutadapt` for each file using the `sample_names.txt` file.    
+Go to your scripts folder and make a bash script for cutadapt with any text editor. Specify the adapter sequences that you want to trim after `-a` and `-A`. What is the difference with `-a` and `-A`? And what option `-O` is for?
+
+You can find the answers from Cutadapt [manual](http://cutadapt.readthedocs.io).
+
+Save the file as `cutadapt.sh` in the scripts folder.  
 __Make sure that the PATHS are correct in your own script__  
 
 ```
@@ -87,9 +93,9 @@ __Make sure that the PATHS are correct in your own script__
 
 while read i
 do
-        cutadapt  -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT -q 28 -O 10 \
+        cutadapt  -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT  -O 10 \
         -o ../trimmed_data/$i"_R1_trimmed.fastq" -p ../trimmed_data/$i"_R2_trimmed.fastq" \
-        *$i*_R1*.fastq.gz *$i*_R2*.fastq.gz > ../trimmed_data/$i"_trim.log"
+        *$i*_R1_001.fastq *$i*_R2_001.fastq > ../trimmed_data/$i"_trim.log"
 done < $1
 ```
 
@@ -104,13 +110,14 @@ Make another file with text editor that runs the script above.
 #SBATCH -t 01:00:00
 #SBATCH -n 1
 #SBATCH -p serial
-#SBATCH --mem=50
+#SBATCH --mem=1000
 #
 
 module load biokit
 cd $WRKDIR/Metagenomics2019/raw_data
 bash ../scripts/cutadapt.sh ../sample_names.txt
 ```
+
 After it is done, we can submit it to the SLURM system. Do it from the course main folder, so go one step back in your folders.  
 
 `sbatch scripts/cut_batch.sh`  
