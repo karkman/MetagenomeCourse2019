@@ -199,9 +199,9 @@ metaquast.py -t $SLURM_CPUS_PER_TASK --no-plots -o assembly_QC final.contigs.fa
 ```
 Submit the batch job as previously
 
-## Taxonomic profiling with Metaxa2
 
 <del>
+## Taxonomic profiling with Metaxa2
 
 The microbial community profiling for the samples will be done using a 16S/18S rRNA gene based classification software [Metaxa2](http://microbiology.se/software/metaxa2/).  
 It identifies the 16S/18S rRNA genes from the short reads using HMM models and then annotates them using BLAST and a reference database.
