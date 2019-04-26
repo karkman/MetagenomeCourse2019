@@ -199,6 +199,10 @@ metaquast.py -t $SLURM_CPUS_PER_TASK --no-plots -o assembly_QC final.contigs.fa
 ```
 Submit the batch job as previously
 
+Things to add:
+- Humann2
+- ARG annotation w/ mapping
+- 
 
 <del>
 ## Taxonomic profiling with Metaxa2
@@ -206,8 +210,8 @@ Submit the batch job as previously
 The microbial community profiling for the samples will be done using a 16S/18S rRNA gene based classification software [Metaxa2](http://microbiology.se/software/metaxa2/).  
 It identifies the 16S/18S rRNA genes from the short reads using HMM models and then annotates them using BLAST and a reference database.
 We will run Metaxa2 as an array job in Taito. More about array jobs at CSC [here](https://research.csc.fi/taito-array-jobs).  
-
 Make a folder for Metaxa2 results and direct the results to that folder in your array job script. (Takes ~6 h for the largest files)
+
 ```
 #!/bin/bash -l
 #SBATCH -J metaxa
