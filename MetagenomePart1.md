@@ -33,8 +33,9 @@ The options are: `x` = extract, `z` = unzip, `v` = verbose, `f` = file
 tar -xzvf Metagenomics2019data.tar.gz
 ```
 
-Make a file containing the sample names. This is everything before the first `-`.  
- `ls *._R1_001.fastq |awk -F "-" '{print $2}' > ../sample_names.txt`  
+Make a file containing the sample names. This is the second field separated by `_`.    
+Use only the forward reads for this.  
+ `ls *.R1_001.fastq |awk -F "_" '{print $2}' > ../sample_names.txt`  
 
 ## QC and trimming
 QC for the raw data (takes few min, depending on the allocation).  
@@ -202,7 +203,7 @@ Submit the batch job as previously
 Things to add:
 - Humann2
 - ARG annotation w/ mapping
-- 
+-
 
 <del>
 ## Taxonomic profiling with Metaxa2
