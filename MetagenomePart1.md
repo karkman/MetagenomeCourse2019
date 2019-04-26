@@ -74,25 +74,27 @@ Have a look at the QC report with your favourite browser.
 
 After inspecting the output, it should be clear that we need to do some trimming.  
 
-Make a folder for the trimmed data.  
-Then we'll make a bash script that runs cutadapt for each file using the `sample_names.txt` file.    
+We'll make a bash script that runs cutadapt for each file using the `sample_names.txt` file.    
 Go to your scripts folder and make a bash script for cutadapt with any text editor. Specify the adapter sequences that you want to trim after `-a` and `-A`. What is the difference with `-a` and `-A`?
 
-Option `-q` is for quality trimming (PHRED score).  
-Check that the paths are correct.  
-Cutadapt [manual.](http://cutadapt.readthedocs.io)  
+Go to the Cutadapt [manual.](http://cutadapt.readthedocs.io) and find out what the other options are doing.
+
+__Make sure that the PATHS are correct in your own script__  
+
 ```
 #!/bin/bash
 
 while read i
 do
-        cutadapt  -a CTGTCTCTTATACACATCTCCGAGCCCACGAGAC -A CTGTCTCTTATACACATCTGACGCTGCCGACGA -q 28 -O 10 \
+        cutadapt  -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT -q 28 -O 10 \
         -o ../trimmed_data/$i"_R1_trimmed.fastq" -p ../trimmed_data/$i"_R2_trimmed.fastq" \
         *$i*_R1*.fastq.gz *$i*_R2*.fastq.gz > ../trimmed_data/$i"_trim.log"
 done < $1
 ```
+
 Then we need a batch job file to submit the job to the SLURM system. More about CSC batch jobs here: https://research.csc.fi/taito-batch-jobs  
-Make another file with text editor.
+Make another file with text editor that runs the script above.
+
 ```
 #!/bin/bash -l
 #SBATCH -J cutadapt
@@ -105,7 +107,7 @@ Make another file with text editor.
 #
 
 module load biokit
-cd $WRKDIR/BioInfo_course/raw_data
+cd $WRKDIR/Metagenomics2019/raw_data
 bash ../scripts/cutadapt.sh ../sample_names.txt
 ```
 After it is done, we can submit it to the SLURM system. Do it from the course main folder, so go one step back in your folders.  
@@ -120,21 +122,30 @@ After the job has finished, you can see how much resources it actually used and 
 
 `seff JOBID`  
 
-Then let's check the results from the trimming. Go to the folder containing the trimmed reads and make a new folder for the QC files.  
+Then let's check the results from the trimming.
+
+Go to the folder containing the trimmed reads (`trimmed_data`) and make a new folder (`FASTQC`) for the QC files.  
 Allocate some resources and then run FASTQC and MultiQC again.  
+
 ```
-salloc -n 1 --cpus-per-task=6 --mem=3000 --nodes=1 -t 00:30:00 -p serial
+# Allocate resources
+salloc -n 1 --cpus-per-task=4 --mem=3000 --nodes=1 -t 00:30:00 -p serial
 srun --pty $SHELL
+
 # activate the QC environment
 module load bioconda/3
 source activate QC_env
+
 # run QC on the trimmed reads
-fastqc ./*.fastq -o FASTQC/ -t 6
- multiqc ./ --interactive
+fastqc ./*.fastq -o FASTQC/ -t 4
+multiqc ./ --interactive
+
 # deactivate the virtual env
 source deactivate
+
 # log out from the computing node
 exit
+
 # and free the resources after the job is done
 exit
 ```
@@ -175,7 +186,7 @@ module purge
 module load intel/16.0.0
 module load megahit
 
-cd $WRKDIR/BioInfo_course/
+cd $WRKDIR/Metagenomics2019/
 
 megahit -1 trimmed_data/all_R1_trimmed.fastq -2 trimmed_data/all_R2_trimmed.fastq \
          -o co-assembly -t $SLURM_CPUS_PER_TASK --min-contig-len 1000
@@ -189,6 +200,9 @@ metaquast.py -t $SLURM_CPUS_PER_TASK --no-plots -o assembly_QC final.contigs.fa
 Submit the batch job as previously
 
 ## Taxonomic profiling with Metaxa2
+
+<del>
+
 The microbial community profiling for the samples will be done using a 16S/18S rRNA gene based classification software [Metaxa2](http://microbiology.se/software/metaxa2/).  
 It identifies the 16S/18S rRNA genes from the short reads using HMM models and then annotates them using BLAST and a reference database.
 We will run Metaxa2 as an array job in Taito. More about array jobs at CSC [here](https://research.csc.fi/taito-array-jobs).  
@@ -217,3 +231,4 @@ metaxa2 -1 ../trimmed_data/$name"_R1_trimmed.fastq" -2 ../trimmed_data/$name"_R2
             -o $name --align none --graphical F --cpu $SLURM_CPUS_PER_TASK --plus
 metaxa2_ttt -i $name".taxonomy.txt" -o $name
 ```
+</del>
