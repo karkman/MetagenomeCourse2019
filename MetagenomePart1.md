@@ -21,7 +21,7 @@ cd raw_data
 cp /wrk/antkark/shared/Metagenomics2019data.tar.gz .
 ```
 
-The md5 sum for the file is `XX`. Check that the md5 sum of the file you downloaded matches with this.
+The md5 sum for the file is `2d86933b525034dcdcddf9592bc0e05c`. Check that the md5 sum of the file you downloaded matches with this.
 
 ```
 md5sum Metagenomics2019data.tar.gz
@@ -78,7 +78,7 @@ __What kind of trimming do you think should be done?__
 You can check the adapter sequences from Illumina's website. (e.g. search with "*Illumina adapter sequences*"). Or from [here](https://support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/experiment-design/illumina-adapter-sequences-1000000002694-10.pdf).
 
 For trimming we'll make a bash script that runs `cutadapt` for each file using the `sample_names.txt` file.    
-Go to your scripts folder and make a bash script for cutadapt with any text editor. Specify the adapter sequences that you want to trim after `-a` and `-A`. What is the difference with `-a` and `-A`? And what option `-O` is for? You can find the answers from Cutadapt [manual](http://cutadapt.readthedocs.io).
+Go to your scripts folder and make a bash script for cutadapt with any text editor. Specify the adapter sequences that you want to trim after `-a` and `-A`. What is the difference with `-a` and `-A`? And what is specified with option `-O`? You can find the answers from Cutadapt [manual](http://cutadapt.readthedocs.io).
 
 Save the file as `cutadapt.sh` in the scripts folder.  
 __Make sure that the PATHS are correct in your own script__  
@@ -88,7 +88,7 @@ __Make sure that the PATHS are correct in your own script__
 
 while read i
 do
-        cutadapt  -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT  -O 10 --max-n 0 \
+        cutadapt  -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT -O 10 --max-n 0 \
         -o ../trimmed_data/$i"_R1_trimmed.fastq" -p ../trimmed_data/$i"_R2_trimmed.fastq" \
         *$i*_R1_001.fastq *$i*_R2_001.fastq > ../trimmed_data/$i"_trim.log"
 done < $1
@@ -156,14 +156,15 @@ exit
 Copy it to your local machine as earlier and look how well the trimming went.  
 
 ## Assembly
-Let's assemble first one seagull sample and one goose sample an then all six samples together (co-assembly). We will use tool Megahit for the assembly https://github.com/voutcn/megahit. Megahit is an ultra fast assembly tool for metagenomics data. It is installed to CSC and be loaded with following commands:
+We will assemble all 10 samples together (co-assembly) and use [Megahit assembler](https://github.com/voutcn/megahit) for the job. In addition, we will use MetaQuast to get some statistics about our assembly.  
 
+Megahit is an ultra fast assembly tool for metagenomics data. It is installed to CSC and be loaded with following commands:
 ```
 module purge
 module load intel/16.0.0
 module load megahit
 ```
-module purge is needed to remove wrong Python versions you might have loaded in earlier today.
+module purge is needed to remove wrong Python versions you might have loaded earlier today.
 
 Assembling metagenomic data can be very resource demanding and we need to do it as a batch job. As we want to do both individual and co-assemblies the R1 and R2 reads need to be merged into two files with `cat`
 

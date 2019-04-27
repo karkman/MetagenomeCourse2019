@@ -28,6 +28,7 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 | --- | --- |
 | __*Morning*__ | [Introduction](http://link-to-presentation.com) (__Jenni__) |
 | __*Morning*__ | [Basic usage of computing services at CSC](http://link-to-presentation) (__Antti__) |
+| __*Morning*__ | [Installations for the course](MetagenomeInstallations.md) (__Antti__) |
 | __*Morning*__ |  [Quality control and trimminmg of data](Day1/README.md#QC-and-trimming) (__Katariina__)|
 | __*Afternoon*__ | *open slot* |
 | __*Afternoon*__ | [Assembly](Day1/README.md#Assembly) (__Katariina__) |

@@ -108,7 +108,6 @@ echo $CENTRIFUGE_BASE
 
 
 **Sourmash**
-
 ```
-conda create -n sourmash_env sourmash python=3.6.4
+conda create -n sourmash_env -c bioconda -c conda-forge sourmash
 ```
