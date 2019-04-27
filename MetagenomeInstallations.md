@@ -1,10 +1,10 @@
 ## From microbial genomes to metagenomes  
-*Antti Karkman, 2017* 
+*Antti Karkman, 2017*
 
 # Installations
 Log into Taito, either with ssh (Mac/Linux) or PuTTy (Windows)  
 
-Open a screen for the installations. 
+Open a screen for the installations.
 ```
 screen -S installations
 ```
@@ -30,7 +30,7 @@ Go back to the installations screen with `screen -r installations`.
 Create a virtual environment for Anvi'o and install all dependencies using Bioconda. (takes 5–10 min)  
 ```
 module load bioconda/3
-conda create -n anvio3 -c bioconda -c conda-forge python=3.5.4 gsl anvio
+conda create -n anvio5 -c bioconda -c conda-forge python=3.5.4 gsl anvio
 ```
 
 Let's test it  
@@ -40,18 +40,15 @@ source activate anvio3
 # Run the mini test
 anvi-self-test --suite mini
 ```
-We will also need to install NCBIs COG databases and reformat them so they can be used later. The formatting step includes changing reorganizing information in raw files, serializing a very large text file into binary Python object for fast access while converting protein IDs to COGs, and finally generating BLAST and DIAMOND search databases.
-
-```
-anvi-setup-ncbi-cogs --num-threads 4
-```
-All should be good and we can close the virtual environment.  
-`source deactivate`  
 
 **CheckM**  
 For assessing the quality of recovered genomes
 ```
-conda create -n checkm pplacer checkm-genome numpy python=2
+conda create -n checkm_env pplacer checkm-genome numpy python=2
+```
+**Humann2**
+```
+conda create --name humann2_env humann2
 ```
 
 **Centrifuge**  
@@ -109,28 +106,9 @@ echo $CENTRIFUGE_BASE
 ```
 ######################################################  
 
-**Metaxa2**  
-For taxonomic profiling of the samples using the trimmed reads.
-```
-cd $USERAPPL
-wget http://microbiology.se/sw/Metaxa2_2.1.3.tar.gz
-tar -xzvf Metaxa2_2.1.3.tar.gz
-cd Metaxa2_2.1.3
-```
-Test it, you will need to load the biokit first, because Metaxa2 uses HMMER3 and BLAST.
-```
-module load biokit
-./metaxa2 -i test.fasta -o TEMP --plus
-```
-Then you can remove the results  
-`rm TEMP*`  
 
-You can also add Metaxa2 to your PATH (go to --> `.bashrc`)  
+**Sourmash**
 
-**DIAMOND parser**  
-Python script to parse the diamond output into a count table.  
-You can put it to your `scripts` folder.  
 ```
-cd $WRKDIR/BioInfo_course/scripts
-git clone https://github.com/karkman/parse_diamond.git
+conda create -n sourmash_env sourmash python=3.6.4
 ```

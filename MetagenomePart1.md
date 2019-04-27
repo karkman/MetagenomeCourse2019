@@ -43,7 +43,7 @@ Go to the folder that contains the raw data and make a folder called e.g. `FASTQ
 Then run the QC for the raw data and combine the results to one report using `multiqc`.  
 
 Can be done on the interactive nodes using `sinteractive`.   
-In that case do not allocate resources.  Just go to the right folder, activate `QC_env` and run `FastQC`. After it is finished you can just log out fromn the computing node. You don´t need to free any resources.
+In that case do not allocate resources.  Just go to the right folder, activate `QC_env` and run `FastQC`. After it is finished you can just log out from the computing node. You don´t need to free any resources.
 
 ```
 # allocate the computing resources and log in to the computing node.
@@ -70,20 +70,15 @@ exit
 exit
 ```
 
-Copy the resulting HTML file to your local machine with `scp` from the command line (Mac/Linux) or *WinSCP* on Windows.  
-Have a look at the QC report with your favourite browser.  
+Copy the resulting HTML file to your local machine with `scp` from the command line (Mac/Linux) or *WinSCP* on Windows. Have a look at the QC report with your favourite browser.  
 
 After inspecting the output, it should be clear that we need to do some trimming.  
 __What kind of trimming do you think should be done?__
 
-You can check the adapter sequences from Illumina's website. (e.g. search with "*Illumina adapter sequences*").  
-
-Or go [here](https://support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/experiment-design/illumina-adapter-sequences-1000000002694-10.pdf).
+You can check the adapter sequences from Illumina's website. (e.g. search with "*Illumina adapter sequences*"). Or from [here](https://support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/experiment-design/illumina-adapter-sequences-1000000002694-10.pdf).
 
 For trimming we'll make a bash script that runs `cutadapt` for each file using the `sample_names.txt` file.    
-Go to your scripts folder and make a bash script for cutadapt with any text editor. Specify the adapter sequences that you want to trim after `-a` and `-A`. What is the difference with `-a` and `-A`? And what option `-O` is for?
-
-You can find the answers from Cutadapt [manual](http://cutadapt.readthedocs.io).
+Go to your scripts folder and make a bash script for cutadapt with any text editor. Specify the adapter sequences that you want to trim after `-a` and `-A`. What is the difference with `-a` and `-A`? And what option `-O` is for? You can find the answers from Cutadapt [manual](http://cutadapt.readthedocs.io).
 
 Save the file as `cutadapt.sh` in the scripts folder.  
 __Make sure that the PATHS are correct in your own script__  
@@ -93,7 +88,7 @@ __Make sure that the PATHS are correct in your own script__
 
 while read i
 do
-        cutadapt  -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT  -O 10 \
+        cutadapt  -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT  -O 10 --max-n 0 \
         -o ../trimmed_data/$i"_R1_trimmed.fastq" -p ../trimmed_data/$i"_R2_trimmed.fastq" \
         *$i*_R1_001.fastq *$i*_R2_001.fastq > ../trimmed_data/$i"_trim.log"
 done < $1
@@ -110,7 +105,7 @@ Make another file with text editor that runs the script above.
 #SBATCH -t 01:00:00
 #SBATCH -n 1
 #SBATCH -p serial
-#SBATCH --mem=1000
+#SBATCH --mem=100
 #
 
 module load biokit
@@ -187,7 +182,7 @@ Make a script called co_assembly.sh in a text editor
 #SBATCH -n 1
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=16
-#SBATCH --mem=20000
+#SBATCH --mem=128000
 #
 
 module purge
