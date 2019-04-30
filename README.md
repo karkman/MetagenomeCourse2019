@@ -37,7 +37,7 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 | Time | Description |
 | --- | --- |
 | __*Morning*__ | *Assembly statistics* (__Jenni/Antti__)|
-| __*Morning*__ | *Getting files for Anvio* (__Tom, Antti, Jenni__)|
+| __*Morning*__ | [Getting files for Anvio](MetagenomePart3.md) (__Tom, Antti, Jenni__)|
 | __*Afternoon*__ | [Introduction to Anvio](http://link-to-presentation.com) (__Tom__)
 
 ## Wednesday
@@ -83,5 +83,5 @@ Inside the class room you can find both __eduroam__ and Univ. Helsinki __HUPnet_
 * PhD Antti Karkman, University of Helsinki, Finland
 
 ### Visiting teachers
-* PhD Tom Delmont, XXX, France
-* Tommi Vatanen, The University of Auckland, New Zealand
+* Dr Tom Delmont, XXX, France
+* Dr Tommi Vatanen, The University of Auckland, New Zealand
