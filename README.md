@@ -23,7 +23,7 @@ The course will be held in Viikki at the Faculty of Agriculture and Forestry, Un
 Place: __Info Centre Korona, room Info4, 1st Floor__
 
 
-### Monday
+### Monday 20.5.2019 9-17
 | Time | Description |
 | --- | --- |
 | __*Morning*__ | [Introduction](http://link-to-presentation.com) (__Jenni__) |
@@ -33,14 +33,14 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 | __*Afternoon*__ | *open slot* |
 | __*Afternoon*__ | [Assembly](Day1/README.md#Assembly) (__Jenni__) |
 
-### Tuesday
+### Tuesday 21.5.2019 8-17
 | Time | Description |
 | --- | --- |
 | __*Morning*__ | *Assembly statistics* (__Jenni/Antti__)|
 | __*Morning*__ | [Getting files for Anvio](MetagenomePart3.md) (__Tom, Antti, Jenni__)|
 | __*Afternoon*__ | [Introduction to Anvio](http://link-to-presentation.com) (__Tom__)
 
-## Wednesday
+## Wednesday 22.5.2019 8-17
 | Time | Description |
 | --- | --- |
 | *Morning* | *Manual binning of MAGs with Anvio* (__Tom__)|
@@ -49,7 +49,7 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 | 14:30-15:30 | |
 | Afternoon | *Taxonomic annotation of MAGs* (__Tom__) |
 
-## Thursday
+## Thursday 23.5.2019 8-16.30
 | Time | Description |
 | --- | --- |
 | 08:00-10:00 | *Metagenomics* **Jenni Hultman**: Assembly check and mapping with (*BOWTIE2*) |
@@ -57,7 +57,7 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 | 12:00-14:00 | **Working with your data** and **lunch** |
 | 14:00-17:00 | *Metagenomics* **Antti Karkman and Jenni Hultman**: Prepping files for Anvio |
 
-## Friday
+## Friday 24.5.2019 9-17
 | Time | Description |
 | --- | --- |
 | 09:00-10:00 | **Tommi Vatanen**: The gut microbiome structure and function in early life - lessons from cohort studies **NB. Room 2012 Biocenter 2 ** |
