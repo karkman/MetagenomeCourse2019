@@ -38,15 +38,15 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 | --- | --- |
 | __*Morning*__ | *Assembly statistics* (__Jenni/Antti__)|
 | __*Morning*__ | *Getting files for Anvio* (__Tom, Antti, Jenni__)|
-| __*Afternoon*__ | **Introduction to Anvio** (__Tom__)
+| __*Afternoon*__ | [Introduction to Anvio](http://link-to-presentation.com) (__Tom__)
 
 ## Wednesday
 | Time | Description |
 | --- | --- |
-| *Morning* | *Manual binning of MAGs with Anvio*|
+| *Morning* | *Manual binning of MAGs with Anvio* (__Tom__)|
 | 11:00-12:30 | **Working with your data** and **lunch** |
-| 12:30-14:30 | ** |
-| 14:30-15:30 | **)|
+| 12:30-14:30 |  |
+| 14:30-15:30 | |
 | Afternoon | *Taxonomic annotation of MAGs* (__Tom__) |
 
 ## Thursday
@@ -60,11 +60,11 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 ## Friday
 | Time | Description |
 | --- | --- |
-| 09:00-10:00 | *Metagenomics* **Tommi Vatanen**: The gut microbiome structure and function in early life - lessons from cohort studies **NB. Room 2012 Biocenter 2 ** |
-| 10:30-12:00 | *Metagenomics* **Tommi Vatanen**: Read based metagenomics with Humann2 and Metaphlan2 |
+| 09:00-10:00 | **Tommi Vatanen**: The gut microbiome structure and function in early life - lessons from cohort studies **NB. Room 2012 Biocenter 2 ** |
+| 10:30-12:00 | Read based metagenomics with Humann2 and Metaphlan2 (__Tommi__|
 | 12:00-13:00 | **Working with your data** and **lunch** |
-| 13:00-16:00 | *Metagenomics*: Crash course into statistics of metagenomic data: Multivariate and diversity analysis and generalized linear models of overdispersed count data (__Katariina__)|
-| 16:00-17:00 | *Metagenomics* : Wrapping up (__Katariina__) |
+| 13:00-16:00 | Crash course into statistics of metagenomic data: Multivariate and diversity analysis and generalized linear models of overdispersed count data (__Katariina__)|
+| 16:00-17:00 | Wrapping up (__Katariina__) |
 
 ## Target group
 This course is targeted at PhD and MSc students who are interested in performing bacterial population analysis using whole-genome sequencing and/or using metagenomics for investigating microbial communities.
