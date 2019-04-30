@@ -31,23 +31,23 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 | __*Morning*__ | [Installations for the course](MetagenomeInstallations.md) (__Antti__) |
 | __*Morning*__ |  [Quality control and trimminmg of data](Day1/README.md#QC-and-trimming) (__Katariina__)|
 | __*Afternoon*__ | *open slot* |
-| __*Afternoon*__ | [Assembly](Day1/README.md#Assembly) (__Katariina__) |
+| __*Afternoon*__ | [Assembly](Day1/README.md#Assembly) (__Jenni__) |
 
 ### Tuesday
 | Time | Description |
 | --- | --- |
-| __*Morning*__ | *Open slot* |
-| __*Morning*__ | **Working with your data** and **lunch** |
-| __*Afternoon*__ | **Working with your data**
+| __*Morning*__ | *Assembly statistics* (__Jenni/Antti__)|
+| __*Morning*__ | *Getting files for Anvio* (__Tom, Antti, Jenni__)|
+| __*Afternoon*__ | **Introduction to Anvio** (__Tom__)
 
 ## Wednesday
 | Time | Description |
 | --- | --- |
-| 08:30-10:45 | *Open slot*|
+| *Morning* | *Manual binning of MAGs with Anvio*|
 | 11:00-12:30 | **Working with your data** and **lunch** |
-| 12:30-14:30 | *Open slot* |
-| 14:30-15:30 | *Metagenomics* **Antti Karkman**: Data download, QC (*FASTQC*) and trimming (*CUTADAPT*)|
-| 15:30-17:00 | *Metagenomics* **Jenni Hultman**: Assembly (*MEGAHIT*) and installation of programs |
+| 12:30-14:30 | ** |
+| 14:30-15:30 | **)|
+| Afternoon | *Taxonomic annotation of MAGs* (__Tom__) |
 
 ## Thursday
 | Time | Description |
@@ -60,7 +60,7 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 ## Friday
 | Time | Description |
 | --- | --- |
-| 09:00-10:00 | *Metagenomics* **Tommi Vatanen**: TBA **NB. Room 2012 Biocenter 2 AND coffee and pulla** |
+| 09:00-10:00 | *Metagenomics* **Tommi Vatanen**: The gut microbiome structure and function in early life - lessons from cohort studies **NB. Room 2012 Biocenter 2 ** |
 | 10:30-12:00 | *Metagenomics* **Tommi Vatanen**: Read based metagenomics with Humann2 and Metaphlan2 |
 | 12:00-13:00 | **Working with your data** and **lunch** |
 | 13:00-16:00 | *Metagenomics*: Crash course into statistics of metagenomic data: Multivariate and diversity analysis and generalized linear models of overdispersed count data (__Katariina__)|
