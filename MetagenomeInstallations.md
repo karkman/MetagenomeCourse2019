@@ -48,7 +48,7 @@ conda create -n checkm_env pplacer checkm-genome numpy python=2
 ```
 **Humann2**
 ```
-conda create --name humann2_env humann2
+conda create -n humann2_env humann2
 ```
 
 **Centrifuge**  

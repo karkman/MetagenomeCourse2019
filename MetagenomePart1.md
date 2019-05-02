@@ -183,7 +183,7 @@ Make a script called co_assembly.sh in a text editor
 #SBATCH -n 1
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=16
-#SBATCH --mem=128000
+#SBATCH --mem=40000
 #
 
 module purge
@@ -208,7 +208,16 @@ Things to add:
 - ARG annotation w/ mapping
 -
 
-<del>
+**Optional**
+
+## (Fairly) Fast MinHash signatures with Sourmash
+```
+sourmash compute *R1_trimmed.fastq -k 31 --scaled 1000
+sourmash compare *.sig -o comparisons
+sourmash plot comparisons
+sourmash gather SIGNATURE.sig ../../shared/genbank-d2-k31.sbt.json -o OUTPUT_sour.txt
+```
+
 ## Taxonomic profiling with Metaxa2
 
 The microbial community profiling for the samples will be done using a 16S/18S rRNA gene based classification software [Metaxa2](http://microbiology.se/software/metaxa2/).  
@@ -229,7 +238,7 @@ Make a folder for Metaxa2 results and direct the results to that folder in your 
 #SBATCH --cpus-per-task=6
 #SBATCH -p serial
 
-cd $WRKDIR/BioInfo_course/Metaxa2
+cd $WRKDIR/Metagenomics2019/Metaxa2
 # Metaxa uses HMMER3 and BLAST, so load the biokit first
 module load biokit
 # each job will get one sample from the sample names file stored to a variable $name
@@ -239,4 +248,3 @@ metaxa2 -1 ../trimmed_data/$name"_R1_trimmed.fastq" -2 ../trimmed_data/$name"_R2
             -o $name --align none --graphical F --cpu $SLURM_CPUS_PER_TASK --plus
 metaxa2_ttt -i $name".taxonomy.txt" -o $name
 ```
-</del>

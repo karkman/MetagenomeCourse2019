@@ -5,7 +5,7 @@ Anvio is an analysis and visualization platform for omics data. You can read mor
 
 ![alt text](https://github.com/INNUENDOCON/MicrobialGenomeMetagenomeCourse/raw/master/Screen%20Shot%202017-12-07%20at%2013.50.20.png "Tom's fault")
 
-Go to your course folder and make a new folder called ANVIO. All task on this section are to be done in this folder. 
+Go to your course folder and make a new folder called ANVIO. All task on this section are to be done in this folder.
 
 ```
 mkdir ANVIO
@@ -23,9 +23,9 @@ module load bioconda/3
 source activate anvio3
 ```
 ## Rename the scaffolds and select those >2,500nt.
-Anvio wants sequence IDs in your FASTA file as simple as possible. Therefore we need to reformat the headerlines to remove spaces and non-numeric characters. Also contigs shorter than 2500 bp will be removed. 
+Anvio wants sequence IDs in your FASTA file as simple as possible. Therefore we need to reformat the headerlines to remove spaces and non-numeric characters. Also contigs shorter than 2500 bp will be removed.
 
-  
+
 ```
 anvi-script-reformat-fasta ../co-assembly/final.contigs.fa -l 2500 --simplify-names --prefix MEGAHIT_co_assembly -r REPORT -o MEGAHIT_co-assembly_2500nt.fa
 ````
@@ -34,7 +34,7 @@ Deattach from the screen with `Ctrl a+d`
 
 ## Mapping the reads back to the assembly
 Next thing to do is mapping all the reads back to the assembly. We use the renamed >2,500 nt contigs and do it sample-wise, so each sample is mapped separately using the trimmed R1 & R2 reads.  
-We will need to two scripts for that, one for the actual mapping and another to run it as an array job. Save both scripts to your `scripts` folder. 
+We will need to two scripts for that, one for the actual mapping and another to run it as an array job. Save both scripts to your `scripts` folder.
 
 But before doing that we have make a bowtie2 index from the contig file. Run the following command:  
 
@@ -90,15 +90,15 @@ Then again submit the array job with `sbatch`.
 
 During luch break check what happens in the different steps in the mapping script.
 ```
-bowtie2 
-samtools view 
-samtools sort 
-samtools index 
+bowtie2
+samtools view
+samtools sort
+samtools index
 ```
 
 ## Back to Anvi'o
 
-Reattach to your Anvi'o screen 
+Reattach to your Anvi'o screen
 
 ```
 screen -r anvio
@@ -146,13 +146,13 @@ module load biokit
 # each job will get one sample from the sample names file
 name=$(sed -n "$SLURM_ARRAY_TASK_ID"p ../sample_names.txt)
 # then the actual profiling
-anvi-profile -c ../ANVIO/MEGAHIT_co-assembly_2500nt_CONTIGS.db  -M 2500 -T $SLURM_CPUS_PER_TASK -i $name.bam -o $name 
+anvi-profile -c ../ANVIO/MEGAHIT_co-assembly_2500nt_CONTIGS.db  -M 2500 -T $SLURM_CPUS_PER_TASK -i $name.bam -o $name
 ```
 Submit the job with `sbatch` as previously.  
 
 ## Run COGs DOES NOT WORK; DO NOT SPEND TIME ON THIS
 
-Next we annotate genes in  contigs database with functions from the NCBI’s Clusters of Orthologus Groups (COGs). 
+Next we annotate genes in  contigs database with functions from the NCBI’s Clusters of Orthologus Groups (COGs).
 Again first reattach to your Anvio'o screen.  
 
 ```
@@ -167,28 +167,27 @@ anvi-get-dna-sequences-for-gene-calls -o gene-calls.fa -c MEGAHIT_co-assembly_25
 ```
 
 ## Run centrifuge
-“classification engine that enables rapid, accurate and sensitive labeling of reads and quantification of species on desktop computers”. Read more from [here](http://biorxiv.org/content/early/2016/05/25/054965). 
+“classification engine that enables rapid, accurate and sensitive labeling of reads and quantification of species on desktop computers”. Read more from [here](http://biorxiv.org/content/early/2016/05/25/054965).
 
-Remember to set the environmental variable pointing to the centrifuge folder as shown in [MetagenomeInstallations](https://github.com/INNUENDOCON/MicrobialGenomeMetagenomeCourse/blob/master/MetagenomeInstallations.md). 
+Remember to set the environmental variable pointing to the centrifuge folder as shown in [MetagenomeInstallations](https://github.com/INNUENDOCON/MicrobialGenomeMetagenomeCourse/blob/master/MetagenomeInstallations.md).
 
 ```
 centrifuge -f -p 6 -x $CENTRIFUGE_BASE/p+h+v gene-calls.fa -S centrifuge_hits.tsv
 ```
 ## Import centrifuge results
 ```
-anvi-import-taxonomy -i centrifuge_report.tsv centrifuge_hits.tsv -p centrifuge -c MEGAHIT_co-assembly_2500nt_CONTIGS.db 
+anvi-import-taxonomy -i centrifuge_report.tsv centrifuge_hits.tsv -p centrifuge -c MEGAHIT_co-assembly_2500nt_CONTIGS.db
 ```
 
 ## Antibiotic resistance gene annotation
 ```
-# run DIAMOND
-diamond blastx -d ~/appl_taito/CARD/CARD -q gene-calls.fa \
-            --max-target-seqs 1 -o CARD.out -f 6 --id 90 --min-orf 20 -p 6 --masking 0
+# run BLASTN against ResFinder
+blastn -query gene-calls.fa -subject ~/appl_taito/database/resfinder_db/resfinder.fasta -out RF.out -outfmt 6 -max_target_seqs 1 -perc_identity 90 -qcov_hsp_perc 80
 # parse the output for Anvi'o  
-printf "gene_callers_id\tsource\taccession\tfunction\te_value\n" > CARD_functions.txt
-awk '{print $1"\tCARD\t\t"$2"\t"$11}' CARD.out >> CARD_functions.txt
+printf "gene_callers_id\tsource\taccession\tfunction\te_value\n" > RF_functions.txt
+awk '{print $1"\tCARD\t\t"$2"\t"$11}' RF.out >> RF_functions.txt
 # and finally import the functions to Anvi'o contigs DB  
-anvi-import-functions -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -i CARD_functions.txt
+anvi-import-functions -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -i RF_functions.txt
 ```
 
 ## Merging the profiles
@@ -219,9 +218,6 @@ Activate anvio
 anvi-interactive -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --server-only -P 8080
 ```
 
-Then open google chrome and go to address 
+Then open google chrome and go to address
 
 http://localhost:8080
-
-
-
