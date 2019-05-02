@@ -79,7 +79,7 @@ samtools idxstats 07004-B_sort.bam | grep -v "*" | cut -f1 >> gene_names
 paste  gene_names *_counts > ARG_genemat.txt
 ```
 
-When the job is finished, inspect the results in the ARG gene matrix.  
+After this inspect the results in the ARG gene matrix.  
 
 ## Assembly quality assesment
 Let's take a look at the assembly file from yesterday. From the log file at `$WRKDIR/BioInfo_course/trimmed_data/co-assembly` you can check how the assembly run and at the last rows how is the output. However, for more detailed analysis we run [MetaQUAST](http://bioinf.spbau.ru/metaquast) together with the assembly. Copy folder called "assembly_QC" to your computer. We will view the results in your favorite browser.
