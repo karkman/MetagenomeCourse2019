@@ -81,8 +81,8 @@ paste  gene_names *_counts > ARG_genemat.txt
 
 After this inspect the results in the ARG gene matrix.  
 
-## Assembly quality assesment
-Let's take a look at the assembly file from yesterday. From the log file at `$WRKDIR/BioInfo_course/trimmed_data/co-assembly` you can check how the assembly run and at the last rows how is the output. However, for more detailed analysis we run [MetaQUAST](http://bioinf.spbau.ru/metaquast) together with the assembly. Copy folder called "assembly_QC" to your computer. We will view the results in your favorite browser.
+## Assembly quality statistics
+Let's take a look at the assembly file from yesterday. From the log file at `$WRKDIR/Metagenomics2019/co-assembly` you can check how the assembly went and from the last rows you can see some summary statistics of the assembly. However, for more detailed analysis we ran [MetaQUAST](http://bioinf.spbau.ru/metaquast) together with the assembly. Copy folder called "assembly_QC" to your computer. You can view the results (`report.html`) in your favorite browser.
 
 ## Taxonomic profiling with Metaxa2 continued...
 When all Metaxa2 array jobs are done, we can combine the results to an OTU table. Different levels correspond to different taxonomic levels.  
