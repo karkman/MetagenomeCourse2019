@@ -40,7 +40,7 @@ Then make the array job script and submit it as previously. (This takes some hou
 #SBATCH --cpus-per-task=4
 #SBATCH -p serial
 #SBATCH --array=1-10
-#SBATCH --mem-per-cpu=2000
+#SBATCH --mem-per-cpu=1000
 #
 
 module load biokit
