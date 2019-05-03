@@ -31,8 +31,8 @@ Make the array job script and submit it as previously. (This takes few hours + p
 ```
 #!/bin/bash -l
 #SBATCH -J ARG_mapping
-#SBATCH -o ARG_out_%j.txt
-#SBATCH -e ARG_err_%j.txt
+#SBATCH -o ARG_out_%A_%a.txt
+#SBATCH -e ARG_err_%A_%a.txt
 #SBATCH -t 05:00:00
 #SBATCH -n 1
 #SBATCH --nodes=1
@@ -70,6 +70,10 @@ samtools idxstats $name"_sort.bam" | grep -v "*" | cut -f3 >> $name"_counts"
 After the mapping is done we can just combine the results to one table
 
 ```
+#
+module load biokit
+
+# name the gene column in the result matrix
 echo -e "GENE" > gene_names
 
 # take the gene name from column 1
