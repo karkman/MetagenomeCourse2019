@@ -208,7 +208,7 @@ Things to add:
 - ARG annotation w/ mapping
 -
 
-**Optional**
+# Optional
 
 ## (Fairly) Fast MinHash signatures with Sourmash
 ```

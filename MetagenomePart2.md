@@ -6,8 +6,7 @@
 Next step is the antibiotic resistance gene annotation.  
 
 We will map all the reads against ResFinder database to annote the antibiotic resistance genes present in the reads.  
-First download the Resfinder database and concatenate the different antibiotic resistance gene sub-classes to one file.
-
+First download the Resfinder database.  
 Go to the ResFinder database [BitbBucket repository](https://bitbucket.org/genomicepidemiology/resfinder_db/src/master/) and clone it to your work directory (`$WRKDIR`).   
 
 ```
@@ -15,19 +14,21 @@ cd $WRKDIR
 git clone https://git@bitbucket.org/genomicepidemiology/resfinder_db.git
 ```
 
-This copies the whole repository to your work directory. Go to the `resfinder_db` folder and concatenate the files.  
-Then we need to index the foles for mapping. This is done using `bowtie2-build` command.
-
+This copies the whole repository to your work directory in a folder called `resfinder_db`. Go to that folder and concatenate the different antibiotic resistance gene sub-classes to one file
 ```
 cat *.fsa > ResFinder.fasta
+```
+
+The annotation of resistance genes will be done as an *array* job. You can learn more about array jobs in Taito from [here.](https://research.csc.fi/fi/taito-array-jobs)   
+
+We use Bowtie2 for the mapping and Samtools for analysing the mapping results. Both can be found from Taito, so we only need to load the biokit.  
+But first we need to index the database file for mapping. This is done using `bowtie2-build` command.
+```
 bowtie2-build ResFinder.fasta ResFinder
 ```
-This makes few files with the prefix ResFinder that Bowtie2 understands and uses in the mapping step.  
+This makes few files with the prefix `ResFinder` that Bowtie2 understands and uses in the mapping step.  
 
-The annotation of resistance genes will be done as an **array** job. You can learn more about array jobs in Taito from [here.](https://research.csc.fi/fi/taito-array-jobs)   
-We use Bowtie2 for the mapping and Samtools for analysing the mapping results. Both can be found from Taito, so we only need to load the biokit.  
-Make the array job script and submit it as previously. (This takes few hours + possible time in the queue).  
-
+Then make the array job script and submit it as previously. (This takes some hours + possible time in the queue).  
 ```
 #!/bin/bash -l
 #SBATCH -J ARG_mapping
@@ -67,7 +68,7 @@ echo -e $name > $name"_counts"
 samtools idxstats $name"_sort.bam" | grep -v "*" | cut -f3 >> $name"_counts"
 ```
 
-After the mapping is done we can just combine the results to one table
+After the mapping every sample has its own result file. So we need to combine the results into one table.
 
 ```
 #
@@ -87,6 +88,8 @@ After this inspect the results in the ARG gene matrix.
 
 ## Assembly quality statistics
 Let's take a look at the assembly file from yesterday. From the log file at `$WRKDIR/Metagenomics2019/co-assembly` you can check how the assembly went and from the last rows you can see some summary statistics of the assembly. However, for more detailed analysis we ran [MetaQUAST](http://bioinf.spbau.ru/metaquast) together with the assembly. Copy folder called "assembly_QC" to your computer. You can view the results (`report.html`) in your favorite browser.
+
+# Optional
 
 ## Taxonomic profiling with Metaxa2 continued...
 When all Metaxa2 array jobs are done, we can combine the results to an OTU table. Different levels correspond to different taxonomic levels.  
