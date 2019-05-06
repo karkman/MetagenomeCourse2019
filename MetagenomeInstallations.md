@@ -106,6 +106,23 @@ echo $CENTRIFUGE_BASE
 ```
 ######################################################  
 
+**Metaxa2**  
+For taxonomic profiling of the samples using the rimmed reads.
+```
+cd $USERAPPL
+wget http://microbiology.se/sw/Metaxa2_2.2.tar.gz
+tar -xzvf Metaxa2_2.2.tar.gz
+cd Metaxa2_2.2
+```
+Test it, you will need to load the biokit first, because Metaxa2 uses HMMER3 and BLAST.
+```
+module load biokit
+./metaxa2 -i test.fasta -o TEMP --plus
+```
+Then you can remove the results  
+`rm TEMP*`  
+
+You can also add Metaxa2 to your PATH (go to --> `.bashrc`)  
 
 **Sourmash**
 ```

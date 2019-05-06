@@ -216,7 +216,7 @@ sourmash compute *R1_trimmed.fastq -k 31 --scaled 10000
 sourmash compare *.sig -o comparisons
 sourmash plot comparisons
 # annotate one
-sourmash gather SIGNATURE.sig ../../shared/genbank-d2-k31.sbt.json -o OUTPUT_sour.txt
+sourmash gather 07005-B ../../shared/genbank-d2-k31.sbt.json -o OUTPUT_sour.txt
 ```
 
 ## Taxonomic profiling with Metaxa2
