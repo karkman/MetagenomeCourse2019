@@ -127,7 +127,7 @@ module load biokit
 Then you can remove the results  
 `rm TEMP*`  
 
-You can also add Metaxa2 to your PATH (go to --> `.bashrc`)  
+You can also add Metaxa2 to your `$PATH` (go to --> `.bashrc`)  
 
 **Sourmash**
 ```
