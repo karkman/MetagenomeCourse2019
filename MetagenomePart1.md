@@ -232,7 +232,7 @@ Make a folder for Metaxa2 results and direct the results to that folder in your 
 #SBATCH -o metaxa_out_%A_%a.txt
 #SBATCH -e metaxa_err_%A_%a.txt
 #SBATCH -t 10:00:00
-#SBATCH --mem=10000
+#SBATCH --mem=15000
 #SBATCH --array=1-6
 #SBATCH -n 1
 #SBATCH --nodes=1
@@ -248,4 +248,12 @@ name=$(sed -n "$SLURM_ARRAY_TASK_ID"p ../sample_names.txt)
 metaxa2 -1 ../trimmed_data/$name"_R1_trimmed.fastq" -2 ../trimmed_data/$name"_R2_trimmed.fastq" \
             -o $name --align none --graphical F --cpu $SLURM_CPUS_PER_TASK --plus
 metaxa2_ttt -i $name".taxonomy.txt" -o $name
+```
+
+When all Metaxa2 array jobs are done, we can combine the results to an OTU table. Different levels correspond to different taxonomic levels.  
+When using any 16S rRNA based software, be cautious with species (and beyond) level classifications. Especially when using short reads.  
+We will look at genus level classification.
+```
+# Genus level taxonomy
+metaxa2_dc -o birds_metaxa6.txt *level_6.txt
 ```

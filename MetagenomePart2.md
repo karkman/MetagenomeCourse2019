@@ -88,14 +88,3 @@ After this inspect the results in the ARG gene matrix.
 
 ## Assembly quality statistics
 Let's take a look at the assembly file from yesterday. From the log file at `$WRKDIR/Metagenomics2019/co-assembly` you can check how the assembly went and from the last rows you can see some summary statistics of the assembly. However, for more detailed analysis we ran [MetaQUAST](http://bioinf.spbau.ru/metaquast) together with the assembly. Copy folder called "assembly_QC" to your computer. You can view the results (`report.html`) in your favorite browser.
-
-# Optional
-
-## Taxonomic profiling with Metaxa2 continued...
-When all Metaxa2 array jobs are done, we can combine the results to an OTU table. Different levels correspond to different taxonomic levels.  
-When using any 16S rRNA based software, be cautious with species (and beyond) level classifications. Especially when using short reads.  
-We will look at genus level classification.
-```
-# Genus level taxonomy
-metaxa2_dc -o birds_metaxa6.txt *level_6.txt
-```
