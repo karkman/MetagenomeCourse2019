@@ -255,5 +255,6 @@ When using any 16S rRNA based software, be cautious with species (and beyond) le
 We will look at genus level classification.
 ```
 # Genus level taxonomy
-metaxa2_dc -o birds_metaxa6.txt *level_6.txt
+cd Metaxa2
+metaxa2_dc -o metaxa_genus.txt *level_6.txt
 ```
