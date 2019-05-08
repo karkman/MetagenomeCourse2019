@@ -3,8 +3,8 @@ title: "A tutorial on genome-resolved metagenomics"
 excerpt: "Extracting population genomes from millions of short metagenomic reads"
 tags: [anvi'o, binning, it always snows in Helsinki, snow is nice through]
 ---
-
-# Genome-resolved metagenomics
+#  Metagenome analysis of infant gut metagenomes - part 4
+## Genome-resolved metagenomics
 
 * Tom Delmont, Antti Karkman, Jenni Hultman *
 
@@ -22,9 +22,9 @@ Here are a few definitions we came up with, so we can try to speak the same lang
 
 -**A microbial species**: Is this a real thing?
 
--**A microbial population**: pool of microbial cells sharing most of their genomic content due to a very close evolutionary history (close ancestor in the tree of life). 
+-**A microbial population**: pool of microbial cells sharing most of their genomic content due to a very close evolutionary history (close ancestor in the tree of life).
 
--**A metagenome**: sequencing data corresponding to more than one genome. 
+-**A metagenome**: sequencing data corresponding to more than one genome.
 
 -**A metagenomic assembly**: set of DNA sequences called contigs that were reconstructed from metagenomic short reads.
 
@@ -68,7 +68,7 @@ As you may remember, we have already done all of this:
 - [x] Exporting genes stored in the CONTIGS database, determining their taxonomy and importing the results into the CONTIGS database
 - [x] Recruiting short reads from each metagenome using the co-assembly output
 - [x] Creating PROFILE databases from the recruited reads, and merging them into a single PROFILE database
-- [x] beat Sweden in Sweden for the 
+- [x] beat Sweden in Sweden for the
 
 In case someone is missing some of the steps, this command will allow you to download the entire directory of anvi'o files for this project (this is a back-up for the workshop, but also a good starting point for someone that just wants to practice binning with anvi'o):
 
@@ -106,7 +106,7 @@ source activate anvio3
 in Windows with Putty:
 In SSH category [+] select "tunnels". Add
 
-Source port: 8080 
+Source port: 8080
 Destination: localhost:8080
 
 Click add and log in to Taito as usual.
@@ -118,7 +118,7 @@ and go to the Anvi'o folder in the course folder at `$WRKDIR`.  
 anvi-interactive -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --server-only -P 8080
 ```
 
-Then open google chrome and go to address 
+Then open google chrome and go to address
 
 http://localhost:8080
 
@@ -166,15 +166,15 @@ It is important to understand what they are based on. This knowledge will be key
 
 Note: as a strategy, the anvi'o developers decided to trust the assembly, so splits from the same contig will remain together.
 
-## 06- Binning the co-asssembly output (from individual contigs to bins) 
+## 06- Binning the co-asssembly output (from individual contigs to bins)
 
 We are going to zoom in and out, and use the mouse to make selections of split clusters, using the clustering based on `differential coverage` and `sequence composition`.
 
-The game is to find as many bins with high completion value, and low redundancy value. 
+The game is to find as many bins with high completion value, and low redundancy value.
 
 To save some time, we will focus on a subset of the data (Tom has done the entire binning and found out that other parts did not allow the recovery of population genomes. That being said, anyone is welcome to perform the entire binning another day!).
 
-Please close the windows of the interface, and kill the job in the terminal using `control + c`. 
+Please close the windows of the interface, and kill the job in the terminal using `control + c`.
 
 We offer two ways to aquire Tom's binning collection:
 
@@ -247,7 +247,7 @@ If some of the bins remain with redundancy value >10%, please refine them again,
 
 OK! Now we have bins with low redundancy values, and some of them look like they represent population genomes!
 
-Cool. 
+Cool.
 
 ## 07- Rename the collection of bins and identify population genomes
 
@@ -259,7 +259,7 @@ anvi-rename-bins -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --col
 
 Bins >2 Mbp and those with a completion >70% will be renamed as MAGs (i.e., as population genomes).
 
->Note that these parameters can be modified by playing with parameters of the program (see `anvi-rename-bins -h`) 
+>Note that these parameters can be modified by playing with parameters of the program (see `anvi-rename-bins -h`)
 
 And summarize the collection:
 
@@ -273,7 +273,7 @@ So, how many MAGs did you get???
 
 
 Now is the time for some genomic curation. This step is boring, but critical: we need to manually curate each one of the MAGs using the `anvi-refine` command line:
- 
+
 ```
 anvi-refine -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs -b MEGAHIT_MAG_000001  --server-only -P 8080
 ```
@@ -352,7 +352,7 @@ cat OUTPUT.txt
 
 Look are the nice E. coli! What about using the tools described on Monday, Tuesday and Wednesday (comparative genomics) to analyse this newly aquired genomes in the context of thousands of E. coli reference genomes?
 
-This [link](http://137.205.70.78/main/dataset/share/35a7c758dc609752e3870191c0962c63c2067abc0f5adc52ddcd5df81e05c2667138e40179d715574c94073ea4313ed3272e5ef2089fb52a650182) brings you there. Enjoy the PHYLOVIZ online visualization properties now. 
+This [link](http://137.205.70.78/main/dataset/share/35a7c758dc609752e3870191c0962c63c2067abc0f5adc52ddcd5df81e05c2667138e40179d715574c94073ea4313ed3272e5ef2089fb52a650182) brings you there. Enjoy the PHYLOVIZ online visualization properties now.
 
 ## 12- Perspectives
 

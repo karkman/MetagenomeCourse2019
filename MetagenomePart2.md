@@ -1,6 +1,4 @@
-*Jenni Hultman and Antti Karkman*
-
-# Metagenome part 2
+# Metagenome analysis of infant gut metagenomes - part 2
 
 ## Antibiotic resistance gene annotation - reads
 Next step is the antibiotic resistance gene annotation.  
