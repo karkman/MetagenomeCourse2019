@@ -233,7 +233,7 @@ Make a folder for Metaxa2 results and direct the results to that folder in your 
 #SBATCH -e metaxa_err_%A_%a.txt
 #SBATCH -t 10:00:00
 #SBATCH --mem=15000
-#SBATCH --array=1-6
+#SBATCH --array=1-10
 #SBATCH -n 1
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=6
