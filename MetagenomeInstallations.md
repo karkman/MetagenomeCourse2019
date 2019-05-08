@@ -56,6 +56,11 @@ conda create -n checkm_env pplacer checkm-genome numpy python=2
 conda create -n humann2_env humann2
 ```
 
+**Metaphlan plotting environment**
+```
+conda create -n metaphlan_plot_env -c bioconda hclust2 graphlan
+```
+
 **Centrifuge**  
 For taxonomic annotation of contigs in Anvi'o. Go again to the application folder and get the programs from GitHub using command `git`. Anvi'o relies on an older version ("branch") of the program, so we need to checkout the branch specified.  
 You can read more about Centrifuge from the website where we clone it.

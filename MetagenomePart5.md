@@ -27,10 +27,30 @@ metaphlan2.py ../trimmed_data/$name"_R1_trimmed.fastq",../trimmed_data/$name"_R2
               -o $name"_metaphlan.txt"
 ```
 Merge the metaphlan2 outputs
+
 ```
-merge_metaphlan_tables.py *_metaphlan.txt > infants_metaphlan.txt
+module load biokit
+merge_metaphlan_tables.py *_metaphlan.txt > infants_merged_table.txt
+module purge
+```
+
+```
+source activate metaphlan_plot_env
+grep -E "(s__)|(^ID)" infants_merged_table.txt | grep -v "t__" | sed 's/^.*s__//g' > infants_metaphlan_species.txt
+hclust2.py -i infants_metaphlan_species.txt -o abundance_heatmap_species.png --ftop 25 \
+            --f_dist_f braycurtis --s_dist_f braycurtis --cell_aspect_ratio 0.5 \
+            -l --flabel_size 6 --slabel_size 6 --max_flabel_len 100 \
+            --max_slabel_len 100 --minv 0.1 --dpi 300
  ```
 
+ ## GraPhlAn
+
+ ```
+export2graphlan.py --skip_rows 1,2 -i infants_merged_table.txt --tree infants_merged.tree.txt \
+                    --annotation merged_abundance.annot.txt --most_abundant 100 \
+                     --abundance_threshold 1 --least_biomarkers 10 --annotations 5,6 \
+                     --external_annotations 7 --min_clade_size 1
+```
 ## HUMAnN2
 
 ```
