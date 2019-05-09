@@ -80,4 +80,4 @@ humann2 --input ../trimmed_data/$name"_R1_trimmed.fastq"  --output $name"_humann
 ## Optional
 
 ### StrainPhlAn
-__What strain to use...__
+*What strain to use...*
