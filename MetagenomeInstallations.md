@@ -58,7 +58,7 @@ conda create -n humann2_env humann2
 
 **Metaphlan plotting environment**
 ```
-conda create -n metaphlan_plot_env -c bioconda hclust2 graphlan
+conda create -n metaphlan_plot_env -c bioconda hclust2 graphlan export2graphlan 
 ```
 
 **Centrifuge**  

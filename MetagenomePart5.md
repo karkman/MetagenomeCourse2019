@@ -40,7 +40,7 @@ Make a heatmap from species level results.
 source activate metaphlan_plot_env
 grep -E "(s__)|(^ID)" infants_merged_table.txt | grep -v "t__" | sed 's/^.*s__//g' > infants_metaphlan_species.txt
 
-hclust2.py -i infants_metaphlan_species.txt -o abundance_heatmap_species.png --ftop 25 \
+hclust2.py -i infants_metaphlan_species.txt -o infants_heatmap_species.png --ftop 25 \
             --f_dist_f braycurtis --s_dist_f braycurtis --cell_aspect_ratio 0.5 \
             -l --flabel_size 6 --slabel_size 6 --max_flabel_len 100 \
             --max_slabel_len 100 --minv 0.1 --dpi 300
@@ -49,10 +49,13 @@ hclust2.py -i infants_metaphlan_species.txt -o abundance_heatmap_species.png --f
  ## GraPhlAn
 
  ```
-export2graphlan.py --skip_rows 1,2 -i infants_merged_table.txt --tree infants_merged.tree.txt \
-                    --annotation merged_abundance.annot.txt --most_abundant 100 \
+export2graphlan.py --skip_rows 1,2 -i infants_merged_table.txt --tree infants.tree.txt \
+                    --annotation infants.annot.txt --most_abundant 100 \
                      --abundance_threshold 1 --least_biomarkers 10 --annotations 5,6 \
                      --external_annotations 7 --min_clade_size 1
+
+graphlan_annotate.py --annot infants.annot.txt infants.tree.txt infants.abundance.xml
+graphlan.py --dpi 300 infants.abundance.xml infants.abundance.png --external_legends
 ```
 
 ## HUMAnN2
@@ -80,4 +83,5 @@ humann2 --input ../trimmed_data/$name"_R1_trimmed.fastq"  --output $name"_humann
 ## Optional
 
 ### StrainPhlAn
-*What strain to use...*
+Follow the instructions for [StrainPhlAn](https://bitbucket.org/biobakery/biobakery/wiki/metaphlan2#rst-header-create-a-strain-level-marker-based-heatmap-panphlan)
+You need to decide the strain based on the MetaPhlAn2 results. 
