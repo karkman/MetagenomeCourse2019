@@ -36,7 +36,7 @@ conda create -n anvio5 -c bioconda -c conda-forge python=3.5.4 gsl anvio
 Let's test it  
 ```
 # Activate the Anvi'o virtual environment
-source activate anvio3
+source activate anvio5
 # Run the mini test
 anvi-self-test --suite mini
 ```
