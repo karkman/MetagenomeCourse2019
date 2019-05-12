@@ -66,7 +66,7 @@ graphlan.py --dpi 300 infants.abundance.xml infants.abundance.png --external_leg
 #SBATCH -o humann2_out_%A_%a.txt
 #SBATCH -e humann2_err_%A_%a.txt
 #SBATCH -t 1:00:00
-#SBATCH --mem=2000
+#SBATCH --mem=20000
 #SBATCH --array=1-10
 #SBATCH -n 1
 #SBATCH --nodes=1
@@ -84,4 +84,4 @@ humann2 --input ../trimmed_data/$name"_R1_trimmed.fastq"  --output $name"_humann
 
 ### StrainPhlAn
 Follow the instructions for [StrainPhlAn](https://bitbucket.org/biobakery/biobakery/wiki/metaphlan2#rst-header-create-a-strain-level-marker-based-heatmap-panphlan)
-You need to decide the strain based on the MetaPhlAn2 results. 
+You need to decide the strain based on the MetaPhlAn2 results.
