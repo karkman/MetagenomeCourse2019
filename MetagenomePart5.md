@@ -74,11 +74,19 @@ graphlan.py --dpi 300 infants.abundance.xml infants.abundance.png --external_leg
 
 #module load biokit
 source activate humann2_env
-cd /wrk/antkark/Metagenomics2019/Humann2
+cd /wrk/antkark/Metagenomics2019
 name=$(sed -n "$SLURM_ARRAY_TASK_ID"p ../sample_names.txt)
-humann2 --input ../trimmed_data/$name"_R1_trimmed.fastq"  --output $name"_humann.txt"
+humann2 --input trimmed_data/$name"_R1_trimmed.fastq"  --output Humann2
 
 ```
+
+Join and normalize Humann2 outputs
+```
+cd Humann2
+humann2_join_tables -i ./ -o infant_genefamilies.tsv --file_name genefamilies
+humann2_renorm_table -i infant_genefamilies.tsv -o infant_genefamilies_cpm.tsv --units cpm
+```
+
 
 ## Optional
 
