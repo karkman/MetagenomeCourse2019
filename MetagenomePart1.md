@@ -18,10 +18,10 @@ mkdir trimmed_data
 Download the metagenomic data (takes few minutes)  
 ```
 cd raw_data
-cp /wrk/antkark/shared/Metagenomics2019data.tar.gz .
+cp link to KATA .
 ```
 
-The md5 sum for the file is `2d86933b525034dcdcddf9592bc0e05c`. Check that the md5 sum of the file you downloaded matches with this.
+The md5 sum for the file is `xxxxxx`. Check that the md5 sum of the file you downloaded matches with this.
 
 ```
 md5sum Metagenomics2019data.tar.gz
