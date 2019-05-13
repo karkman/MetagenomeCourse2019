@@ -30,7 +30,7 @@ Go back to the installations screen with `screen -r installations`.
 Create a virtual environment for Anvi'o and install all dependencies using Bioconda. (takes 5–10 min)  
 ```
 module load bioconda/3
-conda create -n anvio5 -c bioconda -c conda-forge python=3.5.4 gsl anvio
+conda create -n anvio5 -c bioconda -c conda-forge python=3.6 anvio=5.5.0
 ```
 
 Let's test it  
