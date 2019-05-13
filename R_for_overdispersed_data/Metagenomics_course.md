@@ -1,4 +1,4 @@
-Crashcourse into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data
+Quick crashcourse into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data
 ======================================================================================================================================
 ================
 Katariina Pärnänen
@@ -132,7 +132,7 @@ adonis(ARG_dist~DIET, data=data.frame(sample_data(baby_ARG_PHY), permutations = 
     ## Terms added sequentially (first to last)
     ## 
     ##           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)  
-    ## DIET       1    0.7378 0.73776  2.0805 0.20639  0.035 *
+    ## DIET       1    0.7378 0.73776  2.0805 0.20639  0.039 *
     ## Residuals  8    2.8368 0.35460         0.79361         
     ## Total      9    3.5746                 1.00000         
     ## ---
@@ -161,7 +161,8 @@ plot_richness(baby_ARG_PHY, measures = "Shannon", x = "DIET")
 ![](Metagenomics_course_files/figure-markdown_github/unnamed-chunk-6-1.png) Again it looks like there might be a difference between the groups, but lets check if it's significant or not using ANOVA, which compares the variances between the two groups.
 
 ``` r
-shannon<-aov(diversity(t(otu_table(baby_ARG_PHY)), index = "shannon")~sample_data(baby_ARG_PHY)$DIET, data=as.data.frame(otu_table(baby_ARG_PHY)))
+shannon<-aov(diversity(t(otu_table(baby_ARG_PHY)), index = "shannon")~sample_data(baby_ARG_PHY)$DIET, 
+             data=as.data.frame(otu_table(baby_ARG_PHY)))
 TukeyHSD(shannon)
 ```
 
@@ -175,7 +176,8 @@ TukeyHSD(shannon)
     ## y-n 1.133848 0.07296601 2.194729 0.0390373
 
 ``` r
-simpson<-aov(diversity(t(otu_table(baby_ARG_PHY)), index = "simpson")~sample_data(baby_ARG_PHY)$DIET, data=as.data.frame(otu_table(baby_ARG_PHY)))
+simpson<-aov(diversity(t(otu_table(baby_ARG_PHY)), index = "simpson")~sample_data(baby_ARG_PHY)$DIET, 
+             data=as.data.frame(otu_table(baby_ARG_PHY)))
 TukeyHSD(simpson)
 ```
 
@@ -207,7 +209,8 @@ People also often use normally distributed models and log transfor their data, b
 
 ``` r
 #Save the total sum of ARGs/average 16S rRNA gene copies to a dataframe for each sample and info of the DIET 
-df<-data.frame(SUM=round(mean(sample_data(baby_ARG_PHY)$SSU_SUM)*(sample_sums(baby_ARG_PHY))), DIET=as.factor(sample_data(baby_ARG_PHY)$DIET))
+df<-data.frame(SUM=round(mean(sample_data(baby_ARG_PHY)$SSU_SUM)*(sample_sums(baby_ARG_PHY))),
+               DIET=as.factor(sample_data(baby_ARG_PHY)$DIET))
 
 #First we can plot the data using boxplots, which plot the interquartile ranges and median
 
@@ -290,7 +293,8 @@ round(c(phi,sqrt(phi)),4)#We see that the variance is 4914.6439 times
     ## [1] 4914.6439   70.1045
 
 ``` r
-#larger than the mean. This means that we should adjust the standard errors multiplying by 70.1045, the square root of 4914.6439
+#larger than the mean. 
+#This means that we should adjust the standard errors multiplying by 70.1045, the square root of 4914.6439
 
 
 model.qpois<-glm(SUM~DIET, data=df, family="quasipoisson")
@@ -328,7 +332,11 @@ summary(model.qpois)
 
 se <- function(model) sqrt(diag(vcov(model)))
 
-round(data.frame(poisson=coef(model.pois), qpoisson=coef(model.qpois), se.poisson=se(model.pois), se.qpoisson=se(model.qpois), ratio=se(model.qpois)/se(model.pois)), 4)
+round(data.frame(poisson=coef(model.pois), 
+                 qpoisson=coef(model.qpois), 
+                 se.poisson=se(model.pois), 
+                 se.qpoisson=se(model.qpois), 
+                 ratio=se(model.qpois)/se(model.pois)), 4)
 ```
 
     ##             poisson qpoisson se.poisson se.qpoisson   ratio
@@ -397,7 +405,12 @@ summary(model.nb)
 ``` r
 #Let's compare the results from Poisson, quasipoisson and negative binomial models
 
-round(data.frame(poisson=coef(model.pois),qpoisson=coef(model.qpois),negbin=coef(model.nb),se.pois=se(model.pois),se.qpoisson=se(model.qpois),se.negbin=se(model.nb)),4)
+round(data.frame(poisson=coef(model.pois),
+                 qpoisson=coef(model.qpois),
+                 negbin=coef(model.nb),
+                 se.pois=se(model.pois),
+                 se.qpoisson=se(model.qpois),
+                 se.negbin=se(model.nb)),4)
 ```
 
     ##             poisson qpoisson negbin se.pois se.qpoisson se.negbin
