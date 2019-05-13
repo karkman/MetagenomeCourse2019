@@ -132,7 +132,7 @@ adonis(ARG_dist~DIET, data=data.frame(sample_data(baby_ARG_PHY), permutations = 
     ## Terms added sequentially (first to last)
     ## 
     ##           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)  
-    ## DIET       1    0.7378 0.73776  2.0805 0.20639  0.034 *
+    ## DIET       1    0.7378 0.73776  2.0805 0.20639  0.035 *
     ## Residuals  8    2.8368 0.35460         0.79361         
     ## Total      9    3.5746                 1.00000         
     ## ---
@@ -279,15 +279,20 @@ sum(pr^2)
 ``` r
 #The deviance is again a lot higher that the critical value for the chi squared test
 
-#Now if we assume that the variance is proportional rather than equal to the mean, We can use a Poisson model with the quasipoisson extension
+
+#Now if we assume that the variance is proportional rather than equal to the mean,
+#we can use a Poisson model with the quasipoisson extension
 phi <- sum(pr^2)/df.residual(model.pois)
 
-round(c(phi,sqrt(phi)),4)#We see that the variance is 4914.6439 times larger than the mean. This means that we should adjust the standard errors multiplying by 70.1045, the square root of 4914.6439
+round(c(phi,sqrt(phi)),4)#We see that the variance is 4914.6439 times 
 ```
 
     ## [1] 4914.6439   70.1045
 
 ``` r
+#larger than the mean. This means that we should adjust the standard errors multiplying by 70.1045, the square root of 4914.6439
+
+
 model.qpois<-glm(SUM~DIET, data=df, family="quasipoisson")
 
 summary(model.qpois)
@@ -317,7 +322,9 @@ summary(model.qpois)
     ## Number of Fisher Scoring iterations: 5
 
 ``` r
-#The estimates are exactly the same as before, but the standard errors are about 70X larger and the p-value is larger. We can verify this fact easily. First we write a useful function to extract standard errors and then use it on our fits:
+#The estimates are exactly the same as before, but the standard
+#errors are about 70X larger and the p-value is larger. 
+#We can verify this fact easily. First we write a useful function to extract standard errors and then use it on our fits:
 
 se <- function(model) sqrt(diag(vcov(model)))
 
@@ -370,7 +377,8 @@ summary(model.nb)
     ##  2 x log-likelihood:  -190.770
 
 ``` r
-#R's theta is the precision of the multiplicative random effect, and corresponds to 1/σ2 in the notes. The estimate corresponds to an estimated variance of 0.798 and is highly significant.
+#R's theta is the precision of the multiplicative random effect, and corresponds to 1/σ2 in the notes. 
+#The estimate corresponds to an estimated variance of 0.798 and is highly significant.
 
 1/model.nb$theta
 ```
@@ -398,22 +406,29 @@ round(data.frame(poisson=coef(model.pois),qpoisson=coef(model.qpois),negbin=coef
 
 ``` r
 #Now if we remember the 95% cutoff from chi-squared test was 15.50731
-deviance(model.pois)#We have 51331.7 deviance in the Poisson model
+deviance(model.pois)
 ```
 
     ## [1] 51331.7
 
 ``` r
-deviance(model.qpois)#The deviance is the same in the quasipoisson which estimates the deviance in the confidence intervals
+#We have 51331.7 deviance in the Poisson model
+deviance(model.qpois)
 ```
 
     ## [1] 51331.7
 
 ``` r
-deviance(model.nb)#The deviance in the negative binomial model is 11.25934, which is below the cutoff value which indicates that the negative binomial model is a good fit for the model.
+#The deviance is the same in the quasipoisson which estimates the deviance in the confidence intervals
+deviance(model.nb)
 ```
 
     ## [1] 11.25934
+
+``` r
+#The deviance in the negative binomial model is 11.25934,
+#which is below the cutoff value which indicates that the negative binomial model is a good fit for the model.
+```
 
 ### Checking variances between models
 
