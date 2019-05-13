@@ -63,7 +63,7 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 | 09:00-10:00 | **Tommi Vatanen**: The gut microbiome structure and function in early life - lessons from cohort studies **NB. Room 2012 Biocenter 2 ** |
 | 10:30-12:00 | Read based metagenomics with Humann2 and Metaphlan2 (__Tommi__|
 | 12:00-13:00 | **Working with your data** and **lunch** |
-| 13:00-16:00 | Crash course into statistics of metagenomic data: Multivariate and diversity analysis and generalized linear models of overdispersed count data (__Katariina__)|
+| 13:00-16:00 | Crash course into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data (__Katariina__)|
 | 16:00-17:00 | Wrapping up (__Katariina__) |
 
 ## Target group
