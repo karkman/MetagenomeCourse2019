@@ -1,5 +1,5 @@
 ---
-title: "Metagenomics_course"
+title: "#Quick crash course into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data"
 author: "Katariina Pärnänen"
 date: "4/23/2019"
 output: html_document
@@ -8,11 +8,14 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-#Quick crash course into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data
 
 
-#Setting up needed packages
-```{r pressure, echo=FALSE}
+#Setting up the R-environment and compiling data
+
+###Setting up needed packages
+
+First we will install and load packages which are needed for analysis. Others are essential, viridis is used only for getting colorblind friendly colors.
+```{r}
 #Install required libraries
 #source('http://bioconductor.org/biocLite.R')
 #biocLite('phyloseq')
@@ -27,24 +30,21 @@ library(vegan)
 library(MASS)
 ```
 
-#Normalizing data
+###Normalizing data
 
-Count data in metagenomes is almost always normalized to either library sizes or 16S rRNA gene counts to get rid off variation that is caused due to differences in library sizes or the number of bacteria. In our case we have a lot of non-bacterial DNA in our samples, and we are quatifying genes which are found exclusively in bacteria. The amount of bacterial DNA also varies between samples. This is why we will normalize our data to 16S counts.
+Count data of metagenomes is almost always normalized to either library sizes or 16S rRNA gene counts to get rid off variation that is caused due to differences in library sizes or the numbers of bacteria. In our case, we have a lot of non-bacterial DNA in our samples, and we are quatifying genes which are found exclusively in bacteria. The amount of bacterial DNA also varies between samples. This is why we will normalize our data to 16S counts.
 
 
 ```{r}
 #Load in the ARG mapping result
-ARG_bt<-as.matrix(read.table("/Users/kparnane/Documents/MetagenomeCourse2019/R_for_overdispersed_data/ARG_genemat.txt", fill= 1, header= T, row.names = 1, check.names = F))
+ARG_bt<-as.matrix(read.table("ARG_genemat.txt", fill= 1, header= T, row.names = 1, check.names = F))
 
 #Let's remove a gene which is not relevant for us
 
 ARG_bt<-ARG_bt[grep('oqxB', row.names(ARG_bt), invert = TRUE),]
 
-
-
-
 #Read in metadata
-sample_data<-read.table("/Users/kparnane/Documents/MetagenomeCourse2019/R_for_overdispersed_data/metadata.txt", sep="\t")
+sample_data<-read.table("metadata.txt", sep="\t")
 
 #Normalize to 16S counts
 ARG_bt_norm<-t(t(ARG_bt)/sample_data$SSU_SUM)
@@ -54,21 +54,31 @@ identical(ARG_bt[1083, 10]/sample_data$SSU_SUM[10], ARG_bt_norm[1083, 10])
 
 ```
 
-##Phyloseq is handy for organizing and accessing data with counts, taxonomy and metadata files
-We  will use Phyloseq to organize our data.
+###Phyloseq is handy for organizing and accessing data with counts, taxonomy and metadata files
+
+Let's use Phyloseq to organize our data. Phyloseq is good for making sure your columns and rows are always in the right order and it makes accessing and splitting data faster.
 
 ```{r}
-
+#Make Phyloseq object with sample data and otu table. 
 baby_ARG_PHY<-phyloseq(otu_table(ARG_bt_norm, taxa_are_rows = TRUE), sample_data(sample_data))
 
+#Look at the sample sums
 sample_sums(baby_ARG_PHY)
+
+#Check the sample data variable DIET
 sample_data(baby_ARG_PHY)$DIET
 ```
 
 ##Multivariate analysis
-Often the research question is wether there are differences in between all genes in samples that can be explained by an explanatory variable or variables. In this case multivariate methods can be used to calculate distances between samples using dissimilarity indexes and ordinating the samples. One of the most commonly used distances in ecology is the Bray-Curtis dissimilarity index. There are several distances sych as Euclidean, Jaccard and Horn-Morisita. However, usually is is best to use a method which does not take zero values into account. Ordination methods are used to ordinate samples in relation to each other in multiple dimensions. There are several ordination methods such as NDMS, PCA and PCoA. We will use PCoA.The first two dimensions or axes of the ordination can be used to plot the placement of samples in relation to each other in a two-dimensional space.
+Often the research question in astudy is if there are differences in between all genes in samples that can be explained by an explanatory variable or variables. 
+
+In this case multivariate methods can be used to calculate distances between samples using dissimilarity/similarity indexes and ordinating the samples in a two-dimensional space for visualization. One of the most commonly used distances in ecology is the Bray-Curtis dissimilarity index. There are several distances such as Euclidean, Jaccard and Horn-Morisita. However, usually for metagenomic data is is best to use a method which does not take zero values into account. 
+
+Ordination methods are used to ordinate samples in relation to each other in multiple dimensions. There are several ordination methods such as NDMS, PCA and PCoA. We will use PCoA.The first two dimensions or axes of the ordination can be used to plot the location of samples in relation to each other in a two-dimensional space.
 
 Phyloseq has vegan built-in so we can ordinate distances using Phyloseq and plot the ordination.
+
+###Ordination of samples using PCoAs and Bray-Curtis dissimilarity index
 
 ```{r}
 #Ordinate using Phyloseq's ordinate command
@@ -79,7 +89,9 @@ p<-plot_ordination(baby_ARG_PHY, baby_ARG_PHY_ord, color="DIET")
 p+scale_color_viridis(discrete = T)
 
 ```
-We can see that there are more purple points on the left. We can test if the difference we see visually is statistically significant using adonis function from 'vegan' package.
+
+We can see that there are more purple points on the left. Let's test if the difference we see visually is also statistically significant using adonis function from the 'vegan' package.
+
 ```{r}
 #We use a square root transformation for the data to even out variation
 ARG_dist<-vegdist(sqrt(t((otu_table(baby_ARG_PHY)))), dist = "bray")
@@ -87,13 +99,13 @@ ARG_dist<-vegdist(sqrt(t((otu_table(baby_ARG_PHY)))), dist = "bray")
 adonis(ARG_dist~DIET, data=data.frame(sample_data(baby_ARG_PHY), permutations = 9999))
 ```
 
-Now based on our result we can conclude that there are no differences in the grouping of genes based on the explanatory variables. (The separation is borderline significant using apla of 0.05). If we would like to know which individual genes are different we could use DeSEQ to investigate fold changes between two groups or fit genes as vectors in the ordination using envfit.
+We can conclude that is some diffference in the grouping of genes based on the explanatory variables. (The separation is borderline significant using alpha of 0.05). If we would like to know which individual genes are different we could use DeSEQ to investigate fold changes between the two groups or fit genes as vectors in the ordination using envfit.
 
 ##Analysis of diversity
 
-In many studies there is interest in determining wether the diversity of bacteria or genes differs between groups. Again there are several diversity indeces, but in most cases  for metagenomic data it is best to use an indes which takes both evenness and the number of different taxa or genes into account.
+In many studies there is interest in determining whether the diversity of bacteria or genes differs between groups. Again there are several diversity indeces, but in most cases for metagenomic data it is best to use an indes which takes both evenness and the number of different taxa or genes into account.
 
-Phyloseq has is able to plot diversities so we will use it.
+Phyloseq is able to plot diversities so we will use it.
 
 ```{r}
 plot_richness(baby_ARG_PHY, measures = "Shannon", x = "DIET")
@@ -110,7 +122,7 @@ TukeyHSD(simpson)
 ```
 It turns out that the difference is not significant using Simpson diversity but is with Shannon.
 
-#Statistical analysis of overdispersed count data
+##Statistical analysis of overdispersed count data 
 
 Read based metagenomis analyses are often used to produce outputs in table formats with counts. During the course we have analysed our data and counted ARGs in each sample by mapping them to an ARG database.
 
@@ -120,31 +132,35 @@ The starting point for count data is a GLM (generalized linear model) with Poiss
 
 The binomial distribution is frequently used to model the number of successes in a sample of size n drawn with replacement from a population of size N. If the sampling is carried out without replacement, the draws are not independent and so the resulting distribution is a hypergeometric distribution, not a binomial one. However, for N much larger than n, the binomial distribution remains a good approximation, and is widely used. As with the Poisson distribution, binomial distribution's assumptions include that there is no overdispersion and zero inflation.
 
+People also often use normally distributed models and log transfor their data, but in most cases the models will end up beign less than optimal. Why not use the right model for your data instead of compromizing?
 
-#Checking which model is best
+
+###Checking which model is best - Poisson, Quasipoisson or Negative Binomial
 ```{r}
 #Save the total sum of ARGs/average 16S rRNA gene copies to a dataframe for each sample and info of the DIET 
 df<-data.frame(SUM=round(mean(sample_data(baby_ARG_PHY)$SSU_SUM)*(sample_sums(baby_ARG_PHY))), DIET=as.factor(sample_data(baby_ARG_PHY)$DIET))
 
 #First we can plot the data using boxplots, which plot the interquartile ranges and median
 
-ggplot(df, aes(y=SUM, x=DIET)) + geom_boxplot()
+plot(df$SUM~df$DIET)
 
 ```
 
 You can see that there might be a difference between 'n' and 'y', but there is gigantic variation between the samples in the 'y' group which has the bigger median. This already gives us an idication that there is a lot of variation in the data and that is definately not suitable for the Poisson model.
 
 
-##Let's first try and fit a Poisson model to the data
+###Let's first try and fit a Poisson model to the data
 
 ```{r}
 model.pois = glm(SUM ~ DIET , data = df, family = poisson)
 summary(model.pois)
 
 ```
-This looks pretty good if you just look at the the p-value, but the residual devience and AIC values, which indicate how well the model explains the data are big. This means that the model is not good at explaining the deviance,
 
-##Let's check if the deviance is above the 0.95 critical value for the chi squared thest with 9 degrees of freedom
+This looks pretty good if you just look at the the p-value, but the residual devience and AIC values, which indicate how well the model explains the variance in the data are big. This means that the model is not good at explaining the deviance.
+
+###Let's check if the deviance is above the 0.95 critical value for the chi squared thest with 9 degrees of freedom
+
 ```{r}
 qchisq(0.95, df.residual(model.pois))#Critical value
 
@@ -180,7 +196,8 @@ round(data.frame(poisson=coef(model.pois), qpoisson=coef(model.qpois), se.poisso
 
 #Negative binomial distribution
 
-Negative binomial distributions are an other option for overdispersed data. Negative binomial models are a big more advanced in modelling how the deviance is modelled.
+Negative binomial distributions are an other option for overdispersed data. Negative binomial models are a bit more advanced in modelling the deviance.
+
 ```{r}
 model.nb <- glm.nb(SUM~DIET, data=df)
 
@@ -201,7 +218,6 @@ summary(model.nb)
 
 round(data.frame(poisson=coef(model.pois),qpoisson=coef(model.qpois),negbin=coef(model.nb),se.pois=se(model.pois),se.qpoisson=se(model.qpois),se.negbin=se(model.nb)),4)
 
-
 #Now if we remember the 95% cutoff from chi-squared test was 15.50731
 deviance(model.pois)#We have 51331.7 deviance in the Poisson model
 deviance(model.qpois)#The deviance is the same in the quasipoisson which estimates the deviance in the confidence intervals
@@ -209,11 +225,14 @@ deviance(model.nb)#The deviance in the negative binomial model is 11.25934, whic
 
 ```
 
-#Checking variances between models
+
+###Checking variances between models
+
+
+
+The over-dispersed Poisson (quasipoisson) and negative binomial models have different variance functions. One way to check which one may be more appropriate is to create groups based on the linear predictor, compute the mean and variance for each group, and finally plot the mean-variance relationship. Unfortunately, our data doesn't have enough data points to be able to get a nice look at the variance functions, but let's look at the variance plot produced by Univ. of Princeton people.
 
 https://data.princeton.edu/wws509/r/overdispersion
-
-The over-dispersed Poisson (quasipoisson) and negative binomial models have different variance functions. One way to check which one may be more appropriate is to create groups based on the linear predictor, compute the mean and variance for each group, and finally plot the mean-variance relationship.
 
 
 The graph plots the mean versus the variance and overlays the curves corresponding to the over-dispersed Poisson model, where the variance is φμ, and the negative binomial model, where the variance is μ(1+μσ2).
