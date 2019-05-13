@@ -29,44 +29,47 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 | __*Morning*__ | [Introduction](http://link-to-presentation.com) (__Jenni__) |
 | __*Morning*__ | [Basic usage of computing services at CSC](http://link-to-presentation) (__Antti__) |
 | __*Morning*__ | [Installations for the course](MetagenomeInstallations.md) (__Antti__) |
-| __*Morning*__ |  [Quality control and trimming of data](Day1/README.md#QC-and-trimming) (__Katariina__)|
+| __*Morning*__ |  [Quality control and trimming of data](Day1/README.md#QC-and-trimming) (__Jenni__)|
 |  |    **Lunch** |
 | __*Afternoon*__ | [Assembly](Day1/README.md#Assembly) (__Jenni__) |
-| __*Afternoon*__ | Read based annotation (__Jenni__) |
-| __*Afternoon*__ | ARG annotation (__Jenni__) |
+| __*Afternoon*__ | Read based annotation (__Katariina__) |
+
 
 ### Tuesday 21.5.2019 8-17
 | Time | Description |
 | --- | --- |
 | __*Morning*__ | *Assembly statistics* (__Jenni/Antti__)|
+| __*Morning*__ | *ARG annotation* (__Katariina__)
 | __*Morning*__ | [Getting files for Anvio](MetagenomePart3.md) (__Tom, Antti, Jenni__)|
+|  |    **Lunch** |
 | __*Afternoon*__ | [Introduction to Anvio](http://link-to-presentation.com) (__Tom__)
 
 ## Wednesday 22.5.2019 8-17
 | Time | Description |
 | --- | --- |
-| *Morning* | *Manual binning of MAGs with Anvio* (__Tom__)|
-| 11:00-12:30 | **Working with your data** and **lunch** |
-| 12:30-14:30 |  |
-| 14:30-15:30 | |
-| Afternoon | *Taxonomic annotation of MAGs* (__Tom__) |
+| __*Morning*__  | *Manual binning of MAGs with Anvio* (__Tom__)|
+|  |    **Lunch** |
+| __*Afternoon*__  |  |
+| __*Afternoon*__ | |
+| __*Afternoon*__  | *Taxonomic annotation of MAGs* (__Tom__) |
 
 ## Thursday 23.5.2019 8-16.30
 | Time | Description |
 | --- | --- |
-| 08:00-10:00 | *Metagenomics* **Jenni Hultman**: Assembly check and mapping with (*BOWTIE2*) |
-| 10:00-12:00 | *Metagenomics* **Antti Karkman**: Read based analysis for 16S rRNA (*Metaphlan2*) and ARG (*ResFinder*) |
-| 12:00-14:00 | **Working with your data** and **lunch** |
-| 14:00-17:00 | *Metagenomics* **Antti Karkman and Jenni Hultman**: Prepping files for Anvio |
+| __*Morning*__  | *MetaPhlan lecture* (__Tommi__)|
+| __*Morning*__  | *Metaphlan profiles* (__Tommi__)|
+|  |    **Lunch** |
+| __*Afternoon*__  | *HUMAnN2 lecture* (__Tommi__)|
+| __*Afternoon*__  | *Humann2 hands on* (__Tommi__)|
 
 ## Friday 24.5.2019 9-17
 | Time | Description |
 | --- | --- |
 | 09:00-10:00 | **Tommi Vatanen**: The gut microbiome structure and function in early life - lessons from cohort studies **NB. Room 2012 Biocenter 2 ** |
-| 10:30-12:00 | Read based metagenomics with Humann2 and Metaphlan2 (__Tommi__|
-| 12:00-13:00 | **Working with your data** and **lunch** |
-| 13:00-16:00 | Crash course into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data (__Katariina__)|
-| 16:00-17:00 | Wrapping up (__Katariina__) |
+| 10:30-12:00 | *Humann2 hands on cont* (__Tommi__)|
+|  |    **Lunch** |
+| __*Afternoon*__  | Crash course into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data (__Katariina__)|
+| __*Afternoon*__ | Wrapping up (__all__) |
 
 ## Target group
 This course is targeted at PhD and MSc students who are interested in performing bacterial population analysis using whole-genome sequencing and/or using metagenomics for investigating microbial communities.
