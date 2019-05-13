@@ -25,6 +25,7 @@ Place: __Info Centre Korona, room Info4, 1st Floor__
 
 ### Monday
 __20.5.2019 9-17__  
+
 | Time | Description |
 | --- | --- |
 | __*Morning*__ | [Introduction](http://link-to-presentation.com) (__Jenni__) |
@@ -38,6 +39,7 @@ __20.5.2019 9-17__
 
 ### Tuesday
 __21.5.2019 8-17__  
+
 | Time | Description |
 | --- | --- |
 | __*Morning*__ | *Assembly statistics* (__Jenni/Antti__)|
@@ -48,6 +50,7 @@ __21.5.2019 8-17__
 
 ## Wednesday
 __22.5.2019 8-17__  
+
 | Time | Description |
 | --- | --- |
 | __*Morning*__  | *Manual binning of MAGs with Anvio* (__Tom__)|
@@ -58,6 +61,7 @@ __22.5.2019 8-17__
 
 ## Thursday
 __23.5.2019 8-16.30__  
+
 | Time | Description |
 | --- | --- |
 | __*Morning*__  | *MetaPhlan lecture* (__Tommi__)|
@@ -68,6 +72,7 @@ __23.5.2019 8-16.30__
 
 ## Friday
 __24.5.2019 9-17__  
+
 | Time | Description |
 | --- | --- |
 | 09:00-10:00 | **Tommi Vatanen**: The gut microbiome structure and function in early life - lessons from cohort studies **NB. Room 2012 Biocenter 2 ** |
