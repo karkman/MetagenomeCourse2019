@@ -48,7 +48,7 @@ __21.5.2019 8-17__
 |  |    **Lunch** |
 | __*Afternoon*__ | [Introduction to Anvio](http://link-to-presentation.com) (__Tom__)
 
-## Wednesday
+### Wednesday
 __22.5.2019 8-17__  
 
 | Time | Description |
@@ -59,7 +59,7 @@ __22.5.2019 8-17__
 | __*Afternoon*__ | |
 | __*Afternoon*__  | *Taxonomic annotation of MAGs* (__Tom__) |
 
-## Thursday
+### Thursday
 __23.5.2019 8-16.30__  
 
 | Time | Description |
@@ -70,7 +70,7 @@ __23.5.2019 8-16.30__
 | __*Afternoon*__  | *HUMAnN2 lecture* (__Tommi__)|
 | __*Afternoon*__  | *Humann2 hands on* (__Tommi__)|
 
-## Friday
+### Friday
 __24.5.2019 9-17__  
 
 | Time | Description |
