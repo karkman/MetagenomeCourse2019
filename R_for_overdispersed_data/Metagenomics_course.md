@@ -1,4 +1,4 @@
-Quick crashcourse into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data
+Crashcourse into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data
 ======================================================================================================================================
 ================
 Katariina Pärnänen
