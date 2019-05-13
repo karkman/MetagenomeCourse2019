@@ -23,7 +23,8 @@ The course will be held in Viikki at the Faculty of Agriculture and Forestry, Un
 Place: __Info Centre Korona, room Info4, 1st Floor__
 
 
-### Monday - 20.5.2019 9-17
+### Monday  
+__20.5.2019 9-17__  
 
 | Time | Description |
 | --- | --- |
