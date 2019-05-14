@@ -132,7 +132,7 @@ adonis(ARG_dist~DIET, data=data.frame(sample_data(baby_ARG_PHY), permutations = 
     ## Terms added sequentially (first to last)
     ## 
     ##           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)  
-    ## DIET       1    0.7378 0.73776  2.0805 0.20639  0.039 *
+    ## DIET       1    0.7378 0.73776  2.0805 0.20639  0.044 *
     ## Residuals  8    2.8368 0.35460         0.79361         
     ## Total      9    3.5746                 1.00000         
     ## ---

@@ -114,10 +114,12 @@ plot_richness(baby_ARG_PHY, measures = "Shannon", x = "DIET")
 Again it looks like there might be a difference between the groups, but lets check if it's significant or not using ANOVA, which compares the variances between the two groups.
 
 ```{r}
-shannon<-aov(diversity(t(otu_table(baby_ARG_PHY)), index = "shannon")~sample_data(baby_ARG_PHY)$DIET, data=as.data.frame(otu_table(baby_ARG_PHY)))
+shannon<-aov(diversity(t(otu_table(baby_ARG_PHY)), index = "shannon")~sample_data(baby_ARG_PHY)$DIET, 
+             data=as.data.frame(otu_table(baby_ARG_PHY)))
 TukeyHSD(shannon)
 
-simpson<-aov(diversity(t(otu_table(baby_ARG_PHY)), index = "simpson")~sample_data(baby_ARG_PHY)$DIET, data=as.data.frame(otu_table(baby_ARG_PHY)))
+simpson<-aov(diversity(t(otu_table(baby_ARG_PHY)), index = "simpson")~sample_data(baby_ARG_PHY)$DIET, 
+             data=as.data.frame(otu_table(baby_ARG_PHY)))
 TukeyHSD(simpson)
 
 ```
@@ -139,7 +141,8 @@ People also often use normally distributed models and log transfor their data, b
 ###Checking which model is best - Poisson, Quasipoisson or Negative Binomial
 ```{r}
 #Save the total sum of ARGs/average 16S rRNA gene copies to a dataframe for each sample and info of the DIET 
-df<-data.frame(SUM=round(mean(sample_data(baby_ARG_PHY)$SSU_SUM)*(sample_sums(baby_ARG_PHY))), DIET=as.factor(sample_data(baby_ARG_PHY)$DIET))
+df<-data.frame(SUM=round(mean(sample_data(baby_ARG_PHY)$SSU_SUM)*(sample_sums(baby_ARG_PHY))),
+               DIET=as.factor(sample_data(baby_ARG_PHY)$DIET))
 
 #First we can plot the data using boxplots, which plot the interquartile ranges and median
 
@@ -177,21 +180,31 @@ sum(pr^2)
 
 #The deviance is again a lot higher that the critical value for the chi squared test
 
-#Now if we assume that the variance is proportional rather than equal to the mean, We can use a Poisson model with the quasipoisson extension
+
+#Now if we assume that the variance is proportional rather than equal to the mean,
+#we can use a Poisson model with the quasipoisson extension
 phi <- sum(pr^2)/df.residual(model.pois)
 
-round(c(phi,sqrt(phi)),4)#We see that the variance is 4914.6439 times larger than the mean. This means that we should adjust the standard errors multiplying by 70.1045, the square root of 4914.6439
+round(c(phi,sqrt(phi)),4)#We see that the variance is 4914.6439 times 
+#larger than the mean. 
+#This means that we should adjust the standard errors multiplying by 70.1045, the square root of 4914.6439
 
 
 model.qpois<-glm(SUM~DIET, data=df, family="quasipoisson")
 
 summary(model.qpois)
 
-#The estimates are exactly the same as before, but the standard errors are about 70X larger and the p-value is larger. We can verify this fact easily. First we write a useful function to extract standard errors and then use it on our fits:
+#The estimates are exactly the same as before, but the standard
+#errors are about 70X larger and the p-value is larger. 
+#We can verify this fact easily. First we write a useful function to extract standard errors and then use it on our fits:
 
 se <- function(model) sqrt(diag(vcov(model)))
 
-round(data.frame(poisson=coef(model.pois), qpoisson=coef(model.qpois), se.poisson=se(model.pois), se.qpoisson=se(model.qpois), ratio=se(model.qpois)/se(model.pois)), 4)
+round(data.frame(poisson=coef(model.pois), 
+                 qpoisson=coef(model.qpois), 
+                 se.poisson=se(model.pois), 
+                 se.qpoisson=se(model.qpois), 
+                 ratio=se(model.qpois)/se(model.pois)), 4)
 
 ```
 
@@ -205,7 +218,8 @@ model.nb <- glm.nb(SUM~DIET, data=df)
 summary(model.nb)
 
 
-#R's theta is the precision of the multiplicative random effect, and corresponds to 1/σ2 in the notes. The estimate corresponds to an estimated variance of 0.798 and is highly significant.
+#R's theta is the precision of the multiplicative random effect, and corresponds to 1/σ2 in the notes. 
+#The estimate corresponds to an estimated variance of 0.798 and is highly significant.
 
 1/model.nb$theta
 
@@ -217,12 +231,21 @@ summary(model.nb)
 
 #Let's compare the results from Poisson, quasipoisson and negative binomial models
 
-round(data.frame(poisson=coef(model.pois),qpoisson=coef(model.qpois),negbin=coef(model.nb),se.pois=se(model.pois),se.qpoisson=se(model.qpois),se.negbin=se(model.nb)),4)
+round(data.frame(poisson=coef(model.pois),
+                 qpoisson=coef(model.qpois),
+                 negbin=coef(model.nb),
+                 se.pois=se(model.pois),
+                 se.qpoisson=se(model.qpois),
+                 se.negbin=se(model.nb)),4)
 
 #Now if we remember the 95% cutoff from chi-squared test was 15.50731
-deviance(model.pois)#We have 51331.7 deviance in the Poisson model
-deviance(model.qpois)#The deviance is the same in the quasipoisson which estimates the deviance in the confidence intervals
-deviance(model.nb)#The deviance in the negative binomial model is 11.25934, which is below the cutoff value which indicates that the negative binomial model is a good fit for the model.
+deviance(model.pois)
+#We have 51331.7 deviance in the Poisson model
+deviance(model.qpois)
+#The deviance is the same in the quasipoisson which estimates the deviance in the confidence intervals
+deviance(model.nb)
+#The deviance in the negative binomial model is 11.25934,
+#which is below the cutoff value which indicates that the negative binomial model is a good fit for the model.
 
 ```
 
