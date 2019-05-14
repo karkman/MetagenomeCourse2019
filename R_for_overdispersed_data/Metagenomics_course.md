@@ -1,4 +1,4 @@
-Quick crashcourse into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data
+Crash course into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data
 ======================================================================================================================================
 ================
 Katariina Pärnänen
@@ -92,11 +92,11 @@ sample_data(baby_ARG_PHY)$DIET
 Multivariate analysis
 ---------------------
 
-Often the research question in astudy is if there are differences in between all genes in samples that can be explained by an explanatory variable or variables.
+Often the research question is if there are differences in all genes between samples that can be explained by an explanatory variable or variables. This is when multivariate analysis methods come in handy.
 
-In this case multivariate methods can be used to calculate distances between samples using dissimilarity/similarity indexes and ordinating the samples in a two-dimensional space for visualization. One of the most commonly used distances in ecology is the Bray-Curtis dissimilarity index. There are several distances such as Euclidean, Jaccard and Horn-Morisita. However, usually for metagenomic data is is best to use a method which does not take zero values into account.
+Multivariate methods can be used to calculate distances between all genes/taxa in samples using dissimilarity/similarity indexes and ordinating the samples in a two-dimensional space for visualization. One of the most commonly used distances in ecology is the Bray-Curtis dissimilarity index. There are several distances such as Euclidean, Jaccard and Horn-Morisita. However, it is best to use a method which does not take zero values into account for metagenomic data.
 
-Ordination methods are used to ordinate samples in relation to each other in multiple dimensions. There are several ordination methods such as NDMS, PCA and PCoA. We will use PCoA.The first two dimensions or axes of the ordination can be used to plot the location of samples in relation to each other in a two-dimensional space.
+Ordination methods are used to ordinate samples in relation to each other in multiple dimensions. There are several ordination methods such as NDMS, PCA and PCoA. We will use PCoA. Tranforming your data is often needed before this, but we will skip it for the figure. The first two dimensions or axes of the ordination can be used to plot the location of samples in relation to each other in a two-dimensional space.
 
 Phyloseq has vegan built-in so we can ordinate distances using Phyloseq and plot the ordination.
 
@@ -113,7 +113,7 @@ p+scale_color_viridis(discrete = T)
 
 ![](Metagenomics_course_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
-We can see that there are more purple points on the left. Let's test if the difference we see visually is also statistically significant using adonis function from the 'vegan' package.
+We can see that there are more purple points on the left. Let's test if the difference we see visually is also statistically significant using the 'adonis' function from the vegan package. Now we will also square root transform the count table which can be accessed by using the function 'otu_table' from the phyloseq package.
 
 ``` r
 #We use a square root transformation for the data to even out variation
@@ -138,14 +138,14 @@ adonis(ARG_dist~DIET, data=data.frame(sample_data(baby_ARG_PHY), permutations = 
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-We can conclude that is some diffference in the grouping of genes based on the explanatory variables. (The separation is borderline significant using alpha of 0.05). If we would like to know which individual genes are different we could use DeSEQ to investigate fold changes between the two groups or fit genes as vectors in the ordination using envfit.
+We can conclude that is some diffference in the grouping of genes based on the explanatory variables. (The separation is borderline significant using alpha of 0.05). Adonis calculates the result using permutations, so there can be some variation in the p-values and model estimates with lower numbers of permutations. If we would like to know which individual genes are different we could use the R-package DeSEQ to investigate fold changes between the two groups or fit genes as vectors in the ordination using envfit from vegan package.
 
 Analysis of diversity
 ---------------------
 
-In many studies there is interest in determining whether the diversity of bacteria or genes differs between groups. Again there are several diversity indeces, but in most cases for metagenomic data it is best to use an indes which takes both evenness and the number of different taxa or genes into account.
+In many studies there is interest in determining whether the diversity of bacteria or genes differs between groups. Again, there are several diversity indeces, but in most cases it is best to use an indes which takes both evenness and the number of different taxa or genes into account when analysing metagenomes.
 
-Phyloseq is able to plot diversities so we will use it.
+Phyloseq is able to plot diversities so we will use the 'plot_richness' function from phyloseq.
 
 ``` r
 plot_richness(baby_ARG_PHY, measures = "Shannon", x = "DIET")
@@ -190,20 +190,20 @@ TukeyHSD(simpson)
     ##         diff         lwr       upr     p adj
     ## y-n 0.160844 -0.01750545 0.3391935 0.0711523
 
-It turns out that the difference is not significant using Simpson diversity but is with Shannon.
+It turns out that the difference is not significant using Simpson diversity but is weakly significant with Shannon.
 
 Statistical analysis of overdispersed count data
 ------------------------------------------------
 
-Read based metagenomis analyses are often used to produce outputs in table formats with counts. During the course we have analysed our data and counted ARGs in each sample by mapping them to an ARG database.
+Many read based metagenomic analyses produce outputs in table formats with counts. During the course we have analysed our data and counted ARGs in each sample by mapping them to an ARG database. We need to decide which statistical methods are most appropriate for out data, in order to analyse the effects of the 'DIET' explanatory variable on the ARG counts.
 
-In traditional statistics, count data is usually modelled using Poisson or binomial distibutions. Poisson is a discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time or space if these events occur with a known constant rate and independently of the time since the last event. For instance, an individual keeping track of the amount of mail they receive each day may notice that they receive an average number of 4 letters per day. If receiving any particular piece of mail does not affect the arrival times of future pieces of mail, i.e., if pieces of mail from a wide range of sources arrive independently of one another, then a reasonable assumption is that the number of pieces of mail received in a day obeys a Poisson distribution.
+In traditional statistics, count data is usually modelled using Poisson or binomial distibutions. Poisson is a discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time or space IF these events occur with a known constant rate and independently of the time since the last event. For instance, a person keeping track of the amount of mail they receive each day may notice that they receive an average number of 4 letters per day. If receiving any particular piece of mail does not affect the arrival times of future pieces of mail, i.e., if pieces of mail from a wide range of sources arrive independently of one another, then a reasonable assumption is that the number of pieces of mail received in a day obeys a Poisson distribution. However, more often than not this is not the case for real life events and biological data.
 
 The starting point for count data is a GLM (generalized linear model) with Poisson-distributed errors, but not all count data meet the assumptions of the Poisson distribution. Poisson distribution requires that the variance is NOT larger than the mean (overdispersed) and that there aren't more zeros than expected in the data (zero inflation).
 
 The binomial distribution is frequently used to model the number of successes in a sample of size n drawn with replacement from a population of size N. If the sampling is carried out without replacement, the draws are not independent and so the resulting distribution is a hypergeometric distribution, not a binomial one. However, for N much larger than n, the binomial distribution remains a good approximation, and is widely used. As with the Poisson distribution, binomial distribution's assumptions include that there is no overdispersion and zero inflation.
 
-People also often use normally distributed models and log transfor their data, but in most cases the models will end up beign less than optimal. Why not use the right model for your data instead of compromizing?
+Some also often use normally distributed models and log transfor their data, but in most cases the models will end up beign less than optimal. Why not use the right model for your data instead of compromizing?
 
 ### Checking which model is best - Poisson, Quasipoisson or Negative Binomial
 
