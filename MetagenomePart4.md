@@ -93,7 +93,6 @@ You don't need to specify any port when running Anvi'o on your own laptop.
 But when running the interactive interface from Taito, you will need your own port, because it is not possible to run two interfaces thru the same port.  
 The available ports will assigned to each student on the course.
 
-
 Remember to change the `XXXX` to the port you were given.  
 
 Open a new ssh window. In mac:  
