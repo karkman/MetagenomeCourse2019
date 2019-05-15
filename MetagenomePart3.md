@@ -199,11 +199,11 @@ anvi-merge ../co-assembly/*/PROFILE.db -o SAMPLES-MERGED -c MEGAHIT_co-assembly_
 
 ## Visualization in the interface (On Friday)
 
-When running the interactive interface from Taito, you will need your own port, because it is not possible to run two interfaces thru the same port.  
+You don't need to specify any port when running Anvi'o on your own laptop.  
+But when running the interactive interface from Taito, you will need your own port, because it is not possible to run two interfaces thru the same port.  
 The available ports will assigned to each student on the course.
 
 Remember to change the `XXXX` to the port you were given.  
-You don't need to specify any port when running Anvi'o on your own laptop.  
 
 Open a new ssh window. In mac:
 ```
