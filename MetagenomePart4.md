@@ -89,12 +89,14 @@ Ha, a last thing: Tom would like to congragulate you for beating Sweden in Swede
 
 There are currently two programs to invoke the interactive interface. We will first use this one: `anvi-interactive`. It basically will let you combine and visualize all the data stored in your CONTIGS and PROFILE databases.
 
-When running the interactive interface from Taito, you will need your own port, because it is not possible to run two interfaces thru the same port.
+When running the interactive interface from Taito, you will need your own port, because it is not possible to run two interfaces thru the same port.  
 The available ports will assigned to each student on the course.
 
-Open a new ssh window. In mac:  
+
 Remember to change the `XXXX` to the port you were given.  
-You don't need to specify any port when running Anvi'o on your own laptop
+You don't need to specify any port when running Anvi'o on your own laptop.
+
+Open a new ssh window. In mac:  
 ```
 ssh -L XXXX:localhost:XXXX YOUR_USERNAME@taito.csc.fi
 ```

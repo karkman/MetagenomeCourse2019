@@ -199,23 +199,29 @@ anvi-merge ../co-assembly/*/PROFILE.db -o SAMPLES-MERGED -c MEGAHIT_co-assembly_
 
 ## Visualization in the interface (On Friday)
 
+When running the interactive interface from Taito, you will need your own port, because it is not possible to run two interfaces thru the same port.  
+The available ports will assigned to each student on the course.
+
+Remember to change the `XXXX` to the port you were given.  
+You don't need to specify any port when running Anvi'o on your own laptop.  
+
 Open a new ssh window. In mac:
 ```
-ssh -L 8080:localhost:8080 YOUR_USERNAME@taito.csc.fi
+ssh -L XXXX:localhost:XXXX YOUR_USERNAME@taito.csc.fi
 ```
 
 in Windows with Putty:
 In SSH tab select "tunnels". Add  
 
-Source port: 8080  
-Destination: localhost:8080  
+Source port: XXXX  
+Destination: localhost:XXXX  
 
 Click add and log in to Taito.
 
 Activate anvio
 
 ```
-anvi-interactive -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --server-only -P 8080
+anvi-interactive -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --server-only -P XXXX
 ```
 
 Then open google chrome and go to address
