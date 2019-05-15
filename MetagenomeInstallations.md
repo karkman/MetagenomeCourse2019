@@ -74,7 +74,7 @@ make
 # Test it, should be version 1.0.2-beta  
 ./centrifuge --version  
 ```
-Download the pre-computed indexes for centrifuge (Can take 10 min).  
+Download the pre-computed indexes for centrifuge (Can take 20 min).  
 Since they are very big, it's better to put them in the `$WRKDIR`, since the home directory is quite small and not meant for storage for large file.  
 ```
 cd $WRKDIR
