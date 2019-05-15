@@ -14,7 +14,7 @@ Two programs for sequence data quality control. Both will be installed using Bio
 When using Bioconda at CSC, everything needs to be installed in virtual enviroments. You can create the virtual environment called `QC_env` and install the packages with one command.  
 ```
 module load bioconda/3
-conda create -n QC_env multiqc fastqc
+conda create -n QC_env multiqc fastqc python=2.7
 ```
 
 The environment can be activate with the command `source activate QC_env`. And deactivated with `source deactivate`.  
@@ -58,7 +58,7 @@ conda create -n humann2_env humann2
 
 **Metaphlan plotting environment**
 ```
-conda create -n metaphlan_plot_env -c bioconda hclust2 graphlan export2graphlan 
+conda create -n metaphlan_plot_env -c bioconda hclust2 graphlan export2graphlan
 ```
 
 **Centrifuge**  
