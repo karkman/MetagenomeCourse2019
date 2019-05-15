@@ -92,16 +92,13 @@ There are currently two programs to invoke the interactive interface. We will fi
 When running the interactive interface from Taito, you will need your own port, because it is not possible to run two interfaces thru the same port.
 The available ports will assigned to each student on the course.
 
-Open a new ssh window. In mac:
-Remember to change the `XXXX` to the port you were given.
-
+Open a new ssh window. In mac:  
+Remember to change the `XXXX` to the port you were given.  
+You don't need to specify any port when running Anvi'o on your own laptop
 ```
 ssh -L XXXX:localhost:XXXX YOUR_USERNAME@taito.csc.fi
 ```
 ```
-# allocate resources and log in to a computing node
-salloc -n 1 --mem=10000 -t 06:00:00 -p serial
-srun --pty $SHELL
 # load bioconda and activate Anvi'o environment
 module load bioconda/3
 source activate anvio3
@@ -111,7 +108,7 @@ in Windows with Putty:
 In SSH category [+] select "tunnels". Add
 
 Source port: XXXX
-Destination: localhost:8080
+Destination: localhost:XXXX
 
 Click add and log in to Taito as usual.
 
@@ -119,7 +116,7 @@ Activate anvio virtual environemnt `source activate anvio3`
 and go to the Anvi'o folder in the course folder at `$WRKDIR`.  
 
 ```
-anvi-interactive -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --server-only -P 8080
+anvi-interactive -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --server-only -P XXXX
 ```
 
 Then open google chrome and go to address
@@ -128,7 +125,7 @@ http://localhost:8080
 
 So far, so good?
 
->Please note that if you work from your laptop, please do not add `--server-only -P 8080`, as it prevents the opening of the window in the browser.
+>Please note that if you work from your laptop, please do not add `--server-only -P XXXX`, as it prevents the opening of the window in the browser.
 
 ## 03- Describing the interface
 
