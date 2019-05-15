@@ -89,10 +89,14 @@ Ha, a last thing: Tom would like to congragulate you for beating Sweden in Swede
 
 There are currently two programs to invoke the interactive interface. We will first use this one: `anvi-interactive`. It basically will let you combine and visualize all the data stored in your CONTIGS and PROFILE databases.
 
+When running the interactive interface from Taito, you will need your own port, because it is not possible to run two interfaces thru the same port.
+The available ports will assigned to each student on the course.
+
 Open a new ssh window. In mac:
+Remember to change the `XXXX` to the port you were given.
 
 ```
-ssh -L 8080:localhost:8080 YOUR_USERNAME@taito.csc.fi
+ssh -L XXXX:localhost:XXXX YOUR_USERNAME@taito.csc.fi
 ```
 ```
 # allocate resources and log in to a computing node
@@ -106,7 +110,7 @@ source activate anvio3
 in Windows with Putty:
 In SSH category [+] select "tunnels". Add
 
-Source port: 8080
+Source port: XXXX
 Destination: localhost:8080
 
 Click add and log in to Taito as usual.
