@@ -20,7 +20,7 @@ cat *.fsa > ResFinder.fasta
 The annotation of resistance genes will be done as an *array* job. You can learn more about array jobs in Taito from [here.](https://research.csc.fi/fi/taito-array-jobs)   
 
 We use Bowtie2 for the mapping and Samtools for analysing the mapping results. Both can be found from Taito, so we only need to load the biokit.  
-But first we need to index the database file for mapping. This is done using `bowtie2-build` command.
+But first we need to index the database file for mapping. This is done using `bowtie2-build` command. Bowtie2 part of the biokit, load it with `module load biokit`
 ```
 bowtie2-build ResFinder.fasta ResFinder
 ```
