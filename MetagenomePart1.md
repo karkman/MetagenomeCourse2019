@@ -27,8 +27,10 @@ The md5 sum for the file is `xxxxxx`. Check that the md5 sum of the file you dow
 md5sum Metagenomics2019data.tar.gz
 ```
 And then unpack the zipped tar file with `tar`.  
+The options are: `x` = extract, `v` = verbose, `f` = file
 
 ```
+tar -xvf Metagenomics2019data.tar.gz
 ```
 
 Make a file containing the sample names. This is the second field separated by `_`.    
