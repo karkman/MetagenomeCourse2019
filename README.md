@@ -75,7 +75,9 @@ __24.5.2019 9-17__
 
 | Time | Description |
 | --- | --- |
-| 09:00-10:00 | **Tommi Vatanen**: The gut microbiome structure and function in early life - lessons from cohort studies **NB. Room 2012 Biocenter 2 ** |
+| 09:00-10:00 | **Tommi Vatanen**: The gut microbiome structure and function in early life - lessons from cohort studies **NB. Infocenter Korona, lecture hall 3):
+The gut microbiome structure and function in early life - lessons from cohort studies
+ ** |
 | 10:30-12:00 | *Humann2 hands on cont* (__Tommi__)|
 |  |    **Lunch** |
 | __*Afternoon*__  | [Crashcourse into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data](R_for_overdispersed_data/README.md) (__Katariina__)|
