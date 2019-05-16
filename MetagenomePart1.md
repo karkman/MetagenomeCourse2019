@@ -211,6 +211,8 @@ Things to add:
 # Optional
 
 ## (Fairly) Fast MinHash signatures with Sourmash
+
+Make sure you're working at Taito-shell with command `sinteractive`.
 ```
 sourmash compute *R1_trimmed.fastq -k 31 --scaled 10000
 sourmash compare *.sig -o comparisons
