@@ -20,7 +20,7 @@ salloc -n 1 --mem=10000 -t 06:00:00 -p serial
 srun --pty $SHELL
 # load bioconda and activate Anvi'o environment
 module load bioconda/3
-source activate anvio3
+source activate anvio5
 ```
 ## Rename the scaffolds and select those >2,500nt.
 Anvio wants sequence IDs in your FASTA file as simple as possible. Therefore we need to reformat the headerlines to remove spaces and non-numeric characters. Also contigs shorter than 2500 bp will be removed.
