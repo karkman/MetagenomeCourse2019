@@ -20,7 +20,7 @@ salloc -n 1 --mem=10000 -t 06:00:00 -p serial
 srun --pty $SHELL
 # load bioconda and activate Anvi'o environment
 module load bioconda/3
-source activate anvio3
+source activate anvio5
 ```
 ## Rename the scaffolds and select those >2,500nt.
 Anvio wants sequence IDs in your FASTA file as simple as possible. Therefore we need to reformat the headerlines to remove spaces and non-numeric characters. Also contigs shorter than 2500 bp will be removed.
@@ -140,7 +140,7 @@ cd $WRKDIR/BioInfo_course/co-assembly
 # we need to load Bioconda
 module load bioconda/3
 # then activate Anvi'o
-source activate anvio3
+source activate anvio5
 # and also load the biokit, since Anvi'o uses samtools in the profiling
 module load biokit
 # each job will get one sample from the sample names file
@@ -197,8 +197,7 @@ When the profiling is done, you can merge them with one command.
 anvi-merge ../co-assembly/*/PROFILE.db -o SAMPLES-MERGED -c MEGAHIT_co-assembly_2500nt_CONTIGS.db
 ```
 
-## Visualization in the interface (On Friday)
-
+## Visualization in the interface 
 You don't need to specify any port when running Anvi'o on your own laptop.  
 But when running the interactive interface from Taito, you will need your own port, because it is not possible to run two interfaces thru the same port.  
 The available ports will assigned to each student on the course.
@@ -224,6 +223,8 @@ Activate anvio
 anvi-interactive -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --server-only -P XXXX
 ```
 
-Then open google chrome and go to address
+Then open google chrome and go to address 
 
 http://localhost:8080
+
+**but change 8080 to your port number

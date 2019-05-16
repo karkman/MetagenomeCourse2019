@@ -22,7 +22,8 @@ For now, just create the environment, we will need it soon.
 
 Detach from the installations screen with `Ctrl a + d`.  
 
-**_STOP HERE AND GO TO THE QC & TRIMMING PART_**
+**_STOP HERE AND GO TO THE QC & TRIMMING PART_** 
+# ADD LINK HERE #
 
 Go back to the installations screen with `screen -r installations`.  
 

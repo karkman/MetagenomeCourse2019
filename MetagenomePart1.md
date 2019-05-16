@@ -18,6 +18,7 @@ mkdir trimmed_data
 Download the metagenomic data (takes few minutes)  
 ```
 cd raw_data
+<<<<<<< HEAD
 cp link to KATA .
 ```
 
@@ -31,11 +32,14 @@ The options are: `x` = extract, `v` = verbose, `f` = file
 
 ```
 tar -xvf Metagenomics2019data.tar.gz
+=======
+cp /wrk/parnanen/shared/COURSE_DATA/* .
+>>>>>>> 1b085114fe611580340655307c69ea2e57e82459
 ```
 
 Make a file containing the sample names. This is the second field separated by `_`.    
 Use only the forward reads for this.  
- `ls *_R1_001.fastq |awk -F "_" '{print $2}' > ../sample_names.txt`  
+ `ls *_R1.fastq.gz |awk -F "_" '{print $2}' > ../sample_names.txt`  
 
 ## QC and trimming
 QC for the raw data (takes few min, depending on the allocation).  
@@ -55,7 +59,7 @@ module load bioconda/3
 source activate QC_env
 
 # Run fastqc
-fastqc ./*.fastq -o FASTQC/ -t 4
+fastqc ./*.fastq.gz -o FASTQC/ -t 4
 
 # Then combine the reports with multiqc
 multiqc ./ --interactive
@@ -90,7 +94,7 @@ while read i
 do
         cutadapt  -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT -O 10 --max-n 0 \
         -o ../trimmed_data/$i"_R1_trimmed.fastq" -p ../trimmed_data/$i"_R2_trimmed.fastq" \
-        *$i*_R1_001.fastq *$i*_R2_001.fastq > ../trimmed_data/$i"_trim.log"
+        *$i*_R1.fastq.gz *$i*_R2.fastq.gz > ../trimmed_data/$i"_trim.log"
 done < $1
 ```
 
@@ -211,6 +215,8 @@ Things to add:
 # Optional
 
 ## (Fairly) Fast MinHash signatures with Sourmash
+
+Make sure you're working at Taito-shell with command `sinteractive`.
 ```
 sourmash compute *R1_trimmed.fastq -k 31 --scaled 10000
 sourmash compare *.sig -o comparisons
