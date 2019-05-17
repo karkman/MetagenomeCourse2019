@@ -196,7 +196,7 @@ HUmann2 might take some time to run.
 To have it ready for Thursday, we will run it already today.  
 
 Make a batch job script for Humann2.  
-*NOTE! Use pre-downloaded databases, don't change the path to them*
+__NOTE! Use pre-downloaded databases, don't change the path to them__
 
 ```
 #!/bin/bash -l
