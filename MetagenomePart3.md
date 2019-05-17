@@ -31,7 +31,6 @@ anvi-script-reformat-fasta ../co-assembly/final.contigs.fa -l 2500 --simplify-na
 ````
 Deattach from the screen with `Ctrl a+d`  
 
-
 ## Mapping the reads back to the assembly
 Next thing to do is mapping all the reads back to the assembly. We use the renamed >2,500 nt contigs and do it sample-wise, so each sample is mapped separately using the trimmed R1 & R2 reads.  
 We will need to two scripts for that, one for the actual mapping and another to run it as an array job. Save both scripts to your `scripts` folder.
@@ -76,7 +75,7 @@ The array job script:
 #SBATCH --cpus-per-task=6
 #SBATCH -p serial
 
-cd $WRKDIR/BioInfo_course/co-assembly
+cd $WRKDIR/Metagenomics2019/co-assembly
 # we need Bowtie2 from the biokit
 module load biokit
 # each job will get one sample from the sample names file
