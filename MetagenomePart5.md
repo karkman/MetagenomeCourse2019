@@ -60,27 +60,8 @@ graphlan.py --dpi 300 infants.abundance.xml infants.abundance.png --external_leg
 
 ## HUMAnN2
 
-```
-#!/bin/bash -l
-#SBATCH -J humann2
-#SBATCH -o humann2_out_%A_%a.txt
-#SBATCH -e humann2_err_%A_%a.txt
-#SBATCH -t 1:00:00
-#SBATCH --mem=20000
-#SBATCH --array=1-10
-#SBATCH -n 1
-#SBATCH --nodes=1
-#SBATCH -p serial
 
-#module load biokit
-source activate humann2_env
-cd /wrk/antkark/Metagenomics2019
-name=$(sed -n "$SLURM_ARRAY_TASK_ID"p ../sample_names.txt)
-humann2 --input trimmed_data/$name"_R1_trimmed.fastq"  --output Humann2
-
-```
-
-Join and normalize Humann2 outputs
+Join and normalize Humann2 outputs from Monday
 ```
 cd Humann2
 humann2_join_tables -i ./ -o infant_genefamilies.tsv --file_name genefamilies
