@@ -208,7 +208,7 @@ Submit the batch job as previously
 #module load biokit
 source activate humann2_env
 cd $WRKDIR/Metagenomics2019
-name=$(sed -n "$SLURM_ARRAY_TASK_ID"p ../sample_names.txt)
+name=$(sed -n "$SLURM_ARRAY_TASK_ID"p sample_names.txt)
 humann2 --input trimmed_data/$name"_R1_trimmed.fastq"  --output Humann2
 
 ```
