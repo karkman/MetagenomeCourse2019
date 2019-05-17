@@ -135,7 +135,7 @@ When the mapping is done for all samples and the contigs database is ready, we c
 #SBATCH --cpus-per-task=6
 #SBATCH -p serial
 
-cd $WRKDIR/BioInfo_course/co-assembly
+cd $WRKDIR/Metagenomics2019/co-assembly
 # we need to load Bioconda
 module load bioconda/3
 # then activate Anvi'o
