@@ -149,7 +149,7 @@ anvi-profile -c ../ANVIO/MEGAHIT_co-assembly_2500nt_CONTIGS.db  -M 2500 -T $SLUR
 ```
 Submit the job with `sbatch` as previously.  
 
-## Run COGs DOES NOT WORK; DO NOT SPEND TIME ON THIS
+## Run COGs 
 
 Next we annotate genes in  contigs database with functions from the NCBI’s Clusters of Orthologus Groups (COGs).
 Again first reattach to your Anvio'o screen.  
