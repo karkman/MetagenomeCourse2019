@@ -210,12 +210,12 @@ __NOTE! Use only the R1 reads AND the pre-downloaded databases, don't change the
 #SBATCH --nodes=1
 #SBATCH -p serial
 
-#module load biokit
+module load bioconda/3
 source activate humann2_env
 cd $WRKDIR/Metagenomics2019
 name=$(sed -n "$SLURM_ARRAY_TASK_ID"p sample_names.txt)
 
-humann2 --input trimmed_data/$name"_R1_trimmed.fastq"  --output Humann2 \
+humann2 --input trimmed_data/$name"_R1_trimmed.fastq" --output Humann2 \
         --nucleotide-database /wrk/antkark/shared/chocophlan
         --protein-database /wrk/antkark/shared/uniref
 
