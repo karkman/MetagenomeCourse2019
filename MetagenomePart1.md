@@ -193,7 +193,7 @@ Submit the batch job as previously
 
 ## HUMAnN2
 HUMAnN2 might take some time to run.   
-To have it ready for Thursday, we will run it already today.  
+To be able to analyse the results on Thursday, we will run it already today.  
 
 Make a batch job script for HUMAnN2.  
 __NOTE! Use pre-downloaded databases, don't change the path to them__
