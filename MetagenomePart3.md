@@ -149,7 +149,7 @@ anvi-profile -c ../ANVIO/MEGAHIT_co-assembly_2500nt_CONTIGS.db  -M 2500 -T $SLUR
 ```
 Submit the job with `sbatch` as previously.  
 
-## Run COGs 
+## Run COGs
 
 Next we annotate genes in  contigs database with functions from the NCBI’s Clusters of Orthologus Groups (COGs).
 Again first reattach to your Anvio'o screen.  
@@ -168,8 +168,7 @@ anvi-get-sequences-for-gene-calls -o gene-calls.fa -c MEGAHIT_co-assembly_2500nt
 ## Run centrifuge
 “classification engine that enables rapid, accurate and sensitive labeling of reads and quantification of species on desktop computers”. Read more from [here](http://biorxiv.org/content/early/2016/05/25/054965).
 
-Remember to set the environmental variable pointing to the centrifuge folder as shown in [MetagenomeInstallations](https://github.com/INNUENDOCON/MicrobialGenomeMetagenomeCourse/blob/master/MetagenomeInstallations.md).
-# LINKKI MENEE MIRKON GITHUBBIIN
+Remember to set the environmental variable pointing to the centrifuge folder as shown in [MetagenomeInstallations](MetagenomeInstallations.md).
 
 ```
 centrifuge -f -p 6 -x $CENTRIFUGE_BASE/p+h+v gene-calls.fa -S centrifuge_hits.tsv
@@ -182,10 +181,10 @@ anvi-import-taxonomy-for-genes -i centrifuge_report.tsv centrifuge_hits.tsv -p c
 ## Antibiotic resistance gene annotation
 ```
 # run BLASTN against ResFinder
-blastn -query gene-calls.fa -subject ~/appl_taito/database/resfinder_db/resfinder.fasta -out RF.out -outfmt 6 -max_target_seqs 1 -perc_identity 90 -qcov_hsp_perc 80
+blastn -query gene-calls.fa -subject $WRKDIR/resfinder_db/ResFinder.fasta -out RF.out -outfmt 6 -max_target_seqs 1 -perc_identity 90 -qcov_hsp_perc 80
 # parse the output for Anvi'o  
 printf "gene_callers_id\tsource\taccession\tfunction\te_value\n" > RF_functions.txt
-awk '{print $1"\tCARD\t\t"$2"\t"$11}' RF.out >> RF_functions.txt
+awk '{print $1"\tResFinder\t\t"$2"\t"$11}' RF.out >> RF_functions.txt
 # and finally import the functions to Anvi'o contigs DB  
 anvi-import-functions -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -i RF_functions.txt
 ```
@@ -197,7 +196,7 @@ When the profiling is done, you can merge them with one command.
 anvi-merge ../co-assembly/*/PROFILE.db -o SAMPLES-MERGED -c MEGAHIT_co-assembly_2500nt_CONTIGS.db
 ```
 
-## Visualization in the interface 
+## Visualization in the interface
 You don't need to specify any port when running Anvi'o on your own laptop.  
 But when running the interactive interface from Taito, you will need your own port, because it is not possible to run two interfaces thru the same port.  
 The available ports will assigned to each student on the course.
@@ -223,8 +222,8 @@ Activate anvio
 anvi-interactive -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --server-only -P XXXX
 ```
 
-Then open google chrome and go to address 
+Then open google chrome and go to address
 
-http://localhost:8080
+http://localhost:XXXX
 
-**but change 8080 to your port number
+**Again change XXXX to your port number
