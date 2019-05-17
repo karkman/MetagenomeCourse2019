@@ -9,7 +9,7 @@ Go to the ResFinder database [BitbBucket repository](https://bitbucket.org/genom
 
 ```
 cd $WRKDIR
-git clone https://git@bitbucket.org/genomicepidemiology/resfinder_db.git
+git clone https://bitbucket.org/genomicepidemiology/resfinder_db.git
 ```
 
 This copies the whole repository to your work directory in a folder called `resfinder_db`. Go to that folder and concatenate the different antibiotic resistance gene sub-classes to one file
