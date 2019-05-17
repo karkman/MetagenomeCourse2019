@@ -191,10 +191,27 @@ metaquast.py -t $SLURM_CPUS_PER_TASK --no-plots -o assembly_QC final.contigs.fa
 ```
 Submit the batch job as previously
 
-Things to add:
-- Humann2
-- ARG annotation w/ mapping
--
+## HUMAnN2
+
+```
+#!/bin/bash -l
+#SBATCH -J humann2
+#SBATCH -o humann2_out_%A_%a.txt
+#SBATCH -e humann2_err_%A_%a.txt
+#SBATCH -t 1:00:00
+#SBATCH --mem=20000
+#SBATCH --array=1-10
+#SBATCH -n 1
+#SBATCH --nodes=1
+#SBATCH -p serial
+
+#module load biokit
+source activate humann2_env
+cd $WRKDIR/Metagenomics2019
+name=$(sed -n "$SLURM_ARRAY_TASK_ID"p ../sample_names.txt)
+humann2 --input trimmed_data/$name"_R1_trimmed.fastq"  --output Humann2
+
+```
 
 # Optional
 
