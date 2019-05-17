@@ -158,8 +158,8 @@ Assembling metagenomic data can be very resource demanding and we need to do it 
 
 ```
 cd trimmed_data
-cat *R1_trimmed.fastq > all_R1_trimmed.fastq
-cat *R2_trimmed.fastq > all_R2_trimmed.fastq
+cat *R1_trimmed.fastq > all_R1.fastq
+cat *R2_trimmed.fastq > all_R2.fastq
 ```
 Make a script called co_assembly.sh in a text editor
 ```
@@ -180,7 +180,7 @@ module load megahit
 
 cd $WRKDIR/Metagenomics2019/
 
-megahit -1 trimmed_data/all_R1_trimmed.fastq -2 trimmed_data/all_R2_trimmed.fastq \
+megahit -1 trimmed_data/all_R1.fastq -2 trimmed_data/all_R2.fastq \
          -o co-assembly -t $SLURM_CPUS_PER_TASK --min-contig-len 1000
 
 # MetaQUAST assembly statistics
