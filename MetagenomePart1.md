@@ -196,7 +196,7 @@ HUMAnN2 might take some time to run.
 To be able to analyse the results on Thursday, we will run it already today.  
 
 Make a batch job script for HUMAnN2.  
-__NOTE! Use pre-downloaded databases, don't change the path to them__
+__NOTE! Use only the R1 reads AND the pre-downloaded databases, don't change the path to them__
 
 ```
 #!/bin/bash -l
