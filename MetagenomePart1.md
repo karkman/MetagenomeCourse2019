@@ -18,23 +18,7 @@ mkdir trimmed_data
 Download the metagenomic data (takes few minutes)  
 ```
 cd raw_data
-<<<<<<< HEAD
-cp link to KATA .
-```
-
-The md5 sum for the file is `xxxxxx`. Check that the md5 sum of the file you downloaded matches with this.
-
-```
-md5sum Metagenomics2019data.tar.gz
-```
-And then unpack the zipped tar file with `tar`.  
-The options are: `x` = extract, `v` = verbose, `f` = file
-
-```
-tar -xvf Metagenomics2019data.tar.gz
-=======
 cp /wrk/parnanen/shared/COURSE_DATA/* .
->>>>>>> 1b085114fe611580340655307c69ea2e57e82459
 ```
 
 Make a file containing the sample names. This is the second field separated by `_`.    
