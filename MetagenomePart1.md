@@ -192,6 +192,11 @@ metaquast.py -t $SLURM_CPUS_PER_TASK --no-plots -o assembly_QC final.contigs.fa
 Submit the batch job as previously
 
 ## HUMAnN2
+HUmann2 might take some time to run.   
+To have it ready for Thursday, we will run it already today.  
+
+Make a batch job script for Humann2.  
+*NOTE! Use pre-downloaded databases, don't change the path to them*
 
 ```
 #!/bin/bash -l
@@ -209,7 +214,10 @@ Submit the batch job as previously
 source activate humann2_env
 cd $WRKDIR/Metagenomics2019
 name=$(sed -n "$SLURM_ARRAY_TASK_ID"p sample_names.txt)
-humann2 --input trimmed_data/$name"_R1_trimmed.fastq"  --output Humann2
+
+humann2 --input trimmed_data/$name"_R1_trimmed.fastq"  --output Humann2 \
+        --nucleotide-database /wrk/antkark/shared/chocophlan
+        --protein-database /wrk/antkark/shared/uniref
 
 ```
 
