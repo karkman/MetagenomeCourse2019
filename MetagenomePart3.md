@@ -176,7 +176,7 @@ centrifuge -f -p 6 -x $CENTRIFUGE_BASE/p+h+v gene-calls.fa -S centrifuge_hits.ts
 ```
 ## Import centrifuge results
 ```
-anvi-import-taxonomy -i centrifuge_report.tsv centrifuge_hits.tsv -p centrifuge -c MEGAHIT_co-assembly_2500nt_CONTIGS.db
+anvi-import-taxonomy-for-genes -i centrifuge_report.tsv centrifuge_hits.tsv -p centrifuge -c MEGAHIT_co-assembly_2500nt_CONTIGS.db
 ```
 
 ## Antibiotic resistance gene annotation
