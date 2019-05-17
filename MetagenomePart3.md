@@ -169,6 +169,7 @@ anvi-get-dna-sequences-for-gene-calls -o gene-calls.fa -c MEGAHIT_co-assembly_25
 “classification engine that enables rapid, accurate and sensitive labeling of reads and quantification of species on desktop computers”. Read more from [here](http://biorxiv.org/content/early/2016/05/25/054965).
 
 Remember to set the environmental variable pointing to the centrifuge folder as shown in [MetagenomeInstallations](https://github.com/INNUENDOCON/MicrobialGenomeMetagenomeCourse/blob/master/MetagenomeInstallations.md).
+# LINKKI MENEE MIRKON GITHUBBIIN
 
 ```
 centrifuge -f -p 6 -x $CENTRIFUGE_BASE/p+h+v gene-calls.fa -S centrifuge_hits.tsv
