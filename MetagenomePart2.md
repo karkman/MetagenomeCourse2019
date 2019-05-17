@@ -5,7 +5,7 @@ Next step is the antibiotic resistance gene annotation.
 
 We will map all the reads against ResFinder database to annote the antibiotic resistance genes present in the reads.  
 First download the Resfinder database.  
-Go to the ResFinder database [BitbBucket repository](https://bitbucket.org/genomicepidemiology/resfinder_db/src/master/) and clone it to your work directory (`$WRKDIR`).   
+Go to the ResFinder database [BitbBucket repository](https://bitbucket.org/genomicepidemiology/resfinder_db/src/master/) and get the link to clone it to your work directory (`$WRKDIR`).   
 
 ```
 cd $WRKDIR
