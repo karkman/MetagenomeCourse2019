@@ -1,141 +1,280 @@
 # Day 1
 *Antti Karkman, Katariina Pärnänen and Jenni Hultman*
 
-# Installations
-Log into Taito, either with ssh (Mac/Linux) or PuTTy (Windows)  
+# Metagenome analysis of infant gut metagenomes
+Log into Taito, either with ssh (Mac/Linux) or PuTTy (Windows)
 
-Open a screen for the installations.
-```
-screen -S installations
-```
+__All the scripts are to be run in `Metagenomics2019` folder!__
 
-**FastQC & MultiQC**  
-Two programs for sequence data quality control. Both will be installed using Bioconda package management tool that can be found from CSC.  
-When using Bioconda at CSC, everything needs to be installed in virtual enviroments. You can create the virtual environment called `QC_env` and install the packages with one command.  
-```
-module load bioconda/3
-conda create -n QC_env multiqc fastqc python=2.7
-```
-
-The environment can be activate with the command `source activate QC_env`. And deactivated with `source deactivate`.  
-For now, just create the environment, we will need it soon.
-
-Detach from the installations screen with `Ctrl a + d`.  
-
-**_STOP HERE AND GO TO THE QC & TRIMMING PART_** 
-# ADD LINK HERE #
-
-Go back to the installations screen with `screen -r installations`.  
-
-**Anvi'o**  
-Create a virtual environment for Anvi'o and install all dependencies using Bioconda. (takes 5–10 min)  
-```
-module load bioconda/3
-conda create -n anvio5 -c bioconda -c conda-forge python=3.6 anvio=5.5.0
-```
-
-Let's test it  
-```
-# Activate the Anvi'o virtual environment
-source activate anvio5
-# Run the mini test
-anvi-self-test --suite mini
-```
-We will also need to install NCBIs COG databases and reformat them so they can be used later. The formatting step includes changing reorganizing information in raw files, serializing a very large text file into binary Python object for fast access while converting protein IDs to COGs, and finally generating BLAST and DIAMOND search databases.
-
-```
-anvi-setup-ncbi-cogs --num-threads 4
-```
-
-**CheckM**  
-For assessing the quality of recovered genomes
-```
-conda create -n checkm_env pplacer checkm-genome numpy python=2
-```
-**Humann2**
-```
-conda create -n humann2_env humann2
-```
-
-**Metaphlan plotting environment**
-```
-conda create -n metaphlan_plot_env -c bioconda hclust2 graphlan export2graphlan
-```
-
-**Centrifuge**  
-For taxonomic annotation of contigs in Anvi'o. Go again to the application folder and get the programs from GitHub using command `git`. Anvi'o relies on an older version ("branch") of the program, so we need to checkout the branch specified.  
-You can read more about Centrifuge from the website where we clone it.
-```
-cd $USERAPPL
-git clone https://github.com/infphilo/centrifuge
-cd centrifuge
-# We need a certain version, so checkout the branch specified
-git checkout 30e3f06ec35bc83e430b49a052f551a1e3edef42
-make
-# Test it, should be version 1.0.2-beta  
-./centrifuge --version  
-```
-Download the pre-computed indexes for centrifuge (Can take 20 min).  
-Since they are very big, it's better to put them in the `$WRKDIR`, since the home directory is quite small and not meant for storage for large file.  
+## Data download
+First set up the course directory, make some folders and then download the data.  
+Move to work directory at CSC and make a course directory there. Or a subfolder under a previous course folder.  
 ```
 cd $WRKDIR
-# make a folder for the indices and download the indices there
-mkdir centrifuge_db
-cd centrifuge_db
-wget ftp://ftp.ccb.jhu.edu/pub/infphilo/centrifuge/data/p+h+v.tar.gz
-# After download, unpack the files and remove the tar file.
-tar -zxvf p+h+v.tar.gz && rm -rf p+h+v.tar.gz
+mkdir Metagenomics2019
+cd Metagenomics2019
+mkdir raw_data
+mkdir scripts
+mkdir trimmed_data
 ```
 
-Set an environmental variable pointing to the centrifuge folder.
-You need to change the path to _**your**_ centrifuge folder.
+Download the metagenomic data (takes few minutes)  
 ```
-export CENTRIFUGE_BASE="/wrk/YOURUSERNAME/centrifuge_db"
-echo $CENTRIFUGE_BASE
-# Needs to be done every time after logging out
+cd raw_data
+cp /wrk/parnanen/shared/COURSE_DATA/* .
 ```
-**Optional**  
-######################################################  
-OR you can add it to your `.bashrc`.  
-Go to home folder and open `.bashrc` with a text editor.  
-Add things after the `# User specific aliases and functions`. Make sure they pointy to the right place on your own folders.  
-```
-export CENTRIFUGE_BASE="$WRKDIR/centrifuge_db"
-# You can add also the centrifuge executable to your PATH
-export PATH=$PATH:$USERAPPL/centrifuge
-```
-If you did set the env variable before, you can remove it first and then set it thru `.bashrc`.  
-```
-unset CENTRIFUGE_BASE
-echo $CENTRIFUGE_BASE # This should give an empty row at this point
 
-#Then run
-source .bashrc
-# And test that it worked.
-centrifuge --version
-echo $CENTRIFUGE_BASE
-```
-######################################################  
+Make a file containing the sample names. This is the second field separated by `_`.    
+Use only the forward reads for this.  
+ `ls *_R1.fastq.gz |awk -F "_" '{print $2}' > ../sample_names.txt`  
 
-**Metaxa2**  
-For taxonomic profiling of the samples using the rimmed reads.
+## QC and trimming
+QC for the raw data (takes few min, depending on the allocation).  
+Go to the folder that contains the raw data and make a folder called e.g. `FASTQC` for the QC reports.  
+Then run the QC for the raw data and combine the results to one report using `multiqc`.  
+
+Can be done on the interactive nodes using `sinteractive`.   
+In that case do not allocate resources.  Just go to the right folder, activate `QC_env` and run `FastQC`. After it is finished you can just log out from the computing node. You don´t need to free any resources.
+
 ```
-cd $USERAPPL
-wget http://microbiology.se/sw/Metaxa2_2.2.tar.gz
-tar -xzvf Metaxa2_2.2.tar.gz
-cd Metaxa2_2.2
+# allocate the computing resources and log in to the computing node.
+salloc -n 1 --cpus-per-task=4 --mem=3000 --nodes=1 -t 00:30:00 -p serial
+srun --pty $SHELL
+
+# activate the QC environment
+module load bioconda/3
+source activate QC_env
+
+# Run fastqc
+fastqc ./*.fastq.gz -o FASTQC/ -t 4
+
+# Then combine the reports with multiqc
+multiqc ./ --interactive
+
+# deactivate the virtual env
+source deactivate
+
+# log out from the computing node
+exit
+
+# and free the resources after the job is done
+exit
 ```
-Test it, you will need to load the biokit first, because Metaxa2 uses HMMER3 and BLAST.
+
+Copy the resulting HTML file to your local machine with `scp` from the command line (Mac/Linux) or *WinSCP* on Windows. Have a look at the QC report with your favourite browser.  
+
+After inspecting the output, it should be clear that we need to do some trimming.  
+__What kind of trimming do you think should be done?__
+
+You can check the adapter sequences from Illumina's website. (e.g. search with "*Illumina adapter sequences*"). Or from [here](https://support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/experiment-design/illumina-adapter-sequences-1000000002694-10.pdf).
+
+For trimming we'll make a bash script that runs `cutadapt` for each file using the `sample_names.txt` file.    
+Go to your scripts folder and make a bash script for cutadapt with any text editor. Specify the adapter sequences that you want to trim after `-a` and `-A`. What is the difference with `-a` and `-A`? And what is specified with option `-O`? You can find the answers from Cutadapt [manual](http://cutadapt.readthedocs.io).
+
+Save the file as `cutadapt.sh` in the scripts folder.  
+__Make sure that the PATHS are correct in your own script__  
+
 ```
+#!/bin/bash
+
+while read i
+do
+        cutadapt  -a CTGTCTCTTATACACATCT -A CTGTCTCTTATACACATCT -O 10 --max-n 0 \
+        -o ../trimmed_data/$i"_R1_trimmed.fastq" -p ../trimmed_data/$i"_R2_trimmed.fastq" \
+        *$i*_R1.fastq.gz *$i*_R2.fastq.gz > ../trimmed_data/$i"_trim.log"
+done < $1
+```
+
+Then we need a batch job file to submit the job to the SLURM system. More about CSC batch jobs here: https://research.csc.fi/taito-batch-jobs  
+Make another file with text editor that runs the script above.
+
+```
+#!/bin/bash -l
+#SBATCH -J cutadapt
+#SBATCH -o cutadapt_out_%j.txt
+#SBATCH -e cutadapt_err_%j.txt
+#SBATCH -t 01:00:00
+#SBATCH -n 1
+#SBATCH -p serial
+#SBATCH --mem=100
+#
+
 module load biokit
-./metaxa2 -i test.fasta -o TEMP --plus
+cd $WRKDIR/Metagenomics2019/raw_data
+bash ../scripts/cutadapt.sh ../sample_names.txt
 ```
-Then you can remove the results  
-`rm TEMP*`  
 
-You can also add Metaxa2 to your `$PATH` (go to --> `.bashrc`)  
+After it is done, we can submit it to the SLURM system. Do it from the course main folder, so go one step back in your folders.  
 
-**Sourmash**
+`sbatch scripts/cut_batch.sh`  
+
+You can check the status of your job with:  
+
+`squeue -l -u $USER`  
+
+After the job has finished, you can see how much resources it actually used and how many billing units were consumed. `JOBID` is the number after the batch job error and output files.  
+
+`seff JOBID`  
+
+Then let's check the results from the trimming.
+
+Go to the folder containing the trimmed reads (`trimmed_data`) and make a new folder (`FASTQC`) for the QC files.  
+Allocate some resources and then run FASTQC and MultiQC again.  
+
 ```
-conda create -n sourmash_env -c bioconda -c conda-forge sourmash
+# Allocate resources
+salloc -n 1 --cpus-per-task=4 --mem=3000 --nodes=1 -t 00:30:00 -p serial
+srun --pty $SHELL
+
+# activate the QC environment
+module load bioconda/3
+source activate QC_env
+
+# run QC on the trimmed reads
+fastqc ./*.fastq -o FASTQC/ -t 4
+multiqc ./ --interactive
+
+# deactivate the virtual env
+source deactivate
+
+# log out from the computing node
+exit
+
+# and free the resources after the job is done
+exit
+```
+
+Copy it to your local machine as earlier and look how well the trimming went.  
+
+## Assembly
+We will assemble all 10 samples together (co-assembly) and use [Megahit assembler](https://github.com/voutcn/megahit) for the job. In addition, we will use MetaQuast to get some statistics about our assembly.  
+
+Megahit is an ultra fast assembly tool for metagenomics data. It is installed to CSC and be loaded with following commands:
+```
+module purge
+module load intel/16.0.0
+module load megahit
+```
+module purge is needed to remove wrong Python versions you might have loaded earlier today.
+
+Assembling metagenomic data can be very resource demanding and we need to do it as a batch job. As we want to do both individual and co-assemblies the R1 and R2 reads need to be merged into two files with `cat`
+
+```
+cd trimmed_data
+cat *R1_trimmed.fastq > all_R1.fastq
+cat *R2_trimmed.fastq > all_R2.fastq
+```
+Make a script called co_assembly.sh in a text editor
+```
+#!/bin/bash
+#SBATCH -J megahit
+#SBATCH -o megahit_out_%j.txt
+#SBATCH -e megahit_err_%j.txt
+#SBATCH -t 06:00:00
+#SBATCH -n 1
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=40000
+#
+
+module purge
+module load intel/16.0.0
+module load megahit
+
+cd $WRKDIR/Metagenomics2019/
+
+megahit -1 trimmed_data/all_R1.fastq -2 trimmed_data/all_R2.fastq \
+         -o co-assembly -t $SLURM_CPUS_PER_TASK --min-contig-len 1000
+
+# MetaQUAST assembly statistics
+module purge
+module load biokit
+cd co-assembly
+metaquast.py -t $SLURM_CPUS_PER_TASK --no-plots -o assembly_QC final.contigs.fa
+```
+Submit the batch job as previously
+
+## HUMAnN2
+HUMAnN2 might take some time to run.   
+To be able to analyse the results on Thursday, we will run it already today.  
+
+Make a batch job script for HUMAnN2.  
+__NOTE! Use only the R1 reads AND the pre-downloaded databases, don't change the path to them__
+
+```
+#!/bin/bash -l
+#SBATCH -J humann2
+#SBATCH -o humann2_out_%A_%a.txt
+#SBATCH -e humann2_err_%A_%a.txt
+#SBATCH -t 20:00:00
+#SBATCH --mem=20000
+#SBATCH --array=1-10
+#SBATCH -n 1
+#SBATCH --nodes=1
+#SBATCH -p serial
+
+module load bioconda/3
+source activate humann2_env
+cd $WRKDIR/Metagenomics2019
+name=$(sed -n "$SLURM_ARRAY_TASK_ID"p sample_names.txt)
+
+humann2 --input trimmed_data/$name"_R1_trimmed.fastq" --output Humann2 \
+        --nucleotide-database /wrk/antkark/shared/chocophlan \
+        --protein-database /wrk/antkark/shared/uniref \
+        --metaphlan-options "--mpa_pkl /appl/bio/metaphlan/db_v20/mpa_v20_m200.pkl \
+        --bowtie2db /appl/bio/metaphlan/db_v20/mpa_v20_m200"
+
+```
+
+# Optional
+
+## (Fairly) Fast MinHash signatures with Sourmash
+
+Make sure you're working at Taito-shell with command `sinteractive`.
+```
+sourmash compute *R1_trimmed.fastq -k 31 --scaled 10000
+sourmash compare *.sig -o comparisons
+sourmash plot comparisons
+# annotate one
+sourmash gather 07005-B ../../shared/genbank-d2-k31.sbt.json -o OUTPUT_sour.txt
+```
+
+## Taxonomic profiling with Metaxa2
+
+The microbial community profiling for the samples will be done using a 16S/18S rRNA gene based classification software [Metaxa2](http://microbiology.se/software/metaxa2/).  
+It identifies the 16S/18S rRNA genes from the short reads using HMM models and then annotates them using BLAST and a reference database.
+We will run Metaxa2 as an array job in Taito. More about array jobs at CSC [here](https://research.csc.fi/taito-array-jobs).  
+Make a folder for Metaxa2 results and direct the results to that folder in your array job script. (Takes ~6 h for the largest files)
+
+```
+#!/bin/bash -l
+#SBATCH -J metaxa
+#SBATCH -o metaxa_out_%A_%a.txt
+#SBATCH -e metaxa_err_%A_%a.txt
+#SBATCH -t 10:00:00
+#SBATCH --mem=15000
+#SBATCH --array=1-10
+#SBATCH -n 1
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=6
+#SBATCH -p serial
+
+cd $WRKDIR/Metagenomics2019/Metaxa2
+# Metaxa uses HMMER3 and BLAST, so load the biokit first
+module load biokit
+# each job will get one sample from the sample names file stored to a variable $name
+name=$(sed -n "$SLURM_ARRAY_TASK_ID"p ../sample_names.txt)
+# then the variable is used in running metaxa2
+metaxa2 -1 ../trimmed_data/$name"_R1_trimmed.fastq" -2 ../trimmed_data/$name"_R2_trimmed.fastq" \
+            -o $name --align none --graphical F --cpu $SLURM_CPUS_PER_TASK --plus
+metaxa2_ttt -i $name".taxonomy.txt" -o $name
+```
+
+When all Metaxa2 array jobs are done, we can combine the results to an OTU table. Different levels correspond to different taxonomic levels.  
+When using any 16S rRNA based software, be cautious with species (and beyond) level classifications. Especially when using short reads.  
+We will look at genus level classification.
+```
+# Genus level taxonomy
+cd Metaxa2
+metaxa2_dc -o metaxa_genus.txt *level_6.txt
 ```
