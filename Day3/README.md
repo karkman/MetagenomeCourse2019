@@ -3,7 +3,7 @@
 
 Anvio is an analysis and visualization platform for omics data. You can read more from Anvio's [webpage](http://merenlab.org/software/anvio/).
 
-![alt text](Figure/Screen%20Shot%202017-12-07%20at%2013.50.20.png "Tom's fault")
+![alt text](/tree/master/Figure/Screen%20Shot%202017-12-07%20at%2013.50.20.png "Tom's fault")
 
 Go to your course folder and make a new folder called ANVIO. All task on this section are to be done in this folder.
 
