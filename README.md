@@ -44,20 +44,20 @@ __21.5.2019 8-17__
 | --- | --- |
 | __*Morning*__ | [Assembly statistics](Day2#assembly-quality-statistics) (__Jenni/Antti__)|
 | __*Morning*__ | [ARG annotation](Day2#antibiotic-resistance-gene-annotation---reads) (__Katariina__)
-| __*Morning*__ | [Getting files for Anvio](MetagenomePart3.md) (__Tom, Antti, Jenni__)|
+| __*Morning*__ | [Getting files for Anvio](Day3#metagenome-analysis-of-infant-gut-metagenomes---part-3) (__Tom, Antti, Jenni__)|
 |  |    **Lunch** |
 | __*Afternoon*__ | [Introduction to Anvio](http://link-to-presentation.com) (__Tom__)
+| __*Afternoon*__ | [Anvio hands-on](MetagenomePart4.md) (__Tom__)
 
 ### Wednesday
 __22.5.2019 8-17__  
 
 | Time | Description |
 | --- | --- |
-| __*Morning*__  | *Manual binning of MAGs with Anvio* (__Tom__)|
+| __*Morning*__  | [Manual binning of MAGs with Anvio](MetagenomePart4.md) (__Tom__)|
 |  |    **Lunch** |
 | __*Afternoon*__  |  |
-| __*Afternoon*__ | |
-| __*Afternoon*__  | *Taxonomic annotation of MAGs* (__Tom__) |
+| __*Afternoon*__  | [Taxonomic annotation of MAGs](MetagenomePart4.md#11--what-do-we-do-with-these-genomes) (__Tom__) |
 
 ### Thursday
 __23.5.2019 8-16.30__  
