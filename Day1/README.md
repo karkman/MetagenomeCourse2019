@@ -230,7 +230,9 @@ humann2 --input trimmed_data/$name"_R1_trimmed.fastq" --output Humann2 \
 
 ## (Fairly) Fast MinHash signatures with Sourmash
 
-Make sure you're working at Taito-shell with command `sinteractive`.
+Go to the documentation of Sourmash and learn more about minhashes and the usage of Sourmash. https://sourmash.readthedocs.io/en/latest/
+
+Before you start, make sure you're working at Taito-shell with command `sinteractive`.
 ```
 sourmash compute *R1_trimmed.fastq -k 31 --scaled 10000
 sourmash compare *.sig -o comparisons
@@ -241,7 +243,7 @@ sourmash gather 07005-B ../../shared/genbank-d2-k31.sbt.json -o OUTPUT_sour.txt
 
 ## Taxonomic profiling with Metaxa2
 
-The microbial community profiling for the samples will be done using a 16S/18S rRNA gene based classification software [Metaxa2](http://microbiology.se/software/metaxa2/).  
+The microbial community profiling for the samples can alsp be done using a 16S/18S rRNA gene based classification software [Metaxa2](http://microbiology.se/software/metaxa2/).  
 It identifies the 16S/18S rRNA genes from the short reads using HMM models and then annotates them using BLAST and a reference database.
 We will run Metaxa2 as an array job in Taito. More about array jobs at CSC [here](https://research.csc.fi/taito-array-jobs).  
 Make a folder for Metaxa2 results and direct the results to that folder in your array job script. (Takes ~6 h for the largest files)
