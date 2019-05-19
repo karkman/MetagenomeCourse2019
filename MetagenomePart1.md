@@ -203,7 +203,7 @@ __NOTE! Use only the R1 reads AND the pre-downloaded databases, don't change the
 #SBATCH -J humann2
 #SBATCH -o humann2_out_%A_%a.txt
 #SBATCH -e humann2_err_%A_%a.txt
-#SBATCH -t 1:00:00
+#SBATCH -t 20:00:00
 #SBATCH --mem=20000
 #SBATCH --array=1-10
 #SBATCH -n 1
