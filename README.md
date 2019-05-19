@@ -34,7 +34,7 @@ __20.5.2019 9-17__
 | __*Morning*__ |  [Quality control and trimming of data](Day1/README.md#QC-and-trimming) (__Jenni__)|
 |  |    **Lunch** |
 | __*Afternoon*__ | [Assembly](Day1/README.md#Assembly) (__Jenni__) |
-| __*Afternoon*__ | Read based annotation (__Katariina__) |
+| __*Afternoon*__ | [Read based annotation](https://github.com/karkman/MetagenomeCourse2019/tree/master/Day1#humann2) (__Katariina__) |
 
 
 ### Tuesday
