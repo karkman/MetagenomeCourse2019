@@ -42,8 +42,8 @@ __21.5.2019 8-17__
 
 | Time | Description |
 | --- | --- |
-| __*Morning*__ | *Assembly statistics* (__Jenni/Antti__)|
-| __*Morning*__ | *ARG annotation* (__Katariina__)
+| __*Morning*__ | [Assembly statistics](Day2#assembly-quality-statistics) (__Jenni/Antti__)|
+| __*Morning*__ | [ARG annotation](Day2#antibiotic-resistance-gene-annotation---reads) (__Katariina__)
 | __*Morning*__ | [Getting files for Anvio](MetagenomePart3.md) (__Tom, Antti, Jenni__)|
 |  |    **Lunch** |
 | __*Afternoon*__ | [Introduction to Anvio](http://link-to-presentation.com) (__Tom__)
