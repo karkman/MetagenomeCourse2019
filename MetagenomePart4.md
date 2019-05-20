@@ -1,26 +1,19 @@
 ---
 title: "A tutorial on genome-resolved metagenomics"
 excerpt: "Extracting population genomes from millions of short metagenomic reads"
-tags: [anvi'o, binning, it always snows in Helsinki, snow is nice through]
+tags: [anvi'o, binning, infant gut]
 ---
-#  Metagenome analysis of infant gut metagenomes - part 4
+#  Metagenome analysis of 10 infant gut metagenomes
+
 ## Genome-resolved metagenomics
 
 * Tom Delmont, Antti Karkman, Jenni Hultman *
 
 This tutorial describes a way to extract and curate population genomes from millions of short metagenomic reads using a methodology called "genome-resolved metagenomics", or simply "binning".
 
-This approach has led to major discoveries in the fields of evolutionary biology and microbial ecology. Here are two examples of what can be learned from the newly discovered genomes (topology of the tree of life on the left, nexus between phylogeny and nitrogen fixation in the surface of the oceans on the right):
-
-![alt text](Figure/FIGURE_GENOME_RESOLVED_METAG.png "Genome-resolved metagenomics")
-
-And here is a world cloud of this tutorial, so you can see what we will speak about in a single look:
-
-![alt text](Figure/World_Cloud.png "World cloud")
-
 Here are a few definitions we came up with, so we can try to speak the same language today:
 
--**A microbial species**: Is this a real thing?
+-**A microbial species**: Not clear definition as of today. 
 
 -**A microbial population**: pool of microbial cells sharing most of their genomic content due to a very close evolutionary history (close ancestor in the tree of life).
 
@@ -31,8 +24,6 @@ Here are a few definitions we came up with, so we can try to speak the same lang
 -**A population genome**: consensus genomic content of a microbial population acquired using a metagenomic assembly.
 
 -**Metagenomic binning**: the act of clustering contigs from a metagenomic assembly into "bins". Note that not all bins represent population genomes (e.g., phages, plasmids, and all the things we have very little clue about).
-
--**The platform anvi'o**: this place where microbiologists can finally feel they are bioinformatics superheros!
 
 -**A CONTIGS.db**: anvi'o database storing various information regarding the metagenomic assembly output (the FASTA file)
 
@@ -62,28 +53,23 @@ Ok.
 
 As you may remember, we have already done all of this:
 
-- [x] Co-assembling six metagenomes corresponding to the gut of two species
+- [x] Co-assembly of ten infant gut metagenomes with MEGAHIT sotfware
 - [x] Creating a CONTIGS database to make sense of the assembly output (find genes, get GC-content and tetra-nucleotide frequency of contigs)
-- [x] Searching for single copy-core genes, and running COGs for functions / CARD for antibiotic resistance genes
+- [x] Searching for single copy-core genes corresponding to Bacteria, Archaea and Eukarya
 - [x] Exporting genes stored in the CONTIGS database, determining their taxonomy and importing the results into the CONTIGS database
-- [x] Recruiting short reads from each metagenome using the co-assembly output
-- [x] Creating PROFILE databases from the recruited reads, and merging them into a single PROFILE database
-- [x] beat Sweden in Sweden for the
+- [x] Recruiting short reads from each metagenome using the co-assembly output and Bowtie2 software
+- [x] Creating PROFILE databases from the recruited reads (n=10), and merging them into a single PROFILE database (n=1)
 
 In case someone is missing some of the steps, this command will allow you to download the entire directory of anvi'o files for this project (this is a back-up for the workshop, but also a good starting point for someone that just wants to practice binning with anvi'o):
 
 ```
-wget https://www.dropbox.com/s/xusxf63iykiewbs/00_MEGAHIT-Binning-v3.zip?dl=0
-mv 00_MEGAHIT-Binning-v3.zip?dl=0 00_MEGAHIT-Binning-v3.zip
-unzip 00_MEGAHIT-Binning-v3.zip
+wget https://www.dropbox.com/s/k8zc6br36yglqu6/anvio_data.zip?dl=0
+mv anvio_data.zip?dl=0 Anvio_Processed_Data 
+mkdir Anvio_Processed_Data
+mv Anvio_Processed_Data Anvio_Processed_Data
+cd Anvio_Processed_Data
+unzip Anvio_Processed_Data.zip
 ```
-
-Well, I think that's it, right? **Now it is time for the fun part of visualizing and manipulating raw genome-resolved metagenomic results using the anvi'o interactive interface**.
-
-Ha, a last thing: Tom would like to congragulate you for beating Sweden in Sweden during the 1995 Men's World Ice Hockey Championships. Well done Finland!
-
-![alt text](Figure/Finland.png "Finland")
-
 
 ## 02- Describing the interface
 
@@ -146,7 +132,7 @@ Here is what you should see:
 
 ![alt text](Figure/Interface-RAW.png "Interface-RAW.png")
 
-Here is the key part to remember: **the six grey layers correspond to the mean coverage values in the six metagenomes**. For each split, a black color means there is environmental signal. No black color means the split did not recruit any reads.
+Here is the key part to remember: **the ten grey layers correspond to the mean coverage values in the ten metagenomes**. For each split, a black color means there is environmental signal. No black color means the split did not recruit any reads.
 
 In addition to the main display, there is a second layer of information describing high-resolution coverage values of contigs across metagenomes. To see it, please put your mouse on a split in the display, and right click to select the `inspection` mode, which should open a new window. Let's do it for a few splits, and discuss the observations.
 
