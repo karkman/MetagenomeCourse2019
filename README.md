@@ -98,5 +98,5 @@ Inside the class room you can find both __eduroam__ and Univ. Helsinki __HUPnet_
 * PhD Antti Karkman, University of Helsinki, Finland
 
 ### Visiting teachers
-* Dr Tom Delmont, XXX, France
+* Dr Tom Delmont, Genoscope, France
 * Dr Tommi Vatanen, The University of Auckland, New Zealand
