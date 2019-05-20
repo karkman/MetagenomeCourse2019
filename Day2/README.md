@@ -90,7 +90,7 @@ bash ../scripts/bowtie2-map-batch.sh ../trimmed_data/$name"_R1_trimmed.fastq" \
 ```
 Then again submit the array job with `sbatch`.  
 
-During luch break check what happens in the different steps in the mapping script.
+During launch break check what happens in the different steps in the mapping script.
 ```
 bowtie2
 samtools view
