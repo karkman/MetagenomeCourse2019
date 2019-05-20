@@ -176,15 +176,24 @@ Please do not try just to replicate this, but here is Tom's binning example:
 
 ## 07- Summary
 
+Now that we have binnned to data, and saved the binning collection, next step is to summarize the results using anvi-summarize command line:
+
 ```
-anvi-summarize -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C TOM_5_BINS -o SUMMARY_BINNING
+anvi-summarize -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C Bin_Name -o SUMMARY_BINNING
 ```
+
+(Note: replace "Bin_Name" with the name you elected to use)
 
 This step create a folder called `SUMMARY_BINNING`. Please download this folder into your laptop using `scp`, open it and double click on the file called `index.html`. This should open a windows in your browser.
 
+Here is Tom's example:
+
+![alt text](Figure/Summary_Binning.png "Summary_Binning.png")
+
+
 Ok.
 
-## 08- manual curation of bins (improve quality)
+## 08- Manual curation of bins (improve quality)
 
 Now, let's refine some of the bins using the program `anvi-refine` (this is the second way to invoke the interface; it is mostly used to work on a single bin within a collection).
 
@@ -208,7 +217,7 @@ Cool.
 Create a new collection where bins are nicely renamed, and MAGs identified (MAG = metagenome-assembled genome = population genome)
 
 ```
-anvi-rename-bins -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --collection-to-read TOM_5_BINS --collection-to-write MAGs --call-MAGs --prefix MEGAHIT --use-highest-completion-score --report-file REPORT
+anvi-rename-bins -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --collection-to-read TOM_5_BINS --collection-to-write MAGs --call-MAGs --prefix MEGAHIT --use-highest-completion-score --report-file REPORT
 ```
 
 Bins >2 Mbp and those with a completion >70% will be renamed as MAGs (i.e., as population genomes).
@@ -218,7 +227,7 @@ Bins >2 Mbp and those with a completion >70% will be renamed as MAGs (i.e., as p
 And summarize the collection:
 
 ```
-anvi-summarize -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs -o SUMMARY_MAGs
+anvi-summarize -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs -o SUMMARY_MAGs
 ```
 
 So, how many MAGs did you get???
@@ -229,7 +238,7 @@ So, how many MAGs did you get???
 Now is the time for some genomic curation. This step is boring, but critical: we need to manually curate each one of the MAGs using the `anvi-refine` command line:
 
 ```
-anvi-refine -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs -b MEGAHIT_MAG_000001  --server-only -P 8080
+anvi-refine -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs -b MEGAHIT_MAG_000001  --server-only -P 8080
 ```
 
 and so one for all MAGs. After that, we will create a final collection called `MAGs_FINAL`:
@@ -241,7 +250,7 @@ anvi-rename-bins -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --col
 and summarize the final, curated collection:
 
 ```
-anvi-summarize -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs_FINAL -o SUMMARY_MAGs_FINAL
+anvi-summarize -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs_FINAL -o SUMMARY_MAGs_FINAL
 ```
 
 We are done with the binning and the curation of this metagenomic co-assembly output!
