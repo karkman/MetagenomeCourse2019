@@ -50,7 +50,7 @@ humann2_pathways_no_stratifications_long <-
   select(-organism) %>%
   filter(!(grepl("^UN", pathway))) 
 
-# Compute pathway alpha divertities par sample
+# Compute pathway alpha divertities per sample
 humann2_pathways_no_stratifications_long %>%
   group_by(sampleID) %>%
   summarise(shannons_div = vegan::diversity(cpm),
