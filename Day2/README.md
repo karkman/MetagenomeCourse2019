@@ -152,15 +152,6 @@ anvi-profile -c ../ANVIO/MEGAHIT_co-assembly_2500nt_CONTIGS.db  -M 2500 -T $SLUR
 ```
 Submit the job with `sbatch` as previously.  
 
-## Run COGs
-
-Next we annotate genes in  contigs database with functions from the NCBI’s Clusters of Orthologus Groups (COGs).
-Again first reattach to your Anvio'o screen.  
-
-```
-anvi-run-ncbi-cogs -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -T 6
-```
-
 ## Export GENES
 With this command we export the genecalls from Prodigal to gene-calls.fa and do taxonomic annotation against centrifuge database you installed on Wednesday
 
@@ -181,7 +172,7 @@ centrifuge -f -p 6 -x $CENTRIFUGE_BASE/p+h+v gene-calls.fa -S centrifuge_hits.ts
 anvi-import-taxonomy-for-genes -i centrifuge_report.tsv centrifuge_hits.tsv -p centrifuge -c MEGAHIT_co-assembly_2500nt_CONTIGS.db
 ```
 
-## Antibiotic resistance gene annotation
+## Antibiotic resistance gene annotation (Optional)
 ```
 # run BLASTN against ResFinder
 blastn -query gene-calls.fa -subject $WRKDIR/resfinder_db/ResFinder.fasta -out RF.out -outfmt 6 -max_target_seqs 1 -perc_identity 90 -qcov_hsp_perc 80
@@ -190,6 +181,15 @@ printf "gene_callers_id\tsource\taccession\tfunction\te_value\n" > RF_functions.
 awk '{print $1"\tResFinder\t\t"$2"\t"$11}' RF.out >> RF_functions.txt
 # and finally import the functions to Anvi'o contigs DB  
 anvi-import-functions -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -i RF_functions.txt
+```
+
+## Run COGs (Optional)
+
+Next we annotate genes in  contigs database with functions from the NCBI’s Clusters of Orthologus Groups (COGs).
+Again first reattach to your Anvio'o screen.  
+
+```
+anvi-run-ncbi-cogs -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -T 6
 ```
 
 ## Merging the profiles
