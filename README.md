@@ -64,10 +64,10 @@ __23.5.2019 8-16.30__
 | Time | Description |
 | --- | --- |
 | __*Morning*__  | *MetaPhlan lecture* (__Tommi__)|
-| __*Morning*__  | *Metaphlan profiles* (__Tommi__)|
+| __*Morning*__  | [Metaphlan profiles](Day4#metaphlan2) (__Tommi__)|
 |  |    **Lunch** |
 | __*Afternoon*__  | *HUMAnN2 lecture* (__Tommi__)|
-| __*Afternoon*__  | *Humann2 hands on* (__Tommi__)|
+| __*Afternoon*__  | [Humann2 hands on](Day5#humann2) (__Tommi__)|
 
 ### Friday
 __24.5.2019 9-17__  
@@ -75,7 +75,7 @@ __24.5.2019 9-17__
 | Time | Description |
 | --- | --- |
 | 09:00-10:00 | **Tommi Vatanen**: The gut microbiome structure and function in early life - lessons from cohort studies NB. Infocenter Korona, lecture hall 3)|
-| 10:30-12:00 | *Humann2 hands on cont* (__Tommi__)|
+| 10:30-12:00 | [Humann2 hands on cont'd](Day5#humann2) (__Tommi__)|
 |  |    **Lunch** |
 | __*Afternoon*__  | [Crashcourse into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data](R_for_overdispersed_data/) (__Katariina__)|
 | __*Afternoon*__ | Wrapping up (__all__) |
