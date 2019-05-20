@@ -73,13 +73,20 @@ humann2_pathways <- as.data.frame(read_tsv("pathways_norm.tsv"))
 Re-format the data frame from wide to long format
 -------------------------------------------------
 
+tidyverse is a really handy package for data wrangling and reformatting tables. This block is commented for what each line does. You can check the help page for each command by typing ? and the command's name for exaple ?rename for the next blocks of code
+
 ``` r
 humann2_pathways_long <- 
-  humann2_pathways %>%
-  rename(pathway = `# Pathway`) %>% #Rename  `# Pathway` as pathway
-  gather(sampleID, cpm, -pathway) %>% #Gather cmp by pathway and sampleID
-  separate(sampleID, "sampleID", sep = "_", extra = "drop") %>% #Separate by sampleID and drop any extra values without warning
-  separate(pathway, c("pathway", "organism"), sep = "\\|", fill = "right") #Separate pathways from organisms using |
+  # %>% is used to pipe the output to the next command
+  humann2_pathways %>% 
+  #Rename  `# Pathway` as pathway
+  rename(pathway = `# Pathway`) %>%
+  #Gather cmp by pathway and sampleID
+  gather(sampleID, cpm, -pathway) %>% 
+  #Separate by sampleID and drop any extra values without warning
+  separate(sampleID, "sampleID", sep = "_", extra = "drop") %>% 
+  #Separate pathways from organisms using |
+  separate(pathway, c("pathway", "organism"), sep = "\\|", fill = "right")
 ```
 
 Continue processing the humann2 output
