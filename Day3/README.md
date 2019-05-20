@@ -13,7 +13,7 @@ This tutorial describes a way to extract and curate population genomes from mill
 
 Here are a few definitions we came up with, so we can try to speak the same language today:
 
--**A microbial species**: Not clear definition as of today. 
+-**A microbial species**: Not clear definition as of today.
 
 -**A microbial population**: pool of microbial cells sharing most of their genomic content due to a very close evolutionary history (close ancestor in the tree of life).
 
@@ -64,7 +64,7 @@ In case someone is missing some of the steps, this command will allow you to dow
 
 ```
 wget https://www.dropbox.com/s/k8zc6br36yglqu6/anvio_data.zip?dl=0
-mv anvio_data.zip?dl=0 Anvio_Processed_Data 
+mv anvio_data.zip?dl=0 Anvio_Processed_Data
 mkdir Anvio_Processed_Data
 mv Anvio_Processed_Data Anvio_Processed_Data
 cd Anvio_Processed_Data
@@ -167,7 +167,7 @@ This is thanks to the program called `anvi-run-hmms`, which searched for single 
 
 Anvi'o has collections dedicated to bacteria, Archaea and Eukarya, and uses random forest to identify Domain bins belong to.
 
-Ok. You have ~10 minutes to identify what you consider are legit bins from the dataset. If you do it faster, feel free to get a coffee or help your friends. 
+Ok. You have ~10 minutes to identify what you consider are legit bins from the dataset. If you do it faster, feel free to get a coffee or help your friends.
 
 Please do not try just to replicate this, but here is Tom's binning example:
 
@@ -203,7 +203,7 @@ We might start with your `Bin_01`:
 anvi-refine -c MEGAHIT_2500nt_CONTIGS.db  -p SAMPLES-MERGED/PROFILE.db -C TOM_5_BINS -b Bin_01 --server-only -P 8080
 ```
 
-And see if some splits should be removed from the bin. If changes are made, simply save the new collection in the interface. 
+And see if some splits should be removed from the bin. If changes are made, simply save the new collection in the interface.
 
 
 If some of the bins remain with redundancy value >10%, please refine them again, and summarize once again (SUMMARY_BINNING-2 as anvi'o does not want to overwrite the folder SUMMARY_BINNING). The game is to have all bins with redundancy <10%.
