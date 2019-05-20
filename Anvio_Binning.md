@@ -169,6 +169,11 @@ Anvi'o has collections dedicated to bacteria, Archaea and Eukarya, and uses rand
 
 Ok. You have ~10 minutes to identify what you consider are legit bins from the dataset. If you do it faster, feel free to get a coffee or help your friends. 
 
+Please do not try just to replicate this, but here is Tom's binning example:
+
+![alt text](Figure/Interface-RAW.png "Interface-RAW.png")
+
+
 ## 07- Summary
 
 ```
