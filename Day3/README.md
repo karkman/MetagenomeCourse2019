@@ -68,9 +68,9 @@ The array job script:
 #SBATCH -J array_map
 #SBATCH -o array_map_out_%A_%a.txt
 #SBATCH -e array_map_err_%A_%a.txt
-#SBATCH -t 00:30:00
+#SBATCH -t 02:00:00
 #SBATCH --mem-per-cpu=1000
-#SBATCH --array=1-6
+#SBATCH --array=1-10
 #SBATCH -n 1
 #SBATCH --cpus-per-task=6
 #SBATCH -p serial
@@ -128,9 +128,9 @@ When the mapping is done for all samples and the contigs database is ready, we c
 #SBATCH -J array_profiling
 #SBATCH -o array_profiling_out_%A_%a.txt
 #SBATCH -e array_profiling_err_%A_%a.txt
-#SBATCH -t 00:30:00
+#SBATCH -t 01:00:00
 #SBATCH --mem-per-cpu=1000
-#SBATCH --array=1-6
+#SBATCH --array=1-10
 #SBATCH -n 1
 #SBATCH --cpus-per-task=6
 #SBATCH -p serial
