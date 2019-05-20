@@ -171,7 +171,7 @@ Ok. You have ~10 minutes to identify what you consider are legit bins from the d
 
 Please do not try just to replicate this, but here is Tom's binning example:
 
-![alt text](Figure/Interface-RAW.png "Interface-RAW.png")
+![alt text](Figure/Interface-Binning.png "Interface-Binning.png")
 
 
 ## 07- Summary
