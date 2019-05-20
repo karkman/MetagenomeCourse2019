@@ -274,12 +274,14 @@ cd $WRKDIR/Metagenomics2019/
 name=$(sed -n "$SLURM_ARRAY_TASK_ID"p sample_names.txt)
 
 # map fastq read pairs to Resfinder database and create bam files
-bowtie2 -x $WRKDIR/resfinder_db/ResFinder -1 trimmed_data/$name"_R1_trimmed.fastq" -2  trimmed_data/$name"_R2_trimmed.fastq" \
+bowtie2 -x $WRKDIR/resfinder_db/ResFinder -1 trimmed_data/$name"_R1_trimmed.fastq" \
+        -2 trimmed_data/$name"_R2_trimmed.fastq" \
         -D 20 -R 3 -N 1 -L 20 -i S,1,0.50 \
         --threads $SLURM_CPUS_PER_TASK | samtools view -Sb - > $name.bam
 
 # sort bam file and count reads which map in pairs and read pairs for which only one maps as one
-samtools view -h $name".bam" | awk '$7!="=" || ($7=="=" && and($2,0x40)) {print $0}' | samtools view -Su  - \
+samtools view -h $name".bam" | awk '$7!="=" || ($7=="=" && and($2,0x40)) {print $0}' \
+        | samtools view -Su  - \
         | samtools sort -o $name"_sort.bam"
 
 # index the bam file
