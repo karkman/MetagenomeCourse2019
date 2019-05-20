@@ -1,4 +1,4 @@
-# Metagenome analysis of infant gut metagenomes - part 5
+# Metagenome analysis of infant gut metagenomes - part 4
 
 ## MetaPhlAn2
 
@@ -46,7 +46,7 @@ hclust2.py -i infants_metaphlan_species.txt -o infants_heatmap_species.png --fto
             --max_slabel_len 100 --minv 0.1 --dpi 300
  ```
 
- ## GraPhlAn
+## GraPhlAn
 
  ```
 export2graphlan.py --skip_rows 1,2 -i infants_merged_table.txt --tree infants.tree.txt \
@@ -59,7 +59,6 @@ graphlan.py --dpi 300 infants.abundance.xml infants.abundance.png --external_leg
 ```
 
 ## HUMAnN2
-
 
 Join and normalize Humann2 outputs from Monday
 ```
