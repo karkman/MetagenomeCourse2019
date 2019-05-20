@@ -29,7 +29,7 @@ __20.5.2019 9-17__
 | Time | Description |
 | --- | --- |
 | __*Morning*__ | [Introduction](https://drive.google.com/file/d/1Fr63zkAQ8EiG7J37taBD0GMLRHaQzBu-/view?usp=sharing) (__Jenni__) |
-| __*Morning*__ | [Basic usage of computing services at CSC](http://link-to-presentation) (__Antti__) |
+| __*Morning*__ | [Basic usage of computing services at CSC](https://drive.google.com/open?id=13Afjk2lDxx4kh2Jdd_5jIGrNcPqflIGJ) (__Antti__) |
 | __*Morning*__ | [Installations for the course](MetagenomeInstallations.md) (__Antti__) |
 | __*Morning*__ |  [Quality control and trimming of data](Day1/README.md#QC-and-trimming) hands-on, [Slides](https://drive.google.com/file/d/1qA8xxK2nwSqZo2lV3BohKQA_RlHW7QBb/view?usp=sharing) (__Jenni__)|
 |  |    **Lunch** |
