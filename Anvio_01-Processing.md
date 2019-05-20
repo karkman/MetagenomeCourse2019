@@ -1,5 +1,5 @@
 # Prepping files for Anvio
-* Tom Delmont, Antti Karkman, Jenni Hultman*
+* Tom Delmont, Antti Karkman, Katariina Pärnänen and Jenni Hultman*
 
 Anvio is an analysis and visualization platform for omics data. You can read more from Anvio's [webpage](http://merenlab.org/software/anvio/).
 
