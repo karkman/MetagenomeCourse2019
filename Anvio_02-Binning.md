@@ -174,12 +174,12 @@ Please do not try just to replicate this, but here is Tom's binning example:
 ![alt text](Figure/Interface-Binning.png "Interface-Binning.png")
 
 
-## 07- Summary
+## 07- Summary binning output
 
 Now that we have binnned to data, and saved the binning collection, next step is to summarize the results using anvi-summarize command line:
 
 ```
-anvi-summarize -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C Bin_Name -o SUMMARY_BINNING
+anvi-summarize -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C Bin_Name -o SUMMARY_BINNING --init-gene-coverages
 ```
 
 (Note: replace "Bin_Name" with the name you elected to use)
