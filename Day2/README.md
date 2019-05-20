@@ -1,5 +1,8 @@
-# Metagenome analysis of infant gut metagenomes - part 3
 
+# Assembly quality statistics
+Let's take a look at the assembly file from yesterday. From the log file at `$WRKDIR/Metagenomics2019/co-assembly` you can check how the assembly went and from the last rows you can see some summary statistics of the assembly. However, for more detailed analysis we ran [MetaQUAST](http://bioinf.spbau.ru/metaquast) together with the assembly. Copy folder called "assembly_QC" to your computer. You can view the results (`report.html`) in your favorite browser.
+
+# Anvi'o
 
 Anvio is an analysis and visualization platform for omics data. You can read more from Anvio's [webpage](http://merenlab.org/software/anvio/).
 
