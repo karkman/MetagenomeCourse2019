@@ -120,7 +120,7 @@ Basically, **the interface allows you to manipulate various parameters**, zoom i
 
 Overwhelmed by the interface? Here is a brief explanation to help digest this new environment:
 
-![alt text](Figure/Interface-explanations.png "Interface-explanations.png")
+![alt text](/Figure/Interface-explanations.png "Interface-explanations.png")
 
 We hope that by the end of the day all of you will be familiar with the interface.
 
@@ -130,7 +130,7 @@ We hope that by the end of the day all of you will be familiar with the interfac
 
 Here is what you should see:
 
-![alt text](Figure/Interface-RAW.png "Interface-RAW.png")
+![alt text](/Figure/Interface-RAW.png "Interface-RAW.png")
 
 Here is the key part to remember: **the ten grey layers correspond to the mean coverage values in the ten metagenomes**. For each split, a black color means there is environmental signal. No black color means the split did not recruit any reads.
 
@@ -142,7 +142,7 @@ Nice.
 
 Let's play with the different contig clustering options:
 
-![alt text](Figure/Interface-Clustering-splits.png "Interface-Clustering-splits.png")
+![alt text](/Figure/Interface-Clustering-splits.png "Interface-Clustering-splits.png")
 
 It is important to understand what they are based on. This knowledge will be key for the manual binning, and curation of population genomes in downstream analyses.
 
@@ -171,7 +171,7 @@ Ok. You have ~10 minutes to identify what you consider are legit bins from the d
 
 Please do not try just to replicate this, but here is Tom's binning example:
 
-![alt text](Figure/Interface-Binning.png "Interface-Binning.png")
+![alt text](/Figure/Interface-Binning.png "Interface-Binning.png")
 
 
 ## 07- Summary binning output
@@ -188,7 +188,7 @@ This step create a folder called `SUMMARY_BINNING`. Please download this folder 
 
 Here is Tom's example:
 
-![alt text](Figure/Summary_Binning.png "Summary_Binning.png")
+![alt text](/Figure/Summary_Binning.png "Summary_Binning.png")
 
 
 Ok.
@@ -259,11 +259,11 @@ Tom got seven bacterial population genomes. What did you get?
 
 Here is the end product for Tom:
 
-![alt text](Figure/Summary_only_MAGs_FINAL.png "Summary_only_MAGs_FINAL.png")
+![alt text](/Figure/Summary_only_MAGs_FINAL.png "Summary_only_MAGs_FINAL.png")
 
 And this is the perspective of these MAGs in the interface:
 
-![alt text](Figure/Interface-Final-MAGs-tod.png "Interface-Final-MAGs-tod.png")
+![alt text](/Figure/Interface-Final-MAGs-tod.png "Interface-Final-MAGs-tod.png")
 
 We should discuss why contigs from each MAG are not next to each other. This is a key advantage of the manual binning, and explains well why automatic binning as it is developped today is noy working well (Tom's opinion, at least).
 
@@ -321,7 +321,7 @@ This [link](http://137.205.70.78/main/dataset/share/35a7c758dc609752e3870191c096
 
 With the type of data extracted from the metagenomes, it could be possible to perform nice "combo analyses". For instance, by combining taxonomy, phylogeny and functions like [in here](https://www.biorxiv.org/content/early/2017/04/23/129791):
 
-![alt text](Figure/Delmont_et_al_2017_HBDs.png "Delmont_et_al_2017_HBDs.png")
+![alt text](/Figure/Delmont_et_al_2017_HBDs.png "Delmont_et_al_2017_HBDs.png")
 
 We also provide tutorials for these specific topics:
 
