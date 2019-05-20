@@ -43,8 +43,8 @@ __21.5.2019 8-17__
 | Time | Description |
 | --- | --- |
 | __*Morning*__ | [Assembly statistics](Day2#assembly-quality-statistics) (__Jenni/Antti__)|
-| __*Morning*__ | [ARG annotation](Day2#antibiotic-resistance-gene-annotation---reads) (__Katariina__)
-| __*Morning*__ | [Getting files for Anvio](Day3#metagenome-analysis-of-infant-gut-metagenomes---part-3) (__Tom, Antti, Jenni__)|
+| __*Morning*__ | [ARG annotation](Day2a#antibiotic-resistance-gene-annotation---reads) (__Katariina__)
+| __*Morning*__ | [Getting files for Anvio](Day2b#metagenome-analysis-of-infant-gut-metagenomes---part-3) (__Tom, Antti, Jenni__)|
 |  |    **Lunch** |
 | __*Afternoon*__ | [Introduction to Anvio](http://link-to-presentation.com) (__Tom__)
 | __*Afternoon*__ | [Anvio hands-on](MetagenomePart4.md) (__Tom__)
