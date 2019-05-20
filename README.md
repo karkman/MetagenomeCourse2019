@@ -42,8 +42,8 @@ __21.5.2019 8-17__
 
 | Time | Description |
 | --- | --- |
-| __*Morning*__ | [Assembly statistics](Day2#assembly-quality-statistics) (__Jenni/Antti__)|
-| __*Morning*__ | [Getting files for Anvio](Day2#Anvi'o) (__Tom, Antti, Jenni__)|
+| __*Morning*__ | [Assembly statistics](Day2/README.md#assembly-quality-statistics) (__Jenni/Antti__)|
+| __*Morning*__ | [Getting files for Anvio](Day2/README.md#anvio) (__Tom, Antti, Jenni__)|
 |  |    **Lunch** |
 | __*Afternoon*__ | [Introduction to Anvio](http://link-to-presentation.com) (__Tom__)
 | __*Afternoon*__ | [Anvio hands-on](Day3/README.md) (__Tom__)
