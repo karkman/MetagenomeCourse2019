@@ -126,7 +126,7 @@ We hope that by the end of the day all of you will be familiar with the interfac
 
 ## 04- A first look at the display
 
-**Clicking on the "Draw" button will show the raw display**. The display describes 13,010 contigs organized into 13,266 splits of 40 kbp or less, along with their mean coverage values across the six metagenomes and other relevant metadata (GC-content and taxonomy of splits especially).
+**Clicking on the "Draw" button will show the raw display**. The display describes contigs organized into 11,577 splits of 40 kbp or less, along with their mean coverage values across the six metagenomes and other relevant metadata (GC-content and taxonomy of splits especially).
 
 Here is what you should see:
 
@@ -160,68 +160,16 @@ We are going to zoom in and out, and use the mouse to make selections of split c
 
 The game is to find as many bins with high completion value, and low redundancy value.
 
-To save some time, we will focus on a subset of the data (Tom has done the entire binning and found out that other parts did not allow the recovery of population genomes. That being said, anyone is welcome to perform the entire binning another day!).
-
-Please close the windows of the interface, and kill the job in the terminal using `control + c`.
-
-We offer two ways to aquire Tom's binning collection:
-
-1- **From Github**: Please (1) download the collection called `collection-TOM_5_BINS.txt` from the Github (https://github.com/INNUENDOCON/MicrobialGenomeMetagenomeCourse/tree/master/ANVIO_COLLECTIONS) and upload it in your working environment (reminder: this is the path where you have the CONTIGS.db `$WRKDIR/BioInfo_course/Anvio`)
-
-2- **Using wget with a dropbox link**: please run from your working environment:
-
-```
-wget https://www.dropbox.com/s/9fc5lsj3vk1ds2v/collection-TOM_5_BINS.txt?dl=0
-mv collection-TOM_5_BINS.txt?dl=0 collection-TOM_5_BINS.txt
-```
-
-to create the file `collection-TOM_5_BINS.txt`.
-
-Either way (Github vs wget), you can then import this information into the PROFILE.db (program is called `anvi-import-collection`), and visualize it in the interface:
-
-```
-anvi-import-collection -c MEGAHIT_2500nt_CONTIGS.db  -p SAMPLES-MERGED/PROFILE.db -C TOM_5_BINS collection-TOM_5_BINS.txt
-```
-
-Then please invoke the interface once again:
-
-```
-anvi-interactive -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --server-only -P 8080
-```
-
-And go to the "Bins" section of the interface to load the bin collection called `TOM_5_BINS`. You should then see this after drawing the figure:
-
-![alt text](Figure/Interface-first-binning-step.png "Interface-first-binning-step.png")
-
->Note: Feel free to take a look at the `collection-TOM_5_BINS.txt` file to understand what it is (e.g., using `head collection-TOM_5_BINS.txt -n 10`). It simply links splits to Bins. Easy.
-
-Ok.
-
-These five bins exhibit different sizes and completion/redundancy values. For instance, the `Bin_01` has a length of 8.69 Mpb with a completion of 100% and a redundancy of 171.9%. This bin is mostly detected in the sample `L4`, and slightly detected in the sample `L3`.
-
-Wait, how do we assess the completion and redundancy values again?
+Bins will exhibit different sizes and completion/redundancy values, but how do we assess the completion and redundancy values again?
 Good question folks.
 
 This is thanks to the program called `anvi-run-hmms`, which searched for single copy core genes that should occur once in each microbial genome. Let's say there are 100 of these genes. If all of them are detected once in the selected cluster (i.e., the bin), then the completion is 100% and the redundancy is 0%. If a few genes are detected multiple times, the redundancy value will increase. If a few genes are missing, then it is the completion value that will drop.
 
-Ok.
+Anvi'o has collections dedicated to bacteria, Archaea and Eukarya, and uses random forest to identify Domain bins belong to.
 
-Now, let's refine each one of them using the program `anvi-refine` (this is the second way to invoke the interface; it is mostly used to work on a single bin within a collection).
+Ok. You have ~10 minutes to identify what you consider are legit bins from the dataset. If you do it faster, feel free to get a coffee or help your friends. 
 
-We shall start with the `Bin_01`:
-
-```
-anvi-refine -c MEGAHIT_2500nt_CONTIGS.db  -p SAMPLES-MERGED/PROFILE.db -C TOM_5_BINS -b Bin_01 --server-only -P 8080
-```
-
-Which should load this figure:
-
-
-![alt text](Figure/Interface-refining-Bin_01.png "Interface-refining-Bin_01.png")
-
-It is actually a good example. Let's refine it together.
-
-When done, we will do the same for the bins 02, 03, 04 and 05, and finally summarize our results:
+## 07- Summary
 
 ```
 anvi-summarize -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C TOM_5_BINS -o SUMMARY_BINNING
@@ -230,6 +178,19 @@ anvi-summarize -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C TOM_
 This step create a folder called `SUMMARY_BINNING`. Please download this folder into your laptop using `scp`, open it and double click on the file called `index.html`. This should open a windows in your browser.
 
 Ok.
+
+## 08- manual curation of bins (improve quality)
+
+Now, let's refine some of the bins using the program `anvi-refine` (this is the second way to invoke the interface; it is mostly used to work on a single bin within a collection).
+
+We might start with your `Bin_01`:
+
+```
+anvi-refine -c MEGAHIT_2500nt_CONTIGS.db  -p SAMPLES-MERGED/PROFILE.db -C TOM_5_BINS -b Bin_01 --server-only -P 8080
+```
+
+And see if some splits should be removed from the bin. If changes are made, simply save the new collection in the interface. 
+
 
 If some of the bins remain with redundancy value >10%, please refine them again, and summarize once again (SUMMARY_BINNING-2 as anvi'o does not want to overwrite the folder SUMMARY_BINNING). The game is to have all bins with redundancy <10%.
 
