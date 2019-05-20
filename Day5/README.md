@@ -1,76 +1,88 @@
-# Metagenome analysis of infant gut metagenomes - part 5
 
-## MetaPhlAn2
+# prepare environment
+module load bioconda/3
+source activate humann2_env
 
-We will use only R1 reads for the following analyses.
+# See how humann2_join_tables works
+humann2_join_tables -h
 
-```
-#!/bin/bash -l
-#SBATCH -J metaphlan2
-#SBATCH -o metaphlan2_out_%A_%a.txt
-#SBATCH -e metaphlan2_err_%A_%a.txt
-#SBATCH -t 2:00:00
-#SBATCH --mem=10000
-#SBATCH --array=1-10
-#SBATCH -n 1
-#SBATCH --nodes=1
-#SBATCH --cpus-per-task=6
-#SBATCH -p serial
+# combine gene family profiles
+humann2_join_tables -i . \
+  --file_name genefamilies.tsv \
+  -o genefamilies.tsv
 
-module load biokit
-cd /wrk/antkark/Metagenomics2019/Metaphlan2
-name=$(sed -n "$SLURM_ARRAY_TASK_ID"p ../sample_names.txt)
-metaphlan2.py ../trimmed_data/$name"_R1_trimmed.fastq" \
-              --input_type fastq --nproc  $SLURM_CPUS_PER_TASK \
-              --mpa_pkl /appl/bio/metaphlan/db_v20/mpa_v20_m200.pkl \
-              --bowtie2db /appl/bio/metaphlan/db_v20/mpa_v20_m200 \
-              --bowtie2out $name".bowtie2.bz2" \
-              -o $name"_metaphlan.txt"
-```
-Merge the metaphlan2 outputs
+# look at gene family table
+less -S genefamilies.tsv
+# - value are RPKs
+# - first line measures unmapped reads
+# - each gene family is stratified to contributing organisms
 
-```
-module load biokit
-merge_metaphlan_tables.py *_metaphlan.txt > infants_merged_table.txt
-module purge
-```
+# Generate a table with no stratifications
+# (for any analysis where you want to look at gene family abundances but don't care contributing organisms)
+# Note the difference in file size; for large data sets this makes a big difference
+grep -v "|" genefamilies.tsv > genefamilies_nostratification.tsv
 
-Make a heatmap from species level results.
-```
-source activate metaphlan_plot_env
-grep -E "(s__)|(^ID)" infants_merged_table.txt | grep -v "t__" | sed 's/^.*s__//g' > infants_metaphlan_species.txt
+# Add gene family names
+humann2_rename_table -h
+humann2_rename_table -i genefamilies_nostratification.tsv \
+  -n uniref90 \
+  -s \
+  -o genefamilies_nostratification_names.tsv
 
-hclust2.py -i infants_metaphlan_species.txt -o infants_heatmap_species.png --ftop 25 \
-            --f_dist_f braycurtis --s_dist_f braycurtis --cell_aspect_ratio 0.5 \
-            -l --flabel_size 6 --slabel_size 6 --max_flabel_len 100 \
-            --max_slabel_len 100 --minv 0.1 --dpi 300
- ```
+# Inspect
+less -S genefamilies_nostratification_names.tsv
 
- ## GraPhlAn
+# Generate new "grouping": MetaCyc enzymes
+# (examples without the stratifications work speed; similar commands work for files with stratifications)
+humann2_regroup_table -h
+humann2_regroup_table -i genefamilies_nostratification.tsv \
+  -g uniref90_level4ec \
+  -o level4ec.tsv
 
- ```
-export2graphlan.py --skip_rows 1,2 -i infants_merged_table.txt --tree infants.tree.txt \
-                    --annotation infants.annot.txt --most_abundant 100 \
-                     --abundance_threshold 1 --least_biomarkers 10 --annotations 5,6 \
-                     --external_annotations 7 --min_clade_size 1
+# Add names
+humann2_rename_table -i level4ec.tsv \
+  -n ec \
+  -s \
+  -o level4ec_names.tsv
 
-graphlan_annotate.py --annot infants.annot.txt infants.tree.txt infants.abundance.xml
-graphlan.py --dpi 300 infants.abundance.xml infants.abundance.png --external_legends
-```
+# Normalize to "counts per million" (CPM)
+humann2_renorm_table -h
+humann2_renorm_table -i level4ec_names.tsv \
+  -p \
+  -o level4ec_names_norm.tsv
 
-## HUMAnN2
+less -S level4ec_names_norm.tsv
 
+# <SAMPLE_ID>_pathabundance.tsv output files quantify MetaCyc pathway abundances
+# Combine profiles in one table and normalize
+# (this time with the organisms level stratifications)
+humann2_join_tables -i . \
+  --file_name pathabundance.tsv \
+  -o pathways.tsv
 
-Join and normalize Humann2 outputs from Monday
-```
-cd Humann2
-humann2_join_tables -i ./ -o infant_genefamilies.tsv --file_name genefamilies
-humann2_renorm_table -i infant_genefamilies.tsv -o infant_genefamilies_cpm.tsv --units cpm
-```
+humann2_renorm_table -i pathways.tsv \
+  -p \
+  -o pathways_norm.tsv
 
+# Analyse pathway table in R (in separate .R file)
 
-## Optional
+# .. visualize pathway identified in R analysis
+humann2_barplot -h
 
-### StrainPhlAn
-Follow the instructions for [StrainPhlAn](https://bitbucket.org/biobakery/biobakery/wiki/metaphlan2#rst-header-create-a-strain-level-marker-based-heatmap-panphlan)
-You need to decide the strain based on the MetaPhlAn2 results.
+humann2_barplot -i pathways_norm.tsv \
+  -f PWY0-162 \
+  -s usimilarity \
+  -o PWY0-162.pdf \
+  -a pseudolog \
+
+# Different normalization and more species for the second one
+humann2_barplot -i pathways_norm.tsv \
+  -f PWY-7219 \
+  -s usimilarity \
+  -o PWY-7219.pdf \
+  -a normalize \
+  -t 15
+
+# Extra assignment if you have time:
+# Generate combined table of MetaCyc pathways
+# and visualize pathways with high and low contributional diversities (one each).
