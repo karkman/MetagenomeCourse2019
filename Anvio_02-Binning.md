@@ -1,26 +1,19 @@
 ---
 title: "A tutorial on genome-resolved metagenomics"
 excerpt: "Extracting population genomes from millions of short metagenomic reads"
-tags: [anvi'o, binning, it always snows in Helsinki, snow is nice through]
+tags: [anvi'o, binning, infant gut]
 ---
-#  Metagenome analysis of infant gut metagenomes - part 4
+#  Metagenome analysis of 10 infant gut metagenomes
+
 ## Genome-resolved metagenomics
 
 * Tom Delmont, Antti Karkman, Jenni Hultman *
 
 This tutorial describes a way to extract and curate population genomes from millions of short metagenomic reads using a methodology called "genome-resolved metagenomics", or simply "binning".
 
-This approach has led to major discoveries in the fields of evolutionary biology and microbial ecology. Here are two examples of what can be learned from the newly discovered genomes (topology of the tree of life on the left, nexus between phylogeny and nitrogen fixation in the surface of the oceans on the right):
-
-![alt text](Figure/FIGURE_GENOME_RESOLVED_METAG.png "Genome-resolved metagenomics")
-
-And here is a world cloud of this tutorial, so you can see what we will speak about in a single look:
-
-![alt text](Figure/World_Cloud.png "World cloud")
-
 Here are a few definitions we came up with, so we can try to speak the same language today:
 
--**A microbial species**: Is this a real thing?
+-**A microbial species**: Not clear definition as of today. 
 
 -**A microbial population**: pool of microbial cells sharing most of their genomic content due to a very close evolutionary history (close ancestor in the tree of life).
 
@@ -31,8 +24,6 @@ Here are a few definitions we came up with, so we can try to speak the same lang
 -**A population genome**: consensus genomic content of a microbial population acquired using a metagenomic assembly.
 
 -**Metagenomic binning**: the act of clustering contigs from a metagenomic assembly into "bins". Note that not all bins represent population genomes (e.g., phages, plasmids, and all the things we have very little clue about).
-
--**The platform anvi'o**: this place where microbiologists can finally feel they are bioinformatics superheros!
 
 -**A CONTIGS.db**: anvi'o database storing various information regarding the metagenomic assembly output (the FASTA file)
 
@@ -62,28 +53,23 @@ Ok.
 
 As you may remember, we have already done all of this:
 
-- [x] Co-assembling six metagenomes corresponding to the gut of two species
+- [x] Co-assembly of ten infant gut metagenomes with MEGAHIT sotfware
 - [x] Creating a CONTIGS database to make sense of the assembly output (find genes, get GC-content and tetra-nucleotide frequency of contigs)
-- [x] Searching for single copy-core genes, and running COGs for functions / CARD for antibiotic resistance genes
+- [x] Searching for single copy-core genes corresponding to Bacteria, Archaea and Eukarya
 - [x] Exporting genes stored in the CONTIGS database, determining their taxonomy and importing the results into the CONTIGS database
-- [x] Recruiting short reads from each metagenome using the co-assembly output
-- [x] Creating PROFILE databases from the recruited reads, and merging them into a single PROFILE database
-- [x] beat Sweden in Sweden for the
+- [x] Recruiting short reads from each metagenome using the co-assembly output and Bowtie2 software
+- [x] Creating PROFILE databases from the recruited reads (n=10), and merging them into a single PROFILE database (n=1)
 
 In case someone is missing some of the steps, this command will allow you to download the entire directory of anvi'o files for this project (this is a back-up for the workshop, but also a good starting point for someone that just wants to practice binning with anvi'o):
 
 ```
-wget https://www.dropbox.com/s/xusxf63iykiewbs/00_MEGAHIT-Binning-v3.zip?dl=0
-mv 00_MEGAHIT-Binning-v3.zip?dl=0 00_MEGAHIT-Binning-v3.zip
-unzip 00_MEGAHIT-Binning-v3.zip
+wget https://www.dropbox.com/s/k8zc6br36yglqu6/anvio_data.zip?dl=0
+mv anvio_data.zip?dl=0 Anvio_Processed_Data 
+mkdir Anvio_Processed_Data
+mv Anvio_Processed_Data Anvio_Processed_Data
+cd Anvio_Processed_Data
+unzip Anvio_Processed_Data.zip
 ```
-
-Well, I think that's it, right? **Now it is time for the fun part of visualizing and manipulating raw genome-resolved metagenomic results using the anvi'o interactive interface**.
-
-Ha, a last thing: Tom would like to congragulate you for beating Sweden in Sweden during the 1995 Men's World Ice Hockey Championships. Well done Finland!
-
-![alt text](Figure/Finland.png "Finland")
-
 
 ## 02- Describing the interface
 
@@ -140,13 +126,13 @@ We hope that by the end of the day all of you will be familiar with the interfac
 
 ## 04- A first look at the display
 
-**Clicking on the "Draw" button will show the raw display**. The display describes 13,010 contigs organized into 13,266 splits of 40 kbp or less, along with their mean coverage values across the six metagenomes and other relevant metadata (GC-content and taxonomy of splits especially).
+**Clicking on the "Draw" button will show the raw display**. The display describes contigs organized into 11,577 splits of 40 kbp or less, along with their mean coverage values across the six metagenomes and other relevant metadata (GC-content and taxonomy of splits especially).
 
 Here is what you should see:
 
 ![alt text](Figure/Interface-RAW.png "Interface-RAW.png")
 
-Here is the key part to remember: **the six grey layers correspond to the mean coverage values in the six metagenomes**. For each split, a black color means there is environmental signal. No black color means the split did not recruit any reads.
+Here is the key part to remember: **the ten grey layers correspond to the mean coverage values in the ten metagenomes**. For each split, a black color means there is environmental signal. No black color means the split did not recruit any reads.
 
 In addition to the main display, there is a second layer of information describing high-resolution coverage values of contigs across metagenomes. To see it, please put your mouse on a split in the display, and right click to select the `inspection` mode, which should open a new window. Let's do it for a few splits, and discuss the observations.
 
@@ -174,76 +160,51 @@ We are going to zoom in and out, and use the mouse to make selections of split c
 
 The game is to find as many bins with high completion value, and low redundancy value.
 
-To save some time, we will focus on a subset of the data (Tom has done the entire binning and found out that other parts did not allow the recovery of population genomes. That being said, anyone is welcome to perform the entire binning another day!).
-
-Please close the windows of the interface, and kill the job in the terminal using `control + c`.
-
-We offer two ways to aquire Tom's binning collection:
-
-1- **From Github**: Please (1) download the collection called `collection-TOM_5_BINS.txt` from the Github (https://github.com/INNUENDOCON/MicrobialGenomeMetagenomeCourse/tree/master/ANVIO_COLLECTIONS) and upload it in your working environment (reminder: this is the path where you have the CONTIGS.db `$WRKDIR/BioInfo_course/Anvio`)
-
-2- **Using wget with a dropbox link**: please run from your working environment:
-
-```
-wget https://www.dropbox.com/s/9fc5lsj3vk1ds2v/collection-TOM_5_BINS.txt?dl=0
-mv collection-TOM_5_BINS.txt?dl=0 collection-TOM_5_BINS.txt
-```
-
-to create the file `collection-TOM_5_BINS.txt`.
-
-Either way (Github vs wget), you can then import this information into the PROFILE.db (program is called `anvi-import-collection`), and visualize it in the interface:
-
-```
-anvi-import-collection -c MEGAHIT_2500nt_CONTIGS.db  -p SAMPLES-MERGED/PROFILE.db -C TOM_5_BINS collection-TOM_5_BINS.txt
-```
-
-Then please invoke the interface once again:
-
-```
-anvi-interactive -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --server-only -P 8080
-```
-
-And go to the "Bins" section of the interface to load the bin collection called `TOM_5_BINS`. You should then see this after drawing the figure:
-
-![alt text](Figure/Interface-first-binning-step.png "Interface-first-binning-step.png")
-
->Note: Feel free to take a look at the `collection-TOM_5_BINS.txt` file to understand what it is (e.g., using `head collection-TOM_5_BINS.txt -n 10`). It simply links splits to Bins. Easy.
-
-Ok.
-
-These five bins exhibit different sizes and completion/redundancy values. For instance, the `Bin_01` has a length of 8.69 Mpb with a completion of 100% and a redundancy of 171.9%. This bin is mostly detected in the sample `L4`, and slightly detected in the sample `L3`.
-
-Wait, how do we assess the completion and redundancy values again?
+Bins will exhibit different sizes and completion/redundancy values, but how do we assess the completion and redundancy values again?
 Good question folks.
 
 This is thanks to the program called `anvi-run-hmms`, which searched for single copy core genes that should occur once in each microbial genome. Let's say there are 100 of these genes. If all of them are detected once in the selected cluster (i.e., the bin), then the completion is 100% and the redundancy is 0%. If a few genes are detected multiple times, the redundancy value will increase. If a few genes are missing, then it is the completion value that will drop.
 
+Anvi'o has collections dedicated to bacteria, Archaea and Eukarya, and uses random forest to identify Domain bins belong to.
+
+Ok. You have ~10 minutes to identify what you consider are legit bins from the dataset. If you do it faster, feel free to get a coffee or help your friends. 
+
+Please do not try just to replicate this, but here is Tom's binning example:
+
+![alt text](Figure/Interface-Binning.png "Interface-Binning.png")
+
+
+## 07- Summary binning output
+
+Now that we have binnned to data, and saved the binning collection, next step is to summarize the results using anvi-summarize command line:
+
+```
+anvi-summarize -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C Bin_Name -o SUMMARY_BINNING --init-gene-coverages
+```
+
+(Note: replace "Bin_Name" with the name you elected to use)
+
+This step create a folder called `SUMMARY_BINNING`. Please download this folder into your laptop using `scp`, open it and double click on the file called `index.html`. This should open a windows in your browser.
+
+Here is Tom's example:
+
+![alt text](Figure/Summary_Binning.png "Summary_Binning.png")
+
+
 Ok.
 
-Now, let's refine each one of them using the program `anvi-refine` (this is the second way to invoke the interface; it is mostly used to work on a single bin within a collection).
+## 08- Manual curation of bins (improve quality)
 
-We shall start with the `Bin_01`:
+Now, let's refine some of the bins using the program `anvi-refine` (this is the second way to invoke the interface; it is mostly used to work on a single bin within a collection).
+
+We might start with your `Bin_01`:
 
 ```
 anvi-refine -c MEGAHIT_2500nt_CONTIGS.db  -p SAMPLES-MERGED/PROFILE.db -C TOM_5_BINS -b Bin_01 --server-only -P 8080
 ```
 
-Which should load this figure:
+And see if some splits should be removed from the bin. If changes are made, simply save the new collection in the interface. 
 
-
-![alt text](Figure/Interface-refining-Bin_01.png "Interface-refining-Bin_01.png")
-
-It is actually a good example. Let's refine it together.
-
-When done, we will do the same for the bins 02, 03, 04 and 05, and finally summarize our results:
-
-```
-anvi-summarize -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C TOM_5_BINS -o SUMMARY_BINNING
-```
-
-This step create a folder called `SUMMARY_BINNING`. Please download this folder into your laptop using `scp`, open it and double click on the file called `index.html`. This should open a windows in your browser.
-
-Ok.
 
 If some of the bins remain with redundancy value >10%, please refine them again, and summarize once again (SUMMARY_BINNING-2 as anvi'o does not want to overwrite the folder SUMMARY_BINNING). The game is to have all bins with redundancy <10%.
 
@@ -256,7 +217,7 @@ Cool.
 Create a new collection where bins are nicely renamed, and MAGs identified (MAG = metagenome-assembled genome = population genome)
 
 ```
-anvi-rename-bins -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --collection-to-read TOM_5_BINS --collection-to-write MAGs --call-MAGs --prefix MEGAHIT --use-highest-completion-score --report-file REPORT
+anvi-rename-bins -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --collection-to-read TOM_5_BINS --collection-to-write MAGs --call-MAGs --prefix MEGAHIT --use-highest-completion-score --report-file REPORT
 ```
 
 Bins >2 Mbp and those with a completion >70% will be renamed as MAGs (i.e., as population genomes).
@@ -266,7 +227,7 @@ Bins >2 Mbp and those with a completion >70% will be renamed as MAGs (i.e., as p
 And summarize the collection:
 
 ```
-anvi-summarize -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs -o SUMMARY_MAGs
+anvi-summarize -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs -o SUMMARY_MAGs
 ```
 
 So, how many MAGs did you get???
@@ -277,7 +238,7 @@ So, how many MAGs did you get???
 Now is the time for some genomic curation. This step is boring, but critical: we need to manually curate each one of the MAGs using the `anvi-refine` command line:
 
 ```
-anvi-refine -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs -b MEGAHIT_MAG_000001  --server-only -P 8080
+anvi-refine -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs -b MEGAHIT_MAG_000001  --server-only -P 8080
 ```
 
 and so one for all MAGs. After that, we will create a final collection called `MAGs_FINAL`:
@@ -289,7 +250,7 @@ anvi-rename-bins -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --col
 and summarize the final, curated collection:
 
 ```
-anvi-summarize -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs_FINAL -o SUMMARY_MAGs_FINAL
+anvi-summarize -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db -C MAGs_FINAL -o SUMMARY_MAGs_FINAL
 ```
 
 We are done with the binning and the curation of this metagenomic co-assembly output!
