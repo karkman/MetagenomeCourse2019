@@ -58,18 +58,8 @@ graphlan_annotate.py --annot infants.annot.txt infants.tree.txt infants.abundanc
 graphlan.py --dpi 300 infants.abundance.xml infants.abundance.png --external_legends
 ```
 
-## HUMAnN2
-
-Join and normalize Humann2 outputs from Monday
-```
-cd Humann2
-humann2_join_tables -i ./ -o infant_genefamilies.tsv --file_name genefamilies
-humann2_renorm_table -i infant_genefamilies.tsv -o infant_genefamilies_cpm.tsv --units cpm
-```
-
-
 ## Optional
 
 ### StrainPhlAn
-Follow the instructions for [StrainPhlAn](https://bitbucket.org/biobakery/biobakery/wiki/metaphlan2#rst-header-create-a-strain-level-marker-based-heatmap-panphlan)
+Follow the instructions for [StrainPhlAn.](https://bitbucket.org/biobakery/biobakery/wiki/metaphlan2#rst-header-create-a-strain-level-marker-based-heatmap-panphlan)  
 You need to decide the strain based on the MetaPhlAn2 results.
