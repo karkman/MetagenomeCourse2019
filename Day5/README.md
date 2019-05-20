@@ -71,9 +71,9 @@ humann2_renorm_table -i level4ec_names.tsv \
 
 less -S level4ec_names_norm.tsv
 ```
-SAMPLE_ID_pathabundance.tsv output files quantify MetaCyc pathway abundances  
-Combine profiles in one table and normalize  
-(this time with the organisms level stratifications)
+`<SAMPLE_ID>_pathabundance.tsv` output files quantify MetaCyc pathway abundances  
+Combine profiles in one table and normalize
+(this time with the organisms level stratifications).
 
 ```
 humann2_join_tables -i . \
@@ -85,7 +85,7 @@ humann2_renorm_table -i pathways.tsv \
   -o pathways_norm.tsv
 ```
 
-Analyse pathway table in R (in separate .R file)
+Analyse pathway table in R (instruction in [here](/R_for_Humann2/README.md))
 
 .. visualize pathway identified in R analysis
 
