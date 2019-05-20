@@ -28,10 +28,10 @@ __20.5.2019 9-17__
 
 | Time | Description |
 | --- | --- |
-| __*Morning*__ | [Introduction](http://link-to-presentation.com) (__Jenni__) |
+| __*Morning*__ | [Introduction](https://drive.google.com/file/d/1Fr63zkAQ8EiG7J37taBD0GMLRHaQzBu-/view?usp=sharing) (__Jenni__) |
 | __*Morning*__ | [Basic usage of computing services at CSC](http://link-to-presentation) (__Antti__) |
 | __*Morning*__ | [Installations for the course](MetagenomeInstallations.md) (__Antti__) |
-| __*Morning*__ |  [Quality control and trimming of data](Day1/README.md#QC-and-trimming) hands-on, [Slides](link) (__Jenni__)|
+| __*Morning*__ |  [Quality control and trimming of data](Day1/README.md#QC-and-trimming) hands-on, [Slides](https://drive.google.com/file/d/1qA8xxK2nwSqZo2lV3BohKQA_RlHW7QBb/view?usp=sharing) (__Jenni__)|
 |  |    **Lunch** |
 | __*Afternoon*__ | [Assembly](Day1/README.md#Assembly) hands-on, [Slides](link)(__Jenni__) |
 | __*Afternoon*__ | [Read based annotation](https://github.com/karkman/MetagenomeCourse2019/tree/master/Day1#humann2) (__Katariina__) |
