@@ -72,7 +72,8 @@ humann2_renorm_table -i level4ec_names.tsv \
 less -S level4ec_names_norm.tsv
 ```
 SAMPLE_ID_pathabundance.tsv output files quantify MetaCyc pathway abundances  
-Combine profiles in one table and normalize (this time with the organisms level stratifications)
+Combine profiles in one table and normalize  
+(this time with the organisms level stratifications)
 
 ```
 humann2_join_tables -i . \
