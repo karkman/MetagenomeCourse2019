@@ -63,10 +63,10 @@ As you may remember, we have already done all of this:
 In case someone is missing some of the steps, this command will allow you to download the entire directory of anvi'o files for this project (this is a back-up for the workshop, but also a good starting point for someone that just wants to practice binning with anvi'o):
 
 ```
-wget https://www.dropbox.com/s/k8zc6br36yglqu6/anvio_data.zip?dl=0
-mv anvio_data.zip?dl=0 Anvio_Processed_Data
+wget https://www.dropbox.com/sh/62yzaohdn0qb9yk/AAAWD4GgM8cFCd06CE5meSHra?dl=0
+mv AAAWD4GgM8cFCd06CE5meSHra?dl=0 Anvio_Processed_Data.zip
 mkdir Anvio_Processed_Data
-mv Anvio_Processed_Data Anvio_Processed_Data
+mv Anvio_Processed_Data.zip Anvio_Processed_Data
 cd Anvio_Processed_Data
 unzip Anvio_Processed_Data.zip
 ```
