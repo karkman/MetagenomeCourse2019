@@ -88,7 +88,7 @@ ssh -L XXXX:localhost:XXXX YOUR_USERNAME@taito.csc.fi
 ```
 # load bioconda and activate Anvi'o environment
 module load bioconda/3
-source activate anvio3
+source activate anvio5
 ```
 
 in Windows with Putty:
