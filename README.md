@@ -9,8 +9,9 @@
     - [Friday](#Friday)
 3. [Target group](#target-group)
 4. [Learning outcomes](#learning-outcomes)
-5. [Internet connection](#internet-connection)
-6. [Organizers and teachers](#Organizers-and-teachers)
+5. [Installations](#installations)
+6. [Internet connection](#internet-connection)
+7. [Organizers and teachers](#Organizers-and-teachers)
 
 
 ## General introduction
@@ -85,6 +86,9 @@ This course is targeted at PhD and MSc students who are interested in performing
 
 ## Learning outcomes
 QA/QC of the raw sequence data, cleaning and assembly; Gene-by-gene annotation; Visualization of data; Taxonomic classification; Functional assignment, Analyses of microbial community composition; Comparative metagenomics; MAG (MetagenomeAssembledGenome) analysis; Statistical methods for metagenome data analysis.
+
+## Installations
+[Installation instructions](MetagenomeInstallations.md)
 
 ## Internet connection
 Inside the class room you can find both __eduroam__ and Univ. Helsinki __HUPnet__. Instructions on how to connect in [HelpDesk website.](https://helpdesk.it.helsinki.fi/en/instructions/logging-and-connections/networks/wireless-connections-university)
