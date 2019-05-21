@@ -162,7 +162,7 @@ anvi-get-sequences-for-gene-calls -o gene-calls.fa -c MEGAHIT_co-assembly_2500nt
 ## Run centrifuge
 _Centrifuge: rapid and sensitive classification of metagenomic sequences._ Read more from [here](http://biorxiv.org/content/early/2016/05/25/054965).
 
-Remember to set the environmental variable pointing to the centrifuge folder as shown in [MetagenomeInstallations](MetagenomeInstallations.md).
+Remember to set the environmental variable pointing to the centrifuge folder as shown in [MetagenomeInstallations](/MetagenomeInstallations.md).
 
 ```
 centrifuge -f -p 6 -x $CENTRIFUGE_BASE/p+h+v gene-calls.fa -S centrifuge_hits.tsv
