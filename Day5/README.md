@@ -4,6 +4,8 @@ Prepare environment and go to the humann2 output folder
 module load bioconda/3
 source activate humann2_env
 cd $WRKDIR/Metagenomics2019/Humann2
+mkdir $WRKDIR/humann2_db
+humann2_databases --download utility_mapping full $WRKDIR/humann2_db
 ```
 See how humann2_join_tables works
 ```
