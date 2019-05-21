@@ -114,7 +114,7 @@ Contigs database (contigs.db) contains information on contig length, open readin
 ```
 anvi-gen-contigs-database -f MEGAHIT_co-assembly_2500nt.fa -o MEGAHIT_co-assembly_2500nt_CONTIGS.db -n MEGAHIT_co-assembly
 ```
-## Run HMMs to identify single copy core genes for Bacteria and Archaea, plus rRNAs
+## Run HMMs to identify single copy core genes for Bacteria, Archaea and Eukarya, plus rRNAs
 ```
 anvi-run-hmms -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -T 6
 ```
@@ -153,7 +153,7 @@ anvi-profile -c ../ANVIO/MEGAHIT_co-assembly_2500nt_CONTIGS.db  -M 2500 -T $SLUR
 Submit the job with `sbatch` as previously.  
 
 ## Export GENES
-With this command we export the genecalls from Prodigal to gene-calls.fa and do taxonomic annotation against centrifuge database you installed on Wednesday
+With this command we export the genecalls from Prodigal to gene-calls.fa and do taxonomic annotation against centrifuge database you installed on Monday
 
 ```
 anvi-get-sequences-for-gene-calls -o gene-calls.fa -c MEGAHIT_co-assembly_2500nt_CONTIGS.db
