@@ -153,7 +153,7 @@ anvi-profile -c ../ANVIO/MEGAHIT_co-assembly_2500nt_CONTIGS.db  -M 2500 -T $SLUR
 Submit the job with `sbatch` as previously.  
 
 ## Export GENES
-With this command we export the genecalls from Prodigal to gene-calls.fa and do taxonomic annotation against centrifuge database you installed on Wednesday
+With this command we export the genecalls from Prodigal to gene-calls.fa and do taxonomic annotation against centrifuge database you installed on Monday
 
 ```
 anvi-get-sequences-for-gene-calls -o gene-calls.fa -c MEGAHIT_co-assembly_2500nt_CONTIGS.db
