@@ -59,7 +59,7 @@ conda create -n humann2_env humann2
 conda create -n metaphlan_plot_env -c bioconda hclust2 graphlan export2graphlan
 ```
 
-**Centrifuge**  
+~**Centrifuge**  
 For taxonomic annotation of contigs in Anvi'o. Go again to the application folder and get the programs from GitHub using command `git`. Anvi'o relies on an older version ("branch") of the program, so we need to checkout the branch specified.  
 You can read more about Centrifuge from the website where we clone it.
 ```
@@ -113,6 +113,7 @@ centrifuge --version
 echo $CENTRIFUGE_BASE
 ```
 ######################################################  
+~
 
 **Metaxa2**  
 For taxonomic profiling of the samples using the rimmed reads.
