@@ -222,7 +222,7 @@ Destination: localhost:XXXX
 
 Click add and log in to Taito.
 
-When you're logged in activate anvio with `source activate anvio5`.
+When you're logged in activate Anvi'o with `source activate anvio5`.
 
 ```
 anvi-interactive -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --server-only -P XXXX
