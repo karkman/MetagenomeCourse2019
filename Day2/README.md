@@ -204,7 +204,7 @@ You don't need to specify any port when running Anvi'o on your own laptop.
 But when running the interactive interface from Taito, you will need your own port, because it is not possible to run two interfaces thru the same port.  
 The available ports will assigned to each student on the course.
 
-[Click here for a list of ports and the login node you should use.](https://drive.google.com/open?id=1MsknlkT5cHCGJ5wU-HU7zr6GZrMKhWzDP1_fpbJR9o8)
+[Click here for a list of ports you should use.](https://drive.google.com/open?id=1MsknlkT5cHCGJ5wU-HU7zr6GZrMKhWzDP1_fpbJR9o8)
 
 
 Remember to change the `XXXX` to the port you were given.  
