@@ -114,7 +114,7 @@ Contigs database (contigs.db) contains information on contig length, open readin
 ```
 anvi-gen-contigs-database -f MEGAHIT_co-assembly_2500nt.fa -o MEGAHIT_co-assembly_2500nt_CONTIGS.db -n MEGAHIT_co-assembly
 ```
-## Run HMMs to identify single copy core genes for Bacteria and Archaea, plus rRNAs
+## Run HMMs to identify single copy core genes for Bacteria, Archaea and Eukarya, plus rRNAs
 ```
 anvi-run-hmms -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -T 6
 ```
