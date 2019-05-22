@@ -34,6 +34,7 @@ module load biokit
 merge_metaphlan_tables.py *_metaphlan.txt > infants_merged_table.txt
 module purge
 ```
+## Optional
 
 Make a heatmap from species level results.
 ```
@@ -58,7 +59,6 @@ graphlan_annotate.py --annot infants.annot.txt infants.tree.txt infants.abundanc
 graphlan.py --dpi 300 infants.abundance.xml infants.abundance.png --external_legends
 ```
 
-## Optional
 
 ### StrainPhlAn
 Follow the instructions for [StrainPhlAn.](https://bitbucket.org/biobakery/biobakery/wiki/metaphlan2#rst-header-create-a-strain-level-marker-based-heatmap-panphlan)  
