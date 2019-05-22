@@ -58,6 +58,7 @@ cd $WRKDIR
 mkdir checkm_db
 cd checkm_db
 wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
+tar -xzvf checkm_data_2015_01_16.tar.gz
 checkm data setRoot /wrk/USERNAME/checkm_db/
 ```
 
