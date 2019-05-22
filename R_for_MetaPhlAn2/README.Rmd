@@ -1,0 +1,100 @@
+---
+title: "MetaPhlAn2"
+author: "Tommi"
+output:
+  github_document: default
+---
+
+#MetaPhlAn2 analysis and visualization in R
+
+##Set your working directory to where you have your data on your own computer (and install) and load needed libraries
+
+```{r setup, echo=FALSE}
+setwd("~/Dropbox/teaching/HY_metagenomic_course_2019/MetagenomeCourse2019/R_for_MetaPhlAn2//")
+#install.packages("tidyverse")
+#install.packages("vegan")
+#install.packages("devtools")
+
+library(tidyverse)
+library(vegan)
+library(RColorBrewer)
+library(devtools)
+
+# comment this is package is already installed
+#install_github("tvatanen/microbiomics")
+library(microbiomics)
+
+```
+
+
+##Read in the species from MetaPhlan table
+
+```{r}
+
+metaphlan_species <- read_metaphlan_table("infants_merged_table.txt", lvl = 7, normalize = T)
+
+rownames(metaphlan_species) <- sapply(rownames(metaphlan_species), function(x) strsplit(x, ".", fixed = T)[[1]][1])
+
+mds_obj <- metaMDS(metaphlan_species)
+
+data.frame(mds_obj$points) %>%
+  rownames_to_column("sampleID") %>%
+  ggplot(aes(x=MDS1, y=MDS2, color = sampleID)) + 
+  geom_point() +
+  coord_equal() +
+  theme_bw()
+
+```
+
+
+```{r species, echo = TRUE}
+metaphlan_species_long <-
+  metaphlan_species %>%
+  rownames_to_column("sampleID") %>%
+  gather(taxon_name, relative_abundance, -sampleID) %>%
+  separate(taxon_name, sep = "\\.", into = c("kingdom", "phylum", "class", "order", "family", "genus", "species"))
+  
+species_stats <- 
+  metaphlan_species_long %>%
+  group_by(species) %>%
+  summarize(mean_relative_abundance = mean(relative_abundance),
+            median_relative_abundance = median(relative_abundance),
+            max_relative_abundance = max(relative_abundance),
+            prevalence = sum(relative_abundance > 0) / n())
+
+head(species_stats %>% arrange(-mean_relative_abundance))
+
+```
+
+## Generate barplot of 10 most abundant species
+```{r barplot}
+species_stats %>% 
+  arrange(-mean_relative_abundance) %>%
+  top_n(9) %>% 
+  left_join(metaphlan_species_long) %>%
+  ggplot(aes(y=relative_abundance, x=sampleID, fill = species)) +
+  geom_bar(stat = "identity") +
+  theme_bw() +
+  ylab("Relative abundance") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+# GeneratebBarplot of 10 most abundant genera
+```{r}
+metaphlan_genera_long <- 
+  metaphlan_species_long %>%
+  group_by(genus,sampleID) %>%
+  summarise(relative_abundance = sum(relative_abundance)) %>%
+  ungroup()
+  
+metaphlan_genera_long %>%
+  group_by(genus) %>%
+  summarize(mean_relative_abundance = mean(relative_abundance)) %>%
+  arrange(-mean_relative_abundance) %>%
+  top_n(10) %>%
+  left_join(metaphlan_genera_long) %>%
+  ggplot(aes(y=relative_abundance, x=sampleID, fill = genus)) +
+  geom_bar(stat = "identity") +
+  theme_bw() +
+  ylab("Relative abundance")
+```
