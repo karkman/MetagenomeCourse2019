@@ -295,10 +295,6 @@ OK.
 
 Let's run CheckM from this directory now, and learn about the taxonomy of each MAG using this advanced tool.
 
-First we need to download some data for `checkM`. Open a screen and activate the `checkM` environment.  
-Then run the following command: `checkm data update`.  
-When it asks for the location for the data give it your working directory (`/wrk/USERNAME`)
-
 When this is done allocate resources with `salloc` or use `sinteractive` and run the `checkM` on a computing node. You will also need to load the biokit because `checkM` uses `HMMER3`.
 
 ```
