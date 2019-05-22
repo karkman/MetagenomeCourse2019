@@ -54,7 +54,7 @@ __22.5.2019 8-17__
 
 | Time | Description |
 | --- | --- |
-| __*Morning*__  | [Manual binning of MAGs with Anvio](Day3/README.md#06--binning-the-co-asssembly-output-from-individual-contigs-to-bins) (__Tom__)|
+| __*Morning*__  | [Manual binning of MAGs with Anvio](Day3/README.md#02--describing-the-interface) (__Tom__)|
 |  |    **Lunch** |
 | __*Afternoon*__  |  |
 | __*Afternoon*__  | [Taxonomic annotation of MAGs](Day3/README.md#11--what-do-we-do-with-these-genomes) (__Tom__) |
