@@ -47,7 +47,7 @@ __21.5.2019 8-17__
 | __*Morning*__ | [Getting files for Anvio](Day2/README.md#anvio) (__Tom, Antti, Jenni__)|
 |  |    **Lunch** |
 | __*Afternoon*__ | [Introduction to Anvio](http://link-to-presentation.com) (__Tom__)
-| __*Afternoon*__ | [Anvio hands-on](Day3/README.md#metagenome-analysis-of-10-infant-gut-metagenomes) (__Tom__)
+| __*Afternoon*__ | [Anvio hands-on](Day3/README.md#02--describing-the-interface) (__Tom__)
 
 ### Wednesday
 __22.5.2019 8-17__  
