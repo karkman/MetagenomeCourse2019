@@ -8,6 +8,15 @@ MetaPhlAn2 analysis and visualization in R
 Set your working directory to where you have your data on your own computer (and install) and load needed libraries
 -------------------------------------------------------------------------------------------------------------------
 
+``` r
+setwd("~/Dropbox/teaching/HY_metagenomic_course_2019/MetagenomeCourse2019/R_for_MetaPhlAn2/")
+#install.packages("tidyverse")
+#install.packages("vegan")
+#install.packages("devtools")
+
+library(tidyverse)
+```
+
     ## ── Attaching packages ──────────────────────────────────────────────────────── tidyverse 1.2.1 ──
 
     ## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
@@ -21,11 +30,19 @@ Set your working directory to where you have your data on your own computer (and
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
+``` r
+library(vegan)
+```
+
     ## Loading required package: permute
 
     ## Loading required package: lattice
 
     ## This is vegan 2.5-1
+
+``` r
+library(devtools)
+```
 
     ## 
     ## Attaching package: 'devtools'
@@ -33,6 +50,12 @@ Set your working directory to where you have your data on your own computer (and
     ## The following object is masked from 'package:permute':
     ## 
     ##     check
+
+``` r
+# Use this to install microbiomics if needed:
+#install_github("tvatanen/microbiomics")
+library(microbiomics)
+```
 
 Read in the species from MetaPhlan table
 ----------------------------------------
@@ -46,37 +69,34 @@ mds_obj <- metaMDS(metaphlan_species)
 ```
 
     ## Run 0 stress 0.1564851 
-    ## Run 1 stress 0.2110563 
-    ## Run 2 stress 0.164349 
-    ## Run 3 stress 0.1686318 
-    ## Run 4 stress 0.1361479 
+    ## Run 1 stress 0.1686287 
+    ## Run 2 stress 0.1686249 
+    ## Run 3 stress 0.1693674 
+    ## Run 4 stress 0.2905829 
+    ## Run 5 stress 0.213171 
+    ## Run 6 stress 0.1698597 
+    ## Run 7 stress 0.3332528 
+    ## Run 8 stress 0.1822126 
+    ## Run 9 stress 0.1361479 
     ## ... New best solution
-    ## ... Procrustes: rmse 0.1521211  max resid 0.3594293 
-    ## Run 5 stress 0.1720604 
-    ## Run 6 stress 0.1643516 
-    ## Run 7 stress 0.1643487 
-    ## Run 8 stress 0.1693674 
-    ## Run 9 stress 0.2128305 
-    ## Run 10 stress 0.1822075 
+    ## ... Procrustes: rmse 0.1521212  max resid 0.3594305 
+    ## Run 10 stress 0.2382355 
     ## Run 11 stress 0.1361479 
     ## ... New best solution
-    ## ... Procrustes: rmse 3.208916e-06  max resid 5.331265e-06 
+    ## ... Procrustes: rmse 8.614615e-06  max resid 1.638424e-05 
     ## ... Similar to previous best
-    ## Run 12 stress 0.1903475 
-    ## Run 13 stress 0.2343412 
-    ## Run 14 stress 0.19577 
-    ## Run 15 stress 0.1361479 
-    ## ... New best solution
-    ## ... Procrustes: rmse 1.788574e-06  max resid 3.061181e-06 
-    ## ... Similar to previous best
-    ## Run 16 stress 0.1879219 
-    ## Run 17 stress 0.213171 
+    ## Run 12 stress 0.1686396 
+    ## Run 13 stress 0.1984005 
+    ## Run 14 stress 0.2275346 
+    ## Run 15 stress 0.1686248 
+    ## Run 16 stress 0.1686312 
+    ## Run 17 stress 0.1818022 
     ## Run 18 stress 0.151936 
     ## Run 19 stress 0.1361479 
     ## ... New best solution
-    ## ... Procrustes: rmse 1.041899e-06  max resid 2.140144e-06 
+    ## ... Procrustes: rmse 1.51498e-06  max resid 2.781808e-06 
     ## ... Similar to previous best
-    ## Run 20 stress 0.1723213 
+    ## Run 20 stress 0.1693674 
     ## *** Solution reached
 
 ``` r
@@ -124,7 +144,7 @@ Generate barplot of 10 most abundant species
 ``` r
 species_stats %>% 
   arrange(-mean_relative_abundance) %>%
-  top_n(9) %>% 
+  top_n(10) %>% 
   left_join(metaphlan_species_long) %>%
   ggplot(aes(y=relative_abundance, x=sampleID, fill = species)) +
   geom_bar(stat = "identity") +

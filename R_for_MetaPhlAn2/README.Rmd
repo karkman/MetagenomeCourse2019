@@ -9,18 +9,17 @@ output:
 
 ##Set your working directory to where you have your data on your own computer (and install) and load needed libraries
 
-```{r setup, echo=FALSE}
-setwd("~/Dropbox/teaching/HY_metagenomic_course_2019/MetagenomeCourse2019/R_for_MetaPhlAn2//")
+```{r setup}
+setwd("~/Dropbox/teaching/HY_metagenomic_course_2019/MetagenomeCourse2019/R_for_MetaPhlAn2/")
 #install.packages("tidyverse")
 #install.packages("vegan")
 #install.packages("devtools")
 
 library(tidyverse)
 library(vegan)
-library(RColorBrewer)
 library(devtools)
 
-# comment this is package is already installed
+# Use this to install microbiomics if needed:
 #install_github("tvatanen/microbiomics")
 library(microbiomics)
 
@@ -70,7 +69,7 @@ head(species_stats %>% arrange(-mean_relative_abundance))
 ```{r barplot}
 species_stats %>% 
   arrange(-mean_relative_abundance) %>%
-  top_n(9) %>% 
+  top_n(10) %>% 
   left_join(metaphlan_species_long) %>%
   ggplot(aes(y=relative_abundance, x=sampleID, fill = species)) +
   geom_bar(stat = "identity") +
