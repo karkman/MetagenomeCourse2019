@@ -217,10 +217,10 @@ Cool.
 Create a new collection where bins are nicely renamed, and MAGs identified (MAG = metagenome-assembled genome = population genome)
 
 ```
-anvi-rename-bins -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --collection-to-read TOM_5_BINS --collection-to-write MAGs --call-MAGs --prefix MEGAHIT --use-highest-completion-score --report-file REPORT
+anvi-rename-bins -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --collection-to-read TOM_5_BINS --collection-to-write MAGs --prefix MEGAHIT --call-MAGs --min-completion-for-MAG 70 --max-redundancy-for-MAG 10 --size-for-MAG 10 --report-file REPORT
 ```
 
-Bins >2 Mbp and those with a completion >70% will be renamed as MAGs (i.e., as population genomes).
+Bins with a completion >70% and <10% redudndance OR size above 10 Mb will be renamed as MAGs (i.e., as population genomes).
 
 >Note that these parameters can be modified by playing with parameters of the program (see `anvi-rename-bins -h`)
 
@@ -244,7 +244,7 @@ anvi-refine -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.d
 and so one for all MAGs. After that, we will create a final collection called `MAGs_FINAL`:
 
 ```
-anvi-rename-bins -c MEGAHIT_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --collection-to-read MAGs --collection-to-write MAGs_FINAL --call-MAGs --prefix MEGAHIT --use-highest-completion-score --report-file REPORT
+anvi-rename-bins -c MEGAHIT_co-assembly_2500nt_CONTIGS.db -p SAMPLES-MERGED/PROFILE.db --collection-to-read MAGs --collection-to-write MAGs_FINAL --prefix MEGAHIT --call-MAGs --min-completion-for-MAG 70 --max-redundancy-for-MAG 10 --size-for-MAG 10 --report-file REPORT
 ```
 
 and summarize the final, curated collection:
