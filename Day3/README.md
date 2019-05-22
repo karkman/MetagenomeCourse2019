@@ -299,7 +299,7 @@ Let's run CheckM from this directory now, and learn about the taxonomy of each M
 # Deactivate the Anvi'o environment
 source deactivate
 # Activate the CheckM environment
-source activate checkm
+source activate checkm_env
 module load biokit
 # Find the marker genes and place them in a pre-computed phylogenetic tree
 checkm tree ./ -x .fa -t 1 ./TREE
