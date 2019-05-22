@@ -64,8 +64,10 @@ __23.5.2019 8-16.30__
 
 | Time | Description |
 | --- | --- |
-| __*Morning*__  | *MetaPhlan lecture* (__Tommi__)|
 | __*Morning*__  | [Metaphlan profiles](Day4#metaphlan2) (__Tommi__)|
+| __*Morning*__  | [CheckM output](Day3/README.md#11--what-do-we-do-with-these-genomes) (__Tom__)|
+| __*Morning*__  | *MetaPhlan lecture* (__Tommi__)|
+| __*Morning*__  | [R-installations and R-part for Metaphlan](R_for_MetaPhlAn2)(__Tommi__)|
 |  |    **Lunch** |
 | __*Afternoon*__  | *HUMAnN2 lecture* (__Tommi__)|
 | __*Afternoon*__  | [Humann2 hands on](Day5#humann2) (__Tommi__)|
