@@ -50,7 +50,7 @@ For assessing the quality of recovered genomes
 conda create -n checkm_env pplacer checkm-genome numpy python=2
 ```
 After creating the environment you need to download database for `checkM`. Activate the environment and download the files to checkm folder in your work folder.  
-Then run `checkm data setRoot` and tell `checkM` where the data is (`/wrk/USERNAME/checkm_db/`). 
+Then run `checkm data setRoot` and tell `checkM` where the data is (`/wrk/USERNAME/checkm_db/`).
 
 ```
 source activate checkm_env
@@ -58,7 +58,7 @@ cd $WRKDIR
 mkdir checkm_db
 cd checkm_db
 wget https://data.ace.uq.edu.au/public/CheckM_databases/checkm_data_2015_01_16.tar.gz
-checkm data setRoot
+checkm data setRoot /wrk/USERNAME/checkm_db/
 ```
 
 **Humann2**
