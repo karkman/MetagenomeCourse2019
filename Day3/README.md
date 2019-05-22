@@ -293,7 +293,13 @@ ls
 
 OK.
 
-Let's run CheckM from this directory now, and learn about the taxonomy of each MAG using this advanced tool:
+Let's run CheckM from this directory now, and learn about the taxonomy of each MAG using this advanced tool.
+
+First we need to download some data for `checkM`. Open a screen and activate the `checkM` environment.  
+Then run the following command: `checkm data update`. And when it asks for the location for the data give it your working directory.  
+`/wrk/USERNAME` 
+
+Allocate resources with `salloc` or use `sinteractive` and run the `checkM` on a computing node
 
 ```
 # Deactivate the Anvi'o environment
