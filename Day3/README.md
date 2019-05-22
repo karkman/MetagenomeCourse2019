@@ -296,7 +296,7 @@ OK.
 Let's run CheckM from this directory now, and learn about the taxonomy of each MAG using this advanced tool.
 
 Open a screen for `checkM` and allocate resources with `salloc` or use `sinteractive` and run the `checkM` on a computing node. You will also need to load the biokit because `checkM` uses `HMMER3`.  
-We will leave the `checkm tree` command running for the night.  
+We will leave the `checkm tree` command running for the night. So deattach from the screen after it started running.  
 
 ```
 # Activate the CheckM environment
