@@ -12,7 +12,7 @@ output:
 download data from https://www.dropbox.com/s/agzc1fecgoj708z/infants_merged_table.txt?dl=0
 
 ```{r setup}
-setwd("~/Dropbox/teaching/HY_metagenomic_course_2019/MetagenomeCourse2019/R_for_MetaPhlAn2/")
+setwd("~/Dropbox/teaching/MetagenomeCourse2019/R_for_MetaPhlAn2/")
 #install.packages("tidyverse")
 #install.packages("vegan")
 #install.packages("devtools")
@@ -22,7 +22,7 @@ library(vegan)
 library(devtools)
 
 # Use this to install microbiomics if needed:
-#install_github("tvatanen/microbiomics")
+install_github("tvatanen/microbiomics")
 library(microbiomics)
 
 ```
@@ -71,7 +71,7 @@ head(species_stats %>% arrange(-mean_relative_abundance))
 ```{r barplot}
 species_stats %>% 
   arrange(-mean_relative_abundance) %>%
-  top_n(10) %>% 
+  top_n(n = 10, wt = mean_relative_abundance) %>% 
   left_join(metaphlan_species_long) %>%
   ggplot(aes(y=relative_abundance, x=sampleID, fill = species)) +
   geom_bar(stat = "identity") +
@@ -92,7 +92,7 @@ metaphlan_genera_long %>%
   group_by(genus) %>%
   summarize(mean_relative_abundance = mean(relative_abundance)) %>%
   arrange(-mean_relative_abundance) %>%
-  top_n(10) %>%
+  top_n(n = 10, wt = mean_relative_abundance) %>%
   left_join(metaphlan_genera_long) %>%
   ggplot(aes(y=relative_abundance, x=sampleID, fill = genus)) +
   geom_bar(stat = "identity") +
