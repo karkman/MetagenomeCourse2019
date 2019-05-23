@@ -9,6 +9,8 @@ output:
 
 ##Set your working directory to where you have your data on your own computer (and install) and load needed libraries
 
+download data from https://www.dropbox.com/s/agzc1fecgoj708z/infants_merged_table.txt?dl=0
+
 ```{r setup}
 setwd("~/Dropbox/teaching/HY_metagenomic_course_2019/MetagenomeCourse2019/R_for_MetaPhlAn2/")
 #install.packages("tidyverse")
