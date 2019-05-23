@@ -18,7 +18,8 @@ We will use only R1 reads for the following analyses.
 #SBATCH -p serial
 
 module load biokit
-cd /wrk/antkark/Metagenomics2019/Metaphlan2
+mkdir /wrk/$USER/Metagenomics2019/Metaphlan2
+cd /wrk/$USER/Metagenomics2019/Metaphlan2
 name=$(sed -n "$SLURM_ARRAY_TASK_ID"p ../sample_names.txt)
 metaphlan2.py ../trimmed_data/$name"_R1_trimmed.fastq" \
               --input_type fastq --nproc  $SLURM_CPUS_PER_TASK \
