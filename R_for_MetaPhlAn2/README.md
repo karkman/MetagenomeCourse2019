@@ -19,7 +19,7 @@ setwd("~/Dropbox/teaching/MetagenomeCourse2019/R_for_MetaPhlAn2/")
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ───────────────────────────────── tidyverse 1.2.1 ──
+    ## ── Attaching packages ────────────────────────────── tidyverse 1.2.1 ──
 
     ## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
     ## ✔ tibble  1.4.2     ✔ dplyr   0.7.4
@@ -28,7 +28,7 @@ library(tidyverse)
 
     ## Warning: package 'stringr' was built under R version 3.5.2
 
-    ## ── Conflicts ──────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ───────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
@@ -65,7 +65,7 @@ install_github("tvatanen/microbiomics")
 
     ## '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
     ##   --no-environ --no-save --no-restore --quiet CMD INSTALL  \
-    ##   '/private/var/folders/fn/c7hlkwzs0qd0hm3klgt_jxqstnhy2f/T/Rtmppq2VMu/devtoolsdf806ad278bd/tvatanen-microbiomics-3bb5e82'  \
+    ##   '/private/var/folders/fn/c7hlkwzs0qd0hm3klgt_jxqstnhy2f/T/RtmpHE3h9S/devtoolsea0f4a162d2a/tvatanen-microbiomics-3bb5e82'  \
     ##   --library='/Library/Frameworks/R.framework/Versions/3.5/Resources/library'  \
     ##   --install-tests
 
@@ -87,37 +87,31 @@ mds_obj <- metaMDS(metaphlan_species)
 ```
 
     ## Run 0 stress 0.1564851 
-    ## Run 1 stress 0.1723213 
-    ## Run 2 stress 0.1361479 
-    ## ... New best solution
-    ## ... Procrustes: rmse 0.1521211  max resid 0.3594304 
-    ## Run 3 stress 0.1720604 
-    ## Run 4 stress 0.2196807 
-    ## Run 5 stress 0.1818022 
-    ## Run 6 stress 0.193751 
-    ## Run 7 stress 0.1720604 
+    ## Run 1 stress 0.1903475 
+    ## Run 2 stress 0.2051456 
+    ## Run 3 stress 0.1643488 
+    ## Run 4 stress 0.1720604 
+    ## Run 5 stress 0.1903475 
+    ## Run 6 stress 0.1693674 
+    ## Run 7 stress 0.1723213 
     ## Run 8 stress 0.1361479 
     ## ... New best solution
-    ## ... Procrustes: rmse 3.618255e-06  max resid 6.899834e-06 
-    ## ... Similar to previous best
-    ## Run 9 stress 0.1720604 
+    ## ... Procrustes: rmse 0.1521197  max resid 0.3594273 
+    ## Run 9 stress 0.1686291 
     ## Run 10 stress 0.1361479 
-    ## ... Procrustes: rmse 4.723332e-06  max resid 9.201045e-06 
+    ## ... New best solution
+    ## ... Procrustes: rmse 6.027705e-06  max resid 1.250728e-05 
     ## ... Similar to previous best
-    ## Run 11 stress 0.1818022 
-    ## Run 12 stress 0.151936 
-    ## Run 13 stress 0.3314708 
-    ## Run 14 stress 0.1564851 
-    ## Run 15 stress 0.1720604 
-    ## Run 16 stress 0.1723218 
-    ## Run 17 stress 0.1686254 
+    ## Run 11 stress 0.213171 
+    ## Run 12 stress 0.1723213 
+    ## Run 13 stress 0.151936 
+    ## Run 14 stress 0.1723213 
+    ## Run 15 stress 0.1723213 
+    ## Run 16 stress 0.1693674 
+    ## Run 17 stress 0.151936 
     ## Run 18 stress 0.1720604 
-    ## Run 19 stress 0.1361479 
-    ## ... Procrustes: rmse 2.9891e-06  max resid 5.676535e-06 
-    ## ... Similar to previous best
-    ## Run 20 stress 0.1361479 
-    ## ... Procrustes: rmse 1.227938e-05  max resid 2.682696e-05 
-    ## ... Similar to previous best
+    ## Run 19 stress 0.1818022 
+    ## Run 20 stress 0.1879219 
     ## *** Solution reached
 
 ``` r
@@ -130,6 +124,19 @@ data.frame(mds_obj$points) %>%
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-1-1.png)
+
+``` r
+# artificial grouping
+data.frame(mds_obj$points) %>%
+  rownames_to_column("sampleID") %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  ggplot(aes(x=MDS1, y=MDS2, color = group)) + 
+  geom_point() +
+  coord_equal() +
+  theme_bw()
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-1-2.png)
 
 ``` r
 metaphlan_species_long <-
@@ -180,7 +187,7 @@ species_stats %>%
 
 ![](README_files/figure-markdown_github/barplot-1.png)
 
-GeneratebBarplot of 10 most abundant genera
+Generate Barplot of 10 most abundant genera
 ===========================================
 
 ``` r
@@ -205,3 +212,76 @@ metaphlan_genera_long %>%
     ## Joining, by = "genus"
 
 ![](README_files/figure-markdown_github/unnamed-chunk-2-1.png)
+
+Try simple faceting
+-------------------
+
+``` r
+metaphlan_genera_long %>%
+  group_by(genus) %>%
+  summarize(mean_relative_abundance = mean(relative_abundance)) %>%
+  top_n(n = 10, wt = mean_relative_abundance) %>%
+  left_join(metaphlan_genera_long) %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  ggplot(aes(y=relative_abundance, x=sampleID, fill = genus)) +
+  geom_bar(stat = "identity") +
+  theme_bw() +
+  ylab("Relative abundance") +
+  facet_grid(~group, scales = "free")
+```
+
+    ## Joining, by = "genus"
+
+![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
+
+Barplot for a single species
+----------------------------
+
+``` r
+metaphlan_genera_long %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  filter(genus == "g__Escherichia") %>%
+  ggplot(aes(y =relative_abundance, x=group)) +
+  geom_boxplot() +
+  geom_point() +
+  theme_bw()
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
+
+``` r
+metaphlan_genera_long %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  filter(genus == "g__Escherichia") %>%
+  arrange(group) %>%
+  mutate(sampleID = factor(sampleID, levels = sampleID)) %>% 
+  ggplot(aes(y =relative_abundance, x=sampleID, fill = group)) +
+  geom_bar(stat = "identity") +
+  theme_bw() + 
+  ylab("Escherichia rel.ab")
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-4-2.png)
+
+Different sort of barplot, mean relative abundance per group
+------------------------------------------------------------
+
+``` r
+species_stats %>% 
+  top_n(n = 10, wt = mean_relative_abundance) %>% 
+  left_join(metaphlan_species_long) %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  group_by(species, group) %>%
+  summarise(mean_relative_abundance = mean(relative_abundance)) %>%
+  ggplot(aes(x=species, fill=group, y=mean_relative_abundance)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  coord_flip() +
+  scale_y_log10() +
+  theme_bw()
+```
+
+    ## Joining, by = "species"
+
+    ## Warning: Transformation introduced infinite values in continuous y-axis
+
+![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)

@@ -45,6 +45,16 @@ data.frame(mds_obj$points) %>%
   coord_equal() +
   theme_bw()
 
+# artificial grouping
+data.frame(mds_obj$points) %>%
+  rownames_to_column("sampleID") %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  ggplot(aes(x=MDS1, y=MDS2, color = group)) + 
+  geom_point() +
+  coord_equal() +
+  theme_bw()
+
+
 ```
 
 
@@ -82,7 +92,7 @@ species_stats %>%
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-# GeneratebBarplot of 10 most abundant genera
+# Generate Barplot of 10 most abundant genera
 ```{r}
 metaphlan_genera_long <- 
   metaphlan_species_long %>%
@@ -100,4 +110,55 @@ metaphlan_genera_long %>%
   geom_bar(stat = "identity") +
   theme_bw() +
   ylab("Relative abundance")
+```
+
+## Try simple faceting
+```{r}
+metaphlan_genera_long %>%
+  group_by(genus) %>%
+  summarize(mean_relative_abundance = mean(relative_abundance)) %>%
+  top_n(n = 10, wt = mean_relative_abundance) %>%
+  left_join(metaphlan_genera_long) %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  ggplot(aes(y=relative_abundance, x=sampleID, fill = genus)) +
+  geom_bar(stat = "identity") +
+  theme_bw() +
+  ylab("Relative abundance") +
+  facet_grid(~group, scales = "free")
+```
+
+## Barplot for a single species
+```{r}
+metaphlan_genera_long %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  filter(genus == "g__Escherichia") %>%
+  ggplot(aes(y =relative_abundance, x=group)) +
+  geom_boxplot() +
+  geom_point() +
+  theme_bw()
+
+metaphlan_genera_long %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  filter(genus == "g__Escherichia") %>%
+  arrange(group) %>%
+  mutate(sampleID = factor(sampleID, levels = sampleID)) %>% 
+  ggplot(aes(y =relative_abundance, x=sampleID, fill = group)) +
+  geom_bar(stat = "identity") +
+  theme_bw() + 
+  ylab("Escherichia rel.ab")
+```
+
+## Different sort of barplot, mean relative abundance per group
+```{r}
+species_stats %>% 
+  top_n(n = 10, wt = mean_relative_abundance) %>% 
+  left_join(metaphlan_species_long) %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  group_by(species, group) %>%
+  summarise(mean_relative_abundance = mean(relative_abundance)) %>%
+  ggplot(aes(x=species, fill=group, y=mean_relative_abundance)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  coord_flip() +
+  scale_y_log10() +
+  theme_bw()
 ```
