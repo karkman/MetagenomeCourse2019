@@ -65,7 +65,7 @@ install_github("tvatanen/microbiomics")
 
     ## '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
     ##   --no-environ --no-save --no-restore --quiet CMD INSTALL  \
-    ##   '/private/var/folders/fn/c7hlkwzs0qd0hm3klgt_jxqstnhy2f/T/RtmpriA833/devtoolsdedc1aeebd4f/tvatanen-microbiomics-3bb5e82'  \
+    ##   '/private/var/folders/fn/c7hlkwzs0qd0hm3klgt_jxqstnhy2f/T/Rtmppq2VMu/devtoolsdf806ad278bd/tvatanen-microbiomics-3bb5e82'  \
     ##   --library='/Library/Frameworks/R.framework/Versions/3.5/Resources/library'  \
     ##   --install-tests
 
@@ -88,35 +88,36 @@ mds_obj <- metaMDS(metaphlan_species)
 
     ## Run 0 stress 0.1564851 
     ## Run 1 stress 0.1723213 
-    ## Run 2 stress 0.1686281 
-    ## Run 3 stress 0.1693675 
-    ## Run 4 stress 0.1698597 
-    ## Run 5 stress 0.1686259 
-    ## Run 6 stress 0.1361479 
+    ## Run 2 stress 0.1361479 
     ## ... New best solution
-    ## ... Procrustes: rmse 0.1521211  max resid 0.3594294 
-    ## Run 7 stress 0.151936 
+    ## ... Procrustes: rmse 0.1521211  max resid 0.3594304 
+    ## Run 3 stress 0.1720604 
+    ## Run 4 stress 0.2196807 
+    ## Run 5 stress 0.1818022 
+    ## Run 6 stress 0.193751 
+    ## Run 7 stress 0.1720604 
     ## Run 8 stress 0.1361479 
-    ## ... Procrustes: rmse 2.272073e-06  max resid 4.544916e-06 
+    ## ... New best solution
+    ## ... Procrustes: rmse 3.618255e-06  max resid 6.899834e-06 
     ## ... Similar to previous best
-    ## Run 9 stress 0.151936 
+    ## Run 9 stress 0.1720604 
     ## Run 10 stress 0.1361479 
-    ## ... Procrustes: rmse 2.522688e-06  max resid 4.892589e-06 
+    ## ... Procrustes: rmse 4.723332e-06  max resid 9.201045e-06 
     ## ... Similar to previous best
-    ## Run 11 stress 0.1643488 
-    ## Run 12 stress 0.1822079 
-    ## Run 13 stress 0.1723213 
-    ## Run 14 stress 0.1361479 
-    ## ... Procrustes: rmse 8.933526e-06  max resid 1.513911e-05 
-    ## ... Similar to previous best
-    ## Run 15 stress 0.1822152 
-    ## Run 16 stress 0.151936 
-    ## Run 17 stress 0.1361479 
-    ## ... Procrustes: rmse 1.808752e-06  max resid 3.64211e-06 
-    ## ... Similar to previous best
+    ## Run 11 stress 0.1818022 
+    ## Run 12 stress 0.151936 
+    ## Run 13 stress 0.3314708 
+    ## Run 14 stress 0.1564851 
+    ## Run 15 stress 0.1720604 
+    ## Run 16 stress 0.1723218 
+    ## Run 17 stress 0.1686254 
     ## Run 18 stress 0.1720604 
-    ## Run 19 stress 0.151936 
-    ## Run 20 stress 0.1693676 
+    ## Run 19 stress 0.1361479 
+    ## ... Procrustes: rmse 2.9891e-06  max resid 5.676535e-06 
+    ## ... Similar to previous best
+    ## Run 20 stress 0.1361479 
+    ## ... Procrustes: rmse 1.227938e-05  max resid 2.682696e-05 
+    ## ... Similar to previous best
     ## *** Solution reached
 
 ``` r
@@ -144,6 +145,8 @@ species_stats <-
             median_relative_abundance = median(relative_abundance),
             max_relative_abundance = max(relative_abundance),
             prevalence = sum(relative_abundance > 0) / n())
+
+#write_tsv(species_stats, path = "species_stats.txt")
 
 head(species_stats %>% arrange(-mean_relative_abundance))
 ```

@@ -63,6 +63,8 @@ species_stats <-
             max_relative_abundance = max(relative_abundance),
             prevalence = sum(relative_abundance > 0) / n())
 
+#write_tsv(species_stats, path = "species_stats.txt")
+
 head(species_stats %>% arrange(-mean_relative_abundance))
 
 ```
