@@ -11,7 +11,7 @@ Set your working directory to where you have your data on your own computer (and
 download data from <https://www.dropbox.com/s/agzc1fecgoj708z/infants_merged_table.txt?dl=0>
 
 ``` r
-setwd("~/Dropbox/teaching/HY_metagenomic_course_2019/MetagenomeCourse2019/R_for_MetaPhlAn2/")
+setwd("~/Dropbox/teaching/MetagenomeCourse2019/R_for_MetaPhlAn2/")
 #install.packages("tidyverse")
 #install.packages("vegan")
 #install.packages("devtools")
@@ -19,7 +19,7 @@ setwd("~/Dropbox/teaching/HY_metagenomic_course_2019/MetagenomeCourse2019/R_for_
 library(tidyverse)
 ```
 
-    ## ── Attaching packages ──────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+    ## ── Attaching packages ───────────────────────────────── tidyverse 1.2.1 ──
 
     ## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
     ## ✔ tibble  1.4.2     ✔ dplyr   0.7.4
@@ -28,7 +28,7 @@ library(tidyverse)
 
     ## Warning: package 'stringr' was built under R version 3.5.2
 
-    ## ── Conflicts ─────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ── Conflicts ──────────────────────────────────── tidyverse_conflicts() ──
     ## ✖ dplyr::filter() masks stats::filter()
     ## ✖ dplyr::lag()    masks stats::lag()
 
@@ -55,7 +55,23 @@ library(devtools)
 
 ``` r
 # Use this to install microbiomics if needed:
-#install_github("tvatanen/microbiomics")
+install_github("tvatanen/microbiomics")
+```
+
+    ## Downloading GitHub repo tvatanen/microbiomics@master
+    ## from URL https://api.github.com/repos/tvatanen/microbiomics/zipball/master
+
+    ## Installing microbiomics
+
+    ## '/Library/Frameworks/R.framework/Resources/bin/R' --no-site-file  \
+    ##   --no-environ --no-save --no-restore --quiet CMD INSTALL  \
+    ##   '/private/var/folders/fn/c7hlkwzs0qd0hm3klgt_jxqstnhy2f/T/RtmpriA833/devtoolsdedc1aeebd4f/tvatanen-microbiomics-3bb5e82'  \
+    ##   --library='/Library/Frameworks/R.framework/Versions/3.5/Resources/library'  \
+    ##   --install-tests
+
+    ## 
+
+``` r
 library(microbiomics)
 ```
 
@@ -71,33 +87,36 @@ mds_obj <- metaMDS(metaphlan_species)
 ```
 
     ## Run 0 stress 0.1564851 
-    ## Run 1 stress 0.1922584 
-    ## Run 2 stress 0.1361479 
+    ## Run 1 stress 0.1723213 
+    ## Run 2 stress 0.1686281 
+    ## Run 3 stress 0.1693675 
+    ## Run 4 stress 0.1698597 
+    ## Run 5 stress 0.1686259 
+    ## Run 6 stress 0.1361479 
     ## ... New best solution
-    ## ... Procrustes: rmse 0.1521212  max resid 0.359429 
-    ## Run 3 stress 0.1686252 
-    ## Run 4 stress 0.1720604 
-    ## Run 5 stress 0.1361479 
-    ## ... Procrustes: rmse 7.598371e-06  max resid 1.567332e-05 
+    ## ... Procrustes: rmse 0.1521211  max resid 0.3594294 
+    ## Run 7 stress 0.151936 
+    ## Run 8 stress 0.1361479 
+    ## ... Procrustes: rmse 2.272073e-06  max resid 4.544916e-06 
     ## ... Similar to previous best
-    ## Run 6 stress 0.1879219 
-    ## Run 7 stress 0.1686306 
-    ## Run 8 stress 0.1643489 
-    ## Run 9 stress 0.1361479 
-    ## ... New best solution
-    ## ... Procrustes: rmse 1.044081e-06  max resid 1.81197e-06 
+    ## Run 9 stress 0.151936 
+    ## Run 10 stress 0.1361479 
+    ## ... Procrustes: rmse 2.522688e-06  max resid 4.892589e-06 
     ## ... Similar to previous best
-    ## Run 10 stress 0.1686373 
-    ## Run 11 stress 0.1720604 
-    ## Run 12 stress 0.1723213 
-    ## Run 13 stress 0.1564851 
-    ## Run 14 stress 0.1698597 
-    ## Run 15 stress 0.1564851 
-    ## Run 16 stress 0.1723214 
-    ## Run 17 stress 0.1686305 
-    ## Run 18 stress 0.151936 
-    ## Run 19 stress 0.213171 
-    ## Run 20 stress 0.1564851 
+    ## Run 11 stress 0.1643488 
+    ## Run 12 stress 0.1822079 
+    ## Run 13 stress 0.1723213 
+    ## Run 14 stress 0.1361479 
+    ## ... Procrustes: rmse 8.933526e-06  max resid 1.513911e-05 
+    ## ... Similar to previous best
+    ## Run 15 stress 0.1822152 
+    ## Run 16 stress 0.151936 
+    ## Run 17 stress 0.1361479 
+    ## ... Procrustes: rmse 1.808752e-06  max resid 3.64211e-06 
+    ## ... Similar to previous best
+    ## Run 18 stress 0.1720604 
+    ## Run 19 stress 0.151936 
+    ## Run 20 stress 0.1693676 
     ## *** Solution reached
 
 ``` r
@@ -145,7 +164,7 @@ Generate barplot of 10 most abundant species
 ``` r
 species_stats %>% 
   arrange(-mean_relative_abundance) %>%
-  top_n(10) %>% 
+  top_n(n = 10, wt = mean_relative_abundance) %>% 
   left_join(metaphlan_species_long) %>%
   ggplot(aes(y=relative_abundance, x=sampleID, fill = species)) +
   geom_bar(stat = "identity") +
@@ -153,8 +172,6 @@ species_stats %>%
   ylab("Relative abundance") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
-
-    ## Selecting by prevalence
 
     ## Joining, by = "species"
 
@@ -174,15 +191,13 @@ metaphlan_genera_long %>%
   group_by(genus) %>%
   summarize(mean_relative_abundance = mean(relative_abundance)) %>%
   arrange(-mean_relative_abundance) %>%
-  top_n(10) %>%
+  top_n(n = 10, wt = mean_relative_abundance) %>%
   left_join(metaphlan_genera_long) %>%
   ggplot(aes(y=relative_abundance, x=sampleID, fill = genus)) +
   geom_bar(stat = "identity") +
   theme_bw() +
   ylab("Relative abundance")
 ```
-
-    ## Selecting by mean_relative_abundance
 
     ## Joining, by = "genus"
 
