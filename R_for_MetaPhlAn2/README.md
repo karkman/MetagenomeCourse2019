@@ -8,6 +8,8 @@ MetaPhlAn2 analysis and visualization in R
 Set your working directory to where you have your data on your own computer (and install) and load needed libraries
 -------------------------------------------------------------------------------------------------------------------
 
+download data from <https://www.dropbox.com/s/agzc1fecgoj708z/infants_merged_table.txt?dl=0>
+
 ``` r
 setwd("~/Dropbox/teaching/HY_metagenomic_course_2019/MetagenomeCourse2019/R_for_MetaPhlAn2/")
 #install.packages("tidyverse")
@@ -69,34 +71,33 @@ mds_obj <- metaMDS(metaphlan_species)
 ```
 
     ## Run 0 stress 0.1564851 
-    ## Run 1 stress 0.1686287 
-    ## Run 2 stress 0.1686249 
-    ## Run 3 stress 0.1693674 
-    ## Run 4 stress 0.2905829 
-    ## Run 5 stress 0.213171 
-    ## Run 6 stress 0.1698597 
-    ## Run 7 stress 0.3332528 
-    ## Run 8 stress 0.1822126 
+    ## Run 1 stress 0.1922584 
+    ## Run 2 stress 0.1361479 
+    ## ... New best solution
+    ## ... Procrustes: rmse 0.1521212  max resid 0.359429 
+    ## Run 3 stress 0.1686252 
+    ## Run 4 stress 0.1720604 
+    ## Run 5 stress 0.1361479 
+    ## ... Procrustes: rmse 7.598371e-06  max resid 1.567332e-05 
+    ## ... Similar to previous best
+    ## Run 6 stress 0.1879219 
+    ## Run 7 stress 0.1686306 
+    ## Run 8 stress 0.1643489 
     ## Run 9 stress 0.1361479 
     ## ... New best solution
-    ## ... Procrustes: rmse 0.1521212  max resid 0.3594305 
-    ## Run 10 stress 0.2382355 
-    ## Run 11 stress 0.1361479 
-    ## ... New best solution
-    ## ... Procrustes: rmse 8.614615e-06  max resid 1.638424e-05 
+    ## ... Procrustes: rmse 1.044081e-06  max resid 1.81197e-06 
     ## ... Similar to previous best
-    ## Run 12 stress 0.1686396 
-    ## Run 13 stress 0.1984005 
-    ## Run 14 stress 0.2275346 
-    ## Run 15 stress 0.1686248 
-    ## Run 16 stress 0.1686312 
-    ## Run 17 stress 0.1818022 
+    ## Run 10 stress 0.1686373 
+    ## Run 11 stress 0.1720604 
+    ## Run 12 stress 0.1723213 
+    ## Run 13 stress 0.1564851 
+    ## Run 14 stress 0.1698597 
+    ## Run 15 stress 0.1564851 
+    ## Run 16 stress 0.1723214 
+    ## Run 17 stress 0.1686305 
     ## Run 18 stress 0.151936 
-    ## Run 19 stress 0.1361479 
-    ## ... New best solution
-    ## ... Procrustes: rmse 1.51498e-06  max resid 2.781808e-06 
-    ## ... Similar to previous best
-    ## Run 20 stress 0.1693674 
+    ## Run 19 stress 0.213171 
+    ## Run 20 stress 0.1564851 
     ## *** Solution reached
 
 ``` r
