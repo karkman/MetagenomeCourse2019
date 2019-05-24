@@ -46,7 +46,7 @@ __21.5.2019 8-17__
 | __*Morning*__ | [Assembly statistics](Day2/README.md#assembly-quality-statistics) (__Jenni/Antti__)|
 | __*Morning*__ | [Getting files for Anvio](Day2/README.md#anvio) (__Tom, Antti, Jenni__)|
 |  |    **Lunch** |
-| __*Afternoon*__ | [Introduction to Anvio](https://www.dropbox.com/s/yh1yf9vfuxbi9gl/2019_Helsinki_Tom_Delmont_Teaching_Material.pdf?dl=0) (__Tom__)
+| __*Afternoon*__ | [Introduction to Anvio, slides](https://www.dropbox.com/s/yh1yf9vfuxbi9gl/2019_Helsinki_Tom_Delmont_Teaching_Material.pdf?dl=0) (__Tom__)
 | __*Afternoon*__ | [Anvio hands-on](Day3/README.md#02--describing-the-interface) (__Tom__)
 
 ### Wednesday
