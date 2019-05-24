@@ -313,6 +313,23 @@ The graph plots the mean versus the variance and overlays the curves correspondi
 
 The Poisson variance function does a pretty good job for the bulk of most data, but fails to capture the high variances of the most productive scholars. The negative binomial variance function is not too different but, being a quadratic, can rise faster and does a better job at the high end. We conclude that the negative binomial model provides a better description of the data than the over-dispersed Poisson model.
 
+```{r}
 
+#Random forests to get the best predictors for ARG sum abundance
+df <- data.frame(SUM=mean(sample_data(baby_ARG_PHY)$SSU_SUM)*sample_sums(baby_ARG_PHY), DIET=sample_data(baby_ARG_PHY)$DIET, Age=sample_data(baby_ARG_PHY)$Age)
+
+
+#Save variables for ARG model
+y<-df$SUM
+x<-df[,2:3]
+dfr<-cbind(x, y)
+
+
+#Fit the model
+fit <- randomForest(y ~Age+DIET, df,ntree=1000)
+predicted= predict(fit,x)
+
+print(fit)
+```
 
 
