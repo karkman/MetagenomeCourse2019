@@ -44,12 +44,13 @@ ARG_bt<-as.matrix(read.table("ARG_genemat.txt", fill= 1, header= T, row.names = 
 #Let's remove a gene which is not relevant for us
 
 ARG_bt<-ARG_bt[grep('oqxB', row.names(ARG_bt), invert = TRUE),]
-
+str(ARG_bt)
 #Read in metadata
 sample_data<-read.table("metadata.txt", sep="\t")
-
+str(sample_data)
 #Normalize to 16S counts
 ARG_bt_norm<-t(t(ARG_bt)/sample_data$SSU_SUM)
+
 
 #Check the division by using a random column and row
 identical(ARG_bt[1083, 10]/sample_data$SSU_SUM[10], ARG_bt_norm[1083, 10])
@@ -64,6 +65,7 @@ Let's use Phyloseq to organize our data. Phyloseq is good for making sure your c
 #Make Phyloseq object with sample data and otu table. 
 baby_ARG_PHY<-phyloseq(otu_table(ARG_bt_norm, taxa_are_rows = TRUE), sample_data(sample_data))
 
+baby_ARG_PHY
 #Look at the sample sums
 sample_sums(baby_ARG_PHY)
 
@@ -81,7 +83,6 @@ Ordination methods are used to ordinate samples in relation to each other in mul
 
 Phyloseq has vegan built-in so we can ordinate distances using Phyloseq and plot the ordination.
 
-Phyloseq has vegan built-in so we can ordinate distances using Phyloseq and plot the ordination.
 
 ### Ordination of samples using PCoAs and Bray-Curtis dissimilarity index
 
@@ -91,6 +92,7 @@ baby_ARG_PHY_ord<-ordinate(baby_ARG_PHY, "PCoA", "bray")
 
 #Plot ordination and color by Formula
 p<-plot_ordination(baby_ARG_PHY, baby_ARG_PHY_ord, color="DIET")
+p
 p+scale_color_viridis(discrete = T) + geom_point(size=3) + theme_minimal()
 
 ```
@@ -101,7 +103,7 @@ We can see that there are more purple points on the left. Let's test if the diff
 #We use a square root transformation for the data to even out variation
 ARG_dist<-vegdist(sqrt(t((otu_table(baby_ARG_PHY)))), dist = "bray")
 
-adonis(ARG_dist~DIET, data=data.frame(sample_data(baby_ARG_PHY), permutations = 9999))
+adonis(ARG_dist~DIET, data=data.frame(sample_data(baby_ARG_PHY)), permutations = 9999)
 ```
 
 We can conclude that is some diffference in the grouping of genes based on the explanatory variables. (The separation is borderline significant using alpha of 0.05). Adonis calculates the result using permutations, so there can be some variation in the p-values and model estimates with lower numbers of permutations. If we would like to know which individual genes are different we could use the R-package DeSEQ to investigate fold changes between the two groups or fit genes as vectors in the ordination using 'envfit' from vegan package.

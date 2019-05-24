@@ -79,12 +79,29 @@ ARG_bt<-as.matrix(read.table("ARG_genemat.txt", fill= 1, header= T, row.names = 
 #Let's remove a gene which is not relevant for us
 
 ARG_bt<-ARG_bt[grep('oqxB', row.names(ARG_bt), invert = TRUE),]
+str(ARG_bt)
+```
 
+    ##  int [1:3082, 1:10] 0 0 0 0 0 0 0 0 0 0 ...
+    ##  - attr(*, "dimnames")=List of 2
+    ##   ..$ : chr [1:3082] "aac(6')-Ib_2_M23634" "aac(6')-Ib11_1_AY136758" "aac(6')-30-aac(6')-Ib'_1_AJ584652" "aac(6')-Iaj_1_AB709942" ...
+    ##   ..$ : chr [1:10] "02078-BA" "07004-B" "07005-B" "08012-B" ...
+
+``` r
 #Read in metadata
 sample_data<-read.table("metadata.txt", sep="\t")
+str(sample_data)
+```
 
+    ## 'data.frame':    10 obs. of  3 variables:
+    ##  $ SSU_SUM: int  47001 5705 20105 33449 41717 61420 15816 56107 54518 39373
+    ##  $ DIET   : Factor w/ 2 levels "n","y": 1 2 2 1 2 1 1 1 2 2
+    ##  $ Age    : num  30.4 33.4 32.7 35.9 33.3 ...
+
+``` r
 #Normalize to 16S counts
 ARG_bt_norm<-t(t(ARG_bt)/sample_data$SSU_SUM)
+
 
 #Check the division by using a random column and row
 identical(ARG_bt[1083, 10]/sample_data$SSU_SUM[10], ARG_bt_norm[1083, 10])
@@ -102,6 +119,14 @@ accessing and splitting data faster.
 #Make Phyloseq object with sample data and otu table. 
 baby_ARG_PHY<-phyloseq(otu_table(ARG_bt_norm, taxa_are_rows = TRUE), sample_data(sample_data))
 
+baby_ARG_PHY
+```
+
+    ## phyloseq-class experiment-level object
+    ## otu_table()   OTU Table:         [ 3082 taxa and 10 samples ]
+    ## sample_data() Sample Data:       [ 10 samples by 3 sample variables ]
+
+``` r
 #Look at the sample sums
 sample_sums(baby_ARG_PHY)
 ```
@@ -141,9 +166,6 @@ dimensions or axes of the ordination can be used to plot the location of
 samples in relation to each other in a two-dimensional space.
 
 Phyloseq has vegan built-in so we can ordinate distances using Phyloseq
-and plot the ordination.
-
-Phyloseq has vegan built-in so we can ordinate distances using Phyloseq
 and plot the
 ordination.
 
@@ -155,10 +177,16 @@ baby_ARG_PHY_ord<-ordinate(baby_ARG_PHY, "PCoA", "bray")
 
 #Plot ordination and color by Formula
 p<-plot_ordination(baby_ARG_PHY, baby_ARG_PHY_ord, color="DIET")
-p+scale_color_viridis(discrete = T) + geom_point(size=3) + theme_minimal()
+p
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+``` r
+p+scale_color_viridis(discrete = T) + geom_point(size=3) + theme_minimal()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
 
 We can see that there are more purple points on the left. Let’s test if
 the difference we see visually is also statistically significant using
@@ -170,20 +198,20 @@ function ‘otu\_table’ from the phyloseq package.
 #We use a square root transformation for the data to even out variation
 ARG_dist<-vegdist(sqrt(t((otu_table(baby_ARG_PHY)))), dist = "bray")
 
-adonis(ARG_dist~DIET, data=data.frame(sample_data(baby_ARG_PHY), permutations = 9999))
+adonis(ARG_dist~DIET, data=data.frame(sample_data(baby_ARG_PHY)), permutations = 9999)
 ```
 
     ## 
     ## Call:
-    ## adonis(formula = ARG_dist ~ DIET, data = data.frame(sample_data(baby_ARG_PHY),      permutations = 9999)) 
+    ## adonis(formula = ARG_dist ~ DIET, data = data.frame(sample_data(baby_ARG_PHY)),      permutations = 9999) 
     ## 
     ## Permutation: free
-    ## Number of permutations: 999
+    ## Number of permutations: 9999
     ## 
     ## Terms added sequentially (first to last)
     ## 
     ##           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)  
-    ## DIET       1    0.7378 0.73776  2.0805 0.20639  0.043 *
+    ## DIET       1    0.7378 0.73776  2.0805 0.20639 0.0373 *
     ## Residuals  8    2.8368 0.35460         0.79361         
     ## Total      9    3.5746                 1.00000         
     ## ---
@@ -723,9 +751,9 @@ predicted
 ```
 
     ##  02078-BA   07004-B   07005-B   08012-B   08016-B   09024-B   09069-B 
-    ##  2930.712 20050.715 20977.604  2346.832 21336.782  2904.995  2649.969 
+    ##  2900.429 20427.816 21423.487  1931.987 21757.998  2881.297  2250.706 
     ##  10029-BA   10030-B   12042-B 
-    ##  3260.473 13916.013 20050.715
+    ##  3243.019 13819.602 20427.816
 
 ``` r
 #Print
@@ -739,5 +767,5 @@ print(fit)
     ##                      Number of trees: 1000
     ## No. of variables tried at each split: 1
     ## 
-    ##           Mean of squared residuals: 108167789
-    ##                     % Var explained: 32.28
+    ##           Mean of squared residuals: 108295535
+    ##                     % Var explained: 32.2
