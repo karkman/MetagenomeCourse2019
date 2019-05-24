@@ -64,8 +64,10 @@ __23.5.2019 8-16.30__
 
 | Time | Description |
 | --- | --- |
-| __*Morning*__  | *MetaPhlan lecture* (__Tommi__)|
 | __*Morning*__  | [Metaphlan profiles](Day4#metaphlan2) (__Tommi__)|
+| __*Morning*__  | [CheckM output](Day3/README.md#11--what-do-we-do-with-these-genomes) (__Tom__)|
+| __*Morning*__  | *MetaPhlan lecture* (__Tommi__)|
+| __*Morning*__  | [R-installations and R-part for Metaphlan](R_for_MetaPhlAn2)(__Tommi__)|
 |  |    **Lunch** |
 | __*Afternoon*__  | *HUMAnN2 lecture* (__Tommi__)|
 | __*Afternoon*__  | [Humann2 hands on](Day5#humann2) (__Tommi__)|
@@ -76,7 +78,7 @@ __24.5.2019 9-17__
 | Time | Description |
 | --- | --- |
 | 09:00-10:00 | **Tommi Vatanen**: The gut microbiome structure and function in early life - lessons from cohort studies NB. Infocenter Korona, lecture hall 3)|
-| 10:30-12:00 | [Humann2 hands on cont'd](Day5#humann2) [and R for Humann2 results](R_for_Humann2) (__Tommi__)|
+| 10:15-11:30 | [Humann2 hands on cont'd](Day5#humann2) [and R for Humann2 results](R_for_Humann2) (__Tommi__)|
 |  |    **Lunch** |
 | __*Afternoon*__  | [Crash course in statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data](R_for_overdispersed_data/) hands on, [Slides](https://drive.google.com/open?id=1FMBSI1df1fDFoDXud3BDMb7Z6EIST0g0) (__Katariina__)|
 | __*Afternoon*__ | Wrapping up (__all__) |

@@ -9,8 +9,10 @@ output:
 
 ##Set your working directory to where you have your data on your own computer (and install) and load needed libraries
 
+download data from https://www.dropbox.com/s/agzc1fecgoj708z/infants_merged_table.txt?dl=0
+
 ```{r setup}
-setwd("~/Dropbox/teaching/HY_metagenomic_course_2019/MetagenomeCourse2019/R_for_MetaPhlAn2/")
+setwd("~/Dropbox/teaching/MetagenomeCourse2019/R_for_MetaPhlAn2/")
 #install.packages("tidyverse")
 #install.packages("vegan")
 #install.packages("devtools")
@@ -20,7 +22,7 @@ library(vegan)
 library(devtools)
 
 # Use this to install microbiomics if needed:
-#install_github("tvatanen/microbiomics")
+install_github("tvatanen/microbiomics")
 library(microbiomics)
 
 ```
@@ -43,6 +45,16 @@ data.frame(mds_obj$points) %>%
   coord_equal() +
   theme_bw()
 
+# artificial grouping
+data.frame(mds_obj$points) %>%
+  rownames_to_column("sampleID") %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  ggplot(aes(x=MDS1, y=MDS2, color = group)) + 
+  geom_point() +
+  coord_equal() +
+  theme_bw()
+
+
 ```
 
 
@@ -61,6 +73,8 @@ species_stats <-
             max_relative_abundance = max(relative_abundance),
             prevalence = sum(relative_abundance > 0) / n())
 
+#write_tsv(species_stats, path = "species_stats.txt")
+
 head(species_stats %>% arrange(-mean_relative_abundance))
 
 ```
@@ -69,7 +83,7 @@ head(species_stats %>% arrange(-mean_relative_abundance))
 ```{r barplot}
 species_stats %>% 
   arrange(-mean_relative_abundance) %>%
-  top_n(10) %>% 
+  top_n(n = 10, wt = mean_relative_abundance) %>% 
   left_join(metaphlan_species_long) %>%
   ggplot(aes(y=relative_abundance, x=sampleID, fill = species)) +
   geom_bar(stat = "identity") +
@@ -78,7 +92,7 @@ species_stats %>%
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-# GeneratebBarplot of 10 most abundant genera
+# Generate Barplot of 10 most abundant genera
 ```{r}
 metaphlan_genera_long <- 
   metaphlan_species_long %>%
@@ -90,10 +104,61 @@ metaphlan_genera_long %>%
   group_by(genus) %>%
   summarize(mean_relative_abundance = mean(relative_abundance)) %>%
   arrange(-mean_relative_abundance) %>%
-  top_n(10) %>%
+  top_n(n = 10, wt = mean_relative_abundance) %>%
   left_join(metaphlan_genera_long) %>%
   ggplot(aes(y=relative_abundance, x=sampleID, fill = genus)) +
   geom_bar(stat = "identity") +
   theme_bw() +
   ylab("Relative abundance")
+```
+
+## Try simple faceting
+```{r}
+metaphlan_genera_long %>%
+  group_by(genus) %>%
+  summarize(mean_relative_abundance = mean(relative_abundance)) %>%
+  top_n(n = 10, wt = mean_relative_abundance) %>%
+  left_join(metaphlan_genera_long) %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  ggplot(aes(y=relative_abundance, x=sampleID, fill = genus)) +
+  geom_bar(stat = "identity") +
+  theme_bw() +
+  ylab("Relative abundance") +
+  facet_grid(~group, scales = "free")
+```
+
+## Barplot for a single species
+```{r}
+metaphlan_genera_long %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  filter(genus == "g__Escherichia") %>%
+  ggplot(aes(y =relative_abundance, x=group)) +
+  geom_boxplot() +
+  geom_point() +
+  theme_bw()
+
+metaphlan_genera_long %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  filter(genus == "g__Escherichia") %>%
+  arrange(group) %>%
+  mutate(sampleID = factor(sampleID, levels = sampleID)) %>% 
+  ggplot(aes(y =relative_abundance, x=sampleID, fill = group)) +
+  geom_bar(stat = "identity") +
+  theme_bw() + 
+  ylab("Escherichia rel.ab")
+```
+
+## Different sort of barplot, mean relative abundance per group
+```{r}
+species_stats %>% 
+  top_n(n = 10, wt = mean_relative_abundance) %>% 
+  left_join(metaphlan_species_long) %>%
+  mutate(group = substr(sampleID, 1, 2)) %>%
+  group_by(species, group) %>%
+  summarise(mean_relative_abundance = mean(relative_abundance)) %>%
+  ggplot(aes(x=species, fill=group, y=mean_relative_abundance)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  coord_flip() +
+  scale_y_log10() +
+  theme_bw()
 ```

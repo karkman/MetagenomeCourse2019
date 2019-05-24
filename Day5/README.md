@@ -3,7 +3,6 @@ Prepare environment and go to the humann2 output folder
 ```
 module load bioconda/3
 source activate humann2_env
-cd $WRKDIR/Metagenomics2019/Humann2
 mkdir $WRKDIR/humann2_db
 humann2_databases --download utility_mapping full $WRKDIR/humann2_db
 ```
@@ -14,6 +13,7 @@ humann2_join_tables -h
 
 Combine gene family profiles
 ```
+cd $WRKDIR/Metagenomics2019/Humann2
 humann2_join_tables -i . \
   --file_name genefamilies.tsv \
   -o genefamilies.tsv

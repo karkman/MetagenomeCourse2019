@@ -18,7 +18,8 @@ We will use only R1 reads for the following analyses.
 #SBATCH -p serial
 
 module load biokit
-cd /wrk/antkark/Metagenomics2019/Metaphlan2
+mkdir /wrk/$USER/Metagenomics2019/Metaphlan2
+cd /wrk/$USER/Metagenomics2019/Metaphlan2
 name=$(sed -n "$SLURM_ARRAY_TASK_ID"p ../sample_names.txt)
 metaphlan2.py ../trimmed_data/$name"_R1_trimmed.fastq" \
               --input_type fastq --nproc  $SLURM_CPUS_PER_TASK \
@@ -34,6 +35,7 @@ module load biokit
 merge_metaphlan_tables.py *_metaphlan.txt > infants_merged_table.txt
 module purge
 ```
+## Optional
 
 Make a heatmap from species level results.
 ```
@@ -58,7 +60,6 @@ graphlan_annotate.py --annot infants.annot.txt infants.tree.txt infants.abundanc
 graphlan.py --dpi 300 infants.abundance.xml infants.abundance.png --external_legends
 ```
 
-## Optional
 
 ### StrainPhlAn
 Follow the instructions for [StrainPhlAn.](https://bitbucket.org/biobakery/biobakery/wiki/metaphlan2#rst-header-create-a-strain-level-marker-based-heatmap-panphlan)  
