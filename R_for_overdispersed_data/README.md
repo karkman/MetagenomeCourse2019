@@ -2,9 +2,9 @@
 analysis and generalized linear models of overdispersed count data
 ================
 
-\#Setting up the R-environment and compiling data
+# Setting up the R-environment and compiling data
 
-\#\#\#Setting up needed packages
+### Setting up needed packages
 
 First we will install and load packages which are needed for analysis.
 Others are essential, viridis is used for getting colorblind friendly
@@ -184,7 +184,7 @@ adonis(ARG_dist~DIET, data=data.frame(sample_data(baby_ARG_PHY), permutations = 
     ## Terms added sequentially (first to last)
     ## 
     ##           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)  
-    ## DIET       1    0.7378 0.73776  2.0805 0.20639   0.04 *
+    ## DIET       1    0.7378 0.73776  2.0805 0.20639  0.034 *
     ## Residuals  8    2.8368 0.35460         0.79361         
     ## Total      9    3.5746                 1.00000         
     ## ---
@@ -199,7 +199,7 @@ genes are different we could use the R-package DeSEQ to investigate fold
 changes between the two groups or fit genes as vectors in the ordination
 using ‘envfit’ from vegan package.
 
-\#\#Analysis of diversity
+## Analysis of diversity
 
 The diversity of bacteria or genes can differ between groups and is
 often interesting to study. Again, there are several diversity indeces,
@@ -268,7 +268,7 @@ TukeyHSD(simpson)
 It turns out that the difference is not significant using Simpson
 diversity but is with Shannon.
 
-\#\#Statistical analysis of overdispersed count data
+## Statistical analysis of overdispersed count data
 
 Many read based metagenomic analyses produce outputs in table formats
 with counts. During the course we have analysed our data and counted
@@ -309,10 +309,10 @@ zero inflation.
 
 Some also often use normally distributed models and log transfor their
 data, but in most cases the models will end up beign less than optimal.
-Why not use the right model for your data instead of compromizing?
+Why not use the right model for your data instead of
+compromizing?
 
-\#\#\#Checking which model is best - Poisson, Quasipoisson or Negative
-Binomial
+### Checking which model is best - Poisson, Quasipoisson or Negative Binomial
 
 ``` r
 #Save the total sum of ARGs/average 16S rRNA gene copies to a dataframe for each sample and info of the DIET 
@@ -331,7 +331,7 @@ the bigger median. This already gives us an idication that there is a
 lot of variation in the data and that is definately not suitable for the
 Poisson model.
 
-\#\#\#Let’s fit a linear model to the data
+### Let’s fit a linear model to the data
 
 ``` r
 model.ln<-lm(SUM~DIET, data=df)
@@ -379,7 +379,7 @@ The Shapiro-Wilks test gives us a siginificant p-value, which means that
 the data significantly differs from the normal distribution. It also
 looks like we might have an s-shaped curve in the normality Q-Q plot.
 
-\#\#\#Let’s try a linear model with a log transformation
+### Let’s try a linear model with a log transformation
 
 ``` r
 model.logln<-lm(log(SUM)~DIET, data=df)
@@ -425,7 +425,7 @@ plot(model.logln)
 
 Now the data fits the normality assumption.
 
-\#\#\#Let’s try and fit a Poisson model to the data
+### Let’s try and fit a Poisson model to the data
 
 ``` r
 model.pois = glm(SUM ~ DIET , data = df, family = poisson)
@@ -458,10 +458,10 @@ summary(model.pois)
 This looks pretty good if you just look at the the p-value, but the
 residual devience and AIC values, which indicate how well the model
 explains the variance in the data are big. This means that the model is
-not good at explaining the deviance.
+not good at explaining the
+deviance.
 
-\#\#\#Let’s check if the deviance is above the 0.95 critical value for
-the chi squared thest with 9 degrees of freedom
+### Let’s check if the deviance is above the 0.95 critical value for the chi squared thest with 9 degrees of freedom
 
 ``` r
 qchisq(0.95, df.residual(model.pois))#Critical value
@@ -553,7 +553,7 @@ round(data.frame(poisson=coef(model.pois),
     ## (Intercept)  7.2041   7.2041     0.0122      0.8549 70.1045
     ## DIETy        2.6979   2.6979     0.0126      0.8832 70.1045
 
-\#Negative binomial distribution
+# Negative binomial distribution
 
 Negative binomial distributions are an other option for overdispersed
 data. Negative binomial models are a bit more advanced in modelling the
@@ -675,7 +675,7 @@ deviance(model.nb)
 #which is below the cutoff value which indicates that the negative binomial model is a good fit for the data.
 ```
 
-\#\#\#Checking variances between models
+### Checking variances between models
 
 The over-dispersed Poisson (quasipoisson) and negative binomial models
 have different variance functions. One way to check which one may be
@@ -698,6 +698,12 @@ different but, being a quadratic, can rise faster and does a better job
 at the high end. We conclude that the negative binomial model provides a
 better description of the data than the over-dispersed Poisson model.
 
+# Machine learning with randomforests
+
+Machine learning allows to look at effects which are not linear and has
+many applications in data science. You can also use them to look at
+metagenome data.
+
 ``` r
 #Random forests to get the best predictors for ARG sum abundance
 df <- data.frame(SUM=mean(sample_data(baby_ARG_PHY)$SSU_SUM)*sample_sums(baby_ARG_PHY), DIET=sample_data(baby_ARG_PHY)$DIET, Age=sample_data(baby_ARG_PHY)$Age)
@@ -713,6 +719,17 @@ dfr<-cbind(x, y)
 fit <- randomForest(y ~Age+DIET, df,ntree=1000)
 predicted= predict(fit,x)
 
+#Look at the preduicted values
+predicted
+```
+
+    ##  02078-BA   07004-B   07005-B   08012-B   08016-B   09024-B   09069-B 
+    ##  3058.530 20417.238 21148.690  2241.990 21502.530  3039.490  2553.131 
+    ##  10029-BA   10030-B   12042-B 
+    ##  3413.208 13463.557 20417.238
+
+``` r
+#Print
 print(fit)
 ```
 
@@ -723,5 +740,5 @@ print(fit)
     ##                      Number of trees: 1000
     ## No. of variables tried at each split: 1
     ## 
-    ##           Mean of squared residuals: 108810322
-    ##                     % Var explained: 31.87
+    ##           Mean of squared residuals: 110122510
+    ##                     % Var explained: 31.05
