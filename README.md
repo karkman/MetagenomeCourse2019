@@ -19,6 +19,8 @@ Microbial community structure and diversity, and population structure are fundam
 
 **Everything is possible thanks to the support of [CSC](http://www.csc.fi)**
 
+## [Feedback](https://presemo.helsinki.fi/metagenomics2019/)
+
 ## Schedule
 The course will be held in Viikki at the Faculty of Agriculture and Forestry, University of Helsinki.  
 Place: __Info Centre Korona, room Info4, 1st Floor__
