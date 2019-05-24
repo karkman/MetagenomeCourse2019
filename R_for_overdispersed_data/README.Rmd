@@ -21,6 +21,7 @@ First we will install and load packages which are needed for analysis. Others ar
 #install.packages("vegan")
 #install.packages("viridis")
 #install.packages("MASS")
+#install.packages("randomForest")
 
 #Load libraries
 library(phyloseq)
@@ -28,6 +29,7 @@ library(viridis)
 library(vegan)
 library(MASS)
 library(ggplot2)
+library(randomForest)
 ```
 
 ###Normalizing data
