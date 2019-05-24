@@ -1,5 +1,5 @@
 ---
-title: "#Crash course into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data"
+title: "Crash course into statistics of metagenomic data: Multivariate analysis and generalized linear models of overdispersed count data"
 output:
   github_document: default
 ---
@@ -32,7 +32,7 @@ library(ggplot2)
 library(randomForest)
 ```
 
-###Normalizing data
+### Normalizing data
 
 Count data of metagenomes is almost always normalized to either library sizes or 16S rRNA gene counts to get rid off variation that is caused due to differences in library sizes or the numbers of bacteria. In our case, we have a lot of non-bacterial DNA in our samples, and we are quatifying genes which are found exclusively in bacteria. The amount of bacterial DNA also varies between samples. This is why we will normalize our data to 16S counts.
 
@@ -56,7 +56,7 @@ identical(ARG_bt[1083, 10]/sample_data$SSU_SUM[10], ARG_bt_norm[1083, 10])
 
 ```
 
-###Phyloseq is handy for organizing and accessing data with counts, taxonomy and metadata files
+### Phyloseq is handy for organizing and accessing data with counts, taxonomy and metadata files
 
 Let's use Phyloseq to organize our data. Phyloseq is good for making sure your columns and rows are always in the right order and it makes accessing and splitting data faster.
 
@@ -71,7 +71,7 @@ sample_sums(baby_ARG_PHY)
 sample_data(baby_ARG_PHY)$DIET
 ```
 
-##Multivariate analysis
+## Multivariate analysis
 
 Often the research question is if there are differences in all genes between samples that can be explained by an explanatory variable or variables. This is when multivariate analysis methods come in handy.
 
@@ -83,7 +83,7 @@ Phyloseq has vegan built-in so we can ordinate distances using Phyloseq and plot
 
 Phyloseq has vegan built-in so we can ordinate distances using Phyloseq and plot the ordination.
 
-###Ordination of samples using PCoAs and Bray-Curtis dissimilarity index
+### Ordination of samples using PCoAs and Bray-Curtis dissimilarity index
 
 ```{r}
 #Ordinate using Phyloseq's ordinate command

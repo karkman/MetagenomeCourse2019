@@ -1,5 +1,5 @@
-\#Crash course into statistics of metagenomic data: Multivariate
-analysis and generalized linear models of overdispersed count data
+Crash course into statistics of metagenomic data: Multivariate analysis
+and generalized linear models of overdispersed count data
 ================
 
 # Setting up the R-environment and compiling data
@@ -62,7 +62,7 @@ library(randomForest)
     ## 
     ##     margin
 
-\#\#\#Normalizing data
+### Normalizing data
 
 Count data of metagenomes is almost always normalized to either library
 sizes or 16S rRNA gene counts to get rid off variation that is caused
@@ -92,8 +92,7 @@ identical(ARG_bt[1083, 10]/sample_data$SSU_SUM[10], ARG_bt_norm[1083, 10])
 
     ## [1] TRUE
 
-\#\#\#Phyloseq is handy for organizing and accessing data with counts,
-taxonomy and metadata files
+### Phyloseq is handy for organizing and accessing data with counts, taxonomy and metadata files
 
 Let’s use Phyloseq to organize our data. Phyloseq is good for making
 sure your columns and rows are always in the right order and it makes
@@ -120,7 +119,7 @@ sample_data(baby_ARG_PHY)$DIET
     ##  [1] n y y n y n n n y y
     ## Levels: n y
 
-\#\#Multivariate analysis
+## Multivariate analysis
 
 Often the research question is if there are differences in all genes
 between samples that can be explained by an explanatory variable or
@@ -145,10 +144,10 @@ Phyloseq has vegan built-in so we can ordinate distances using Phyloseq
 and plot the ordination.
 
 Phyloseq has vegan built-in so we can ordinate distances using Phyloseq
-and plot the ordination.
+and plot the
+ordination.
 
-\#\#\#Ordination of samples using PCoAs and Bray-Curtis dissimilarity
-index
+### Ordination of samples using PCoAs and Bray-Curtis dissimilarity index
 
 ``` r
 #Ordinate using Phyloseq's ordinate command
@@ -184,7 +183,7 @@ adonis(ARG_dist~DIET, data=data.frame(sample_data(baby_ARG_PHY), permutations = 
     ## Terms added sequentially (first to last)
     ## 
     ##           Df SumsOfSqs MeanSqs F.Model      R2 Pr(>F)  
-    ## DIET       1    0.7378 0.73776  2.0805 0.20639  0.034 *
+    ## DIET       1    0.7378 0.73776  2.0805 0.20639  0.043 *
     ## Residuals  8    2.8368 0.35460         0.79361         
     ## Total      9    3.5746                 1.00000         
     ## ---
@@ -724,9 +723,9 @@ predicted
 ```
 
     ##  02078-BA   07004-B   07005-B   08012-B   08016-B   09024-B   09069-B 
-    ##  3058.530 20417.238 21148.690  2241.990 21502.530  3039.490  2553.131 
+    ##  2930.712 20050.715 20977.604  2346.832 21336.782  2904.995  2649.969 
     ##  10029-BA   10030-B   12042-B 
-    ##  3413.208 13463.557 20417.238
+    ##  3260.473 13916.013 20050.715
 
 ``` r
 #Print
@@ -740,5 +739,5 @@ print(fit)
     ##                      Number of trees: 1000
     ## No. of variables tried at each split: 1
     ## 
-    ##           Mean of squared residuals: 110122510
-    ##                     % Var explained: 31.05
+    ##           Mean of squared residuals: 108167789
+    ##                     % Var explained: 32.28
