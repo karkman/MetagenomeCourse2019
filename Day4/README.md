@@ -39,6 +39,7 @@ module purge
 
 Make a heatmap from species level results.
 ```
+module load bioconda/3
 source activate metaphlan_plot_env
 grep -E "(s__)|(^ID)" infants_merged_table.txt | grep -v "t__" | sed 's/^.*s__//g' > infants_metaphlan_species.txt
 
